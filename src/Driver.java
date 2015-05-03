@@ -1,6 +1,7 @@
 /**
  * Created by anantoni on 1/5/2015.
  */
+import factgen.FactGenerator;
 import parser.*;
 import visitor.*;
 import syntaxtree.*;
@@ -19,6 +20,7 @@ public class Driver {
         try {
             SpigletParser parser = new SpigletParser(new FileReader(args[0]));
             Goal goal = parser.Goal();
+            goal.accept(new FactGenerator(), null);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ParseException e) {

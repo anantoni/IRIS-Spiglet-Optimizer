@@ -8,12 +8,12 @@ import visitor.IVoidVisitor;
 
 public interface INode extends java.io.Serializable {
 
-  public <R, A> R accept(final IRetArguVisitor<R, A> vis, final A argu);
+  <R, A> R accept(final IRetArguVisitor<R, A> vis, final A argu);
 
-  public <R> R accept(final IRetVisitor<R> vis);
+  <R> R accept(final IRetVisitor<R> vis);
 
-  public <A> void accept(final IVoidArguVisitor<A> vis, final A argu);
+  <A> void accept(final IVoidArguVisitor<A> vis, final A argu);
 
-  public void accept(final IVoidVisitor vis);
+  void accept(final IVoidVisitor vis);
 
 }

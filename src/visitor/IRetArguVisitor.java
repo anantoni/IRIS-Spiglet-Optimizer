@@ -5,58 +5,58 @@ import syntaxtree.*;
 
 public interface IRetArguVisitor<R, A> {
 
-  public R visit(final NodeList n, final A argu);
+  R visit(final NodeList n, final A argu);
 
-  public R visit(final NodeListOptional n, final A argu);
+  R visit(final NodeListOptional n, final A argu);
 
-  public R visit(final NodeOptional n, final A argu);
+  R visit(final NodeOptional n, final A argu);
 
-  public R visit(final NodeSequence n, final A argu);
+  R visit(final NodeSequence n, final A argu);
 
-  public R visit(final NodeToken n, final A argu);
+  R visit(final NodeToken n, final A argu);
 
-  public R visit(final Goal n, final A argu);
+  R visit(final Goal n, final A argu);
 
-  public R visit(final StmtList n, final A argu);
+  R visit(final StmtList n, final A argu);
 
-  public R visit(final Procedure n, final A argu);
+  R visit(final Procedure n, final A argu);
 
-  public R visit(final Stmt n, final A argu);
+  R visit(final Stmt n, final A argu);
 
-  public R visit(final NoOpStmt n, final A argu);
+  R visit(final NoOpStmt n, final A argu);
 
-  public R visit(final ErrorStmt n, final A argu);
+  R visit(final ErrorStmt n, final A argu);
 
-  public R visit(final CJumpStmt n, final A argu);
+  R visit(final CJumpStmt n, final A argu);
 
-  public R visit(final JumpStmt n, final A argu);
+  R visit(final JumpStmt n, final A argu);
 
-  public R visit(final HStoreStmt n, final A argu);
+  R visit(final HStoreStmt n, final A argu);
 
-  public R visit(final HLoadStmt n, final A argu);
+  R visit(final HLoadStmt n, final A argu);
 
-  public R visit(final MoveStmt n, final A argu);
+  R visit(final MoveStmt n, final A argu);
 
-  public R visit(final PrintStmt n, final A argu);
+  R visit(final PrintStmt n, final A argu);
 
-  public R visit(final Exp n, final A argu);
+  R visit(final Exp n, final A argu);
 
-  public R visit(final StmtExp n, final A argu);
+  R visit(final StmtExp n, final A argu);
 
-  public R visit(final Call n, final A argu);
+  R visit(final Call n, final A argu);
 
-  public R visit(final HAllocate n, final A argu);
+  R visit(final HAllocate n, final A argu);
 
-  public R visit(final BinOp n, final A argu);
+  R visit(final BinOp n, final A argu);
 
-  public R visit(final Operator n, final A argu);
+  R visit(final Operator n, final A argu);
 
-  public R visit(final SimpleExp n, final A argu);
+  R visit(final SimpleExp n, final A argu);
 
-  public R visit(final Temp n, final A argu);
+  R visit(final Temp n, final A argu);
 
-  public R visit(final IntegerLiteral n, final A argu);
+  R visit(final IntegerLiteral n, final A argu);
 
-  public R visit(final Label n, final A argu);
+  R visit(final Label n, final A argu);
 
 }

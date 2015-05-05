@@ -8,20 +8,20 @@ import visitor.IVoidVisitor;
 
 public interface INodeList extends INode {
 
-  public void addNode(final INode n);
+  void addNode(final INode n);
 
-  public INode elementAt(int i);
+  INode elementAt(int i);
 
-  public java.util.Iterator<INode> elements();
+  java.util.Iterator<INode> elements();
 
-  public int size();
+  int size();
 
-  public <R, A> R accept(final IRetArguVisitor<R, A> vis, final A argu);
+  <R, A> R accept(final IRetArguVisitor<R, A> vis, final A argu);
 
-  public <R> R accept(final IRetVisitor<R> vis);
+  <R> R accept(final IRetVisitor<R> vis);
 
-  public <A> void accept(final IVoidArguVisitor<A> vis, final A argu);
+  <A> void accept(final IVoidArguVisitor<A> vis, final A argu);
 
-  public void accept(final IVoidVisitor vis);
+  void accept(final IVoidVisitor vis);
 
 }

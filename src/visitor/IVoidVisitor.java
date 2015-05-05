@@ -5,58 +5,58 @@ import syntaxtree.*;
 
 public interface IVoidVisitor {
 
-  public void visit(final NodeList n);
+  void visit(final NodeList n);
 
-  public void visit(final NodeListOptional n);
+  void visit(final NodeListOptional n);
 
-  public void visit(final NodeOptional n);
+  void visit(final NodeOptional n);
 
-  public void visit(final NodeSequence n);
+  void visit(final NodeSequence n);
 
-  public void visit(final NodeToken n);
+  void visit(final NodeToken n);
 
-  public void visit(final Goal n);
+  void visit(final Goal n);
 
-  public void visit(final StmtList n);
+  void visit(final StmtList n);
 
-  public void visit(final Procedure n);
+  void visit(final Procedure n);
 
-  public void visit(final Stmt n);
+  void visit(final Stmt n);
 
-  public void visit(final NoOpStmt n);
+  void visit(final NoOpStmt n);
 
-  public void visit(final ErrorStmt n);
+  void visit(final ErrorStmt n);
 
-  public void visit(final CJumpStmt n);
+  void visit(final CJumpStmt n);
 
-  public void visit(final JumpStmt n);
+  void visit(final JumpStmt n);
 
-  public void visit(final HStoreStmt n);
+  void visit(final HStoreStmt n);
 
-  public void visit(final HLoadStmt n);
+  void visit(final HLoadStmt n);
 
-  public void visit(final MoveStmt n);
+  void visit(final MoveStmt n);
 
-  public void visit(final PrintStmt n);
+  void visit(final PrintStmt n);
 
-  public void visit(final Exp n);
+  void visit(final Exp n);
 
-  public void visit(final StmtExp n);
+  void visit(final StmtExp n);
 
-  public void visit(final Call n);
+  void visit(final Call n);
 
-  public void visit(final HAllocate n);
+  void visit(final HAllocate n);
 
-  public void visit(final BinOp n);
+  void visit(final BinOp n);
 
-  public void visit(final Operator n);
+  void visit(final Operator n);
 
-  public void visit(final SimpleExp n);
+  void visit(final SimpleExp n);
 
-  public void visit(final Temp n);
+  void visit(final Temp n);
 
-  public void visit(final IntegerLiteral n);
+  void visit(final IntegerLiteral n);
 
-  public void visit(final Label n);
+  void visit(final Label n);
 
 }

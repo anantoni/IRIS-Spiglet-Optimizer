@@ -5,58 +5,58 @@ import syntaxtree.*;
 
 public interface IRetVisitor<R> {
 
-  public R visit(final NodeList n);
+  R visit(final NodeList n);
 
-  public R visit(final NodeListOptional n);
+  R visit(final NodeListOptional n);
 
-  public R visit(final NodeOptional n);
+  R visit(final NodeOptional n);
 
-  public R visit(final NodeSequence n);
+  R visit(final NodeSequence n);
 
-  public R visit(final NodeToken n);
+  R visit(final NodeToken n);
 
-  public R visit(final Goal n);
+  R visit(final Goal n);
 
-  public R visit(final StmtList n);
+  R visit(final StmtList n);
 
-  public R visit(final Procedure n);
+  R visit(final Procedure n);
 
-  public R visit(final Stmt n);
+  R visit(final Stmt n);
 
-  public R visit(final NoOpStmt n);
+  R visit(final NoOpStmt n);
 
-  public R visit(final ErrorStmt n);
+  R visit(final ErrorStmt n);
 
-  public R visit(final CJumpStmt n);
+  R visit(final CJumpStmt n);
 
-  public R visit(final JumpStmt n);
+  R visit(final JumpStmt n);
 
-  public R visit(final HStoreStmt n);
+  R visit(final HStoreStmt n);
 
-  public R visit(final HLoadStmt n);
+  R visit(final HLoadStmt n);
 
-  public R visit(final MoveStmt n);
+  R visit(final MoveStmt n);
 
-  public R visit(final PrintStmt n);
+  R visit(final PrintStmt n);
 
-  public R visit(final Exp n);
+  R visit(final Exp n);
 
-  public R visit(final StmtExp n);
+  R visit(final StmtExp n);
 
-  public R visit(final Call n);
+  R visit(final Call n);
 
-  public R visit(final HAllocate n);
+  R visit(final HAllocate n);
 
-  public R visit(final BinOp n);
+  R visit(final BinOp n);
 
-  public R visit(final Operator n);
+  R visit(final Operator n);
 
-  public R visit(final SimpleExp n);
+  R visit(final SimpleExp n);
 
-  public R visit(final Temp n);
+  R visit(final Temp n);
 
-  public R visit(final IntegerLiteral n);
+  R visit(final IntegerLiteral n);
 
-  public R visit(final Label n);
+  R visit(final Label n);
 
 }

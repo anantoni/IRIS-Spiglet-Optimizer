@@ -2,13 +2,14 @@ package factgen;
 
 import syntaxtree.*;
 import visitor.DepthFirstVoidArguVisitor;
+import visitor.IVoidArguVisitor;
 
 import java.util.Iterator;
 
 /**
  * Created by anantoni on 5/5/2015.
  */
-public class DefVarFactGen extends DepthFirstVoidArguVisitor {
+public class DefVarFactGen extends DepthFirstVoidArguVisitor<String> implements IVoidArguVisitor<String> {
 
     private FactGenerator primaryVisitor;
 

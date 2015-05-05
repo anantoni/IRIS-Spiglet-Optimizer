@@ -12,8 +12,8 @@ import java.util.Iterator;
  */
 public class FactGenerator extends DepthFirstRetArguVisitor<String, String> implements IRetArguVisitor<String, String> {
     private int instructionCounter;
-    private IVoidArguVisitor<String> useVarFactGen = new UseVarFactGen(this);
-    private IVoidArguVisitor<String> defVarFactGen = new DefVarFactGen(this);
+    private IVoidArguVisitor<String> useVarFactGen;
+    private IVoidArguVisitor<String> defVarFactGen;
 
     public FactGenerator() {
         useVarFactGen = new UseVarFactGen(this);
@@ -43,9 +43,15 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
     public String visit(final NodeListOptional n, final String argu) {
         if (n.present()) {
             String nRes = null;
+            int counter = 0;
             for (final Iterator<INode> e = n.elements(); e.hasNext();) {
                 @SuppressWarnings("unused")
                 String sRes = e.next().accept(this, argu);
+                if (counter == 0)
+                    nRes = sRes;
+                else
+                    nRes += " " + sRes;
+                counter++;
             }
             return nRes;
         } else
@@ -121,26 +127,24 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
 
     public String visit(final CJumpStmt n, final String argu) {
         String instructionLiteral = n.f0.toString();
-        int currentInstructionCounter = instructionCounter++;
 
         n.f0.accept(this, argu);
         instructionLiteral += " " + n.f1.accept(this, argu);
         n.f1.accept(this.useVarFactGen, argu);
         instructionLiteral += " " + n.f2.accept(this, argu);
 
-        String instructionEDB = "instruction(" + currentInstructionCounter + ",\'" + argu + "\',\'" + instructionLiteral + "\').";
+        String instructionEDB = "instruction(" + this.instructionCounter++ + ",\'" + argu + "\',\'" + instructionLiteral + "\').";
         System.out.println(instructionEDB);
         return instructionLiteral;
     }
 
     public String visit(final JumpStmt n, final String argu) {
         String instructionLiteral = n.f0.toString();
-        int currentInstructionCounter = instructionCounter++;
 
         n.f0.accept(this, argu);
         instructionLiteral += " " + n.f1.accept(this, argu);
 
-        String instructionEDB = "instruction(" + currentInstructionCounter + ",\'" + argu + "\',\'" + instructionLiteral + "\').";
+        String instructionEDB = "instruction(" + argu + "\',\'" + this.instructionCounter++ + ",\'"  + instructionLiteral + "\').";
         System.out.println(instructionEDB);
         return instructionLiteral;
     }
@@ -156,7 +160,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         instructionLiteral += n.f3.accept(this, argu);
         n.f3.accept(this.useVarFactGen, argu);
 
-        String instructionEDB = "instruction(" + this.instructionCounter++ + ",\'" + argu + "\',\'" + instructionLiteral + "\').";
+        String instructionEDB = "instruction(" + argu + "\',\'" + this.instructionCounter++ + ",\'" +  instructionLiteral + "\').";
         System.out.println(instructionEDB);
 
         return instructionLiteral;
@@ -181,7 +185,6 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
 
     public String visit(final MoveStmt n, final String argu) {
         String instructionLiteral = n.f0.toString();
-        int currentInstructionCounter = instructionCounter++;
 
         n.f0.accept(this, argu);
         String varDecl = n.f1.accept(this, argu);
@@ -191,7 +194,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         instructionLiteral += " " + n.f2.accept(this, argu);
         n.f2.accept(this.useVarFactGen, argu);
 
-        String instructionEDB = "instruction(" + argu + "\',\'" + currentInstructionCounter + ",\'"  + instructionLiteral + "\').";
+        String instructionEDB = "instruction(" + argu + "\',\'" + this.instructionCounter++ + ",\'"  + instructionLiteral + "\').";
         System.out.println(instructionEDB);
 
         String varEDB = "var(" + "\'" + argu + "\', \'" + varDecl + "\').";
@@ -202,13 +205,12 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
 
     public String visit(final PrintStmt n, final String argu) {
         String instructionLiteral = n.f0.toString();
-        int currentInstructionCounter = instructionCounter++;
 
         n.f0.accept(this, argu);
         instructionLiteral += " " + n.f1.accept(this, argu);
         n.f1.accept(this.useVarFactGen, argu);
 
-        String instructionEDB = "instruction(" + currentInstructionCounter + ",\'" + argu + "\',\'" + instructionLiteral + "\').";
+        String instructionEDB = "instruction(" + this.instructionCounter++ + ",\'" + argu + "\',\'" + instructionLiteral + "\').";
         System.out.println(instructionEDB);
         return instructionLiteral;
     }
@@ -228,13 +230,19 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
     }
 
     public String visit(final Call n, final String argu) {
-        String nRes = null;
+        String instructionLiteral = n.f0.toString();
+
         n.f0.accept(this, argu);
-        n.f1.accept(this, argu);
+        instructionLiteral += " " + n.f1.accept(this, argu);
+        n.f1.accept(this.useVarFactGen, argu);
         n.f2.accept(this, argu);
-        n.f3.accept(this, argu);
+        instructionLiteral += " " + n.f2.tokenImage;
+        instructionLiteral += " " + n.f3.accept(this, argu);
+        n.f3.accept(this.useVarFactGen, argu);
         n.f4.accept(this, argu);
-        return nRes;
+        instructionLiteral += " " + n.f4.tokenImage;
+
+        return instructionLiteral;
     }
 
     public String visit(final HAllocate n, final String argu) {

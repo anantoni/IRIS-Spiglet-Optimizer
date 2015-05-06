@@ -73,7 +73,9 @@ public class Driver {
                     factsReader = new FileReader(fileEntry);
                     parser.parse(factsReader);
                 } catch (ParserException e) {
+                    System.err.println("Parse exception in file: " + fileEntry.getName());
                     e.printStackTrace();
+                    System.exit(-1);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -87,34 +89,37 @@ public class Driver {
             System.exit(-1);
         }
 
-        File rulesFile = new File(rootAnalysisLogicDir+ "rules.iris");
-        Reader rulesReader = null;
+        File copyPropagationRuleFile = new File(rootAnalysisLogicDir+ "copy-propagation.iris");
+        Reader rulesReader;
         try {
-            rulesReader = new FileReader(rulesFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        File queriesFile = new File(rootQueriesDir + "queries.iris");
-        Reader queriesReader = null;
-        try {
-            queriesReader = new FileReader(queriesFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        // Parse rules file.
-        try {
+            rulesReader = new FileReader(copyPropagationRuleFile);
             parser.parse(rulesReader);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (ParserException e) {
             e.printStackTrace();
         }
-        // Retrieve the rules from the parsed file.
         List<IRule> rules = parser.getRules();
 
-        // Parse queries file.
+
+        File constantPropagationRuleFile = new File(rootAnalysisLogicDir+ "constant-propagation.iris");
         try {
+            rulesReader = new FileReader(constantPropagationRuleFile);
+            parser.parse(rulesReader);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParserException e) {
+            e.printStackTrace();
+        }
+        rules.addAll(parser.getRules());
+
+        File queriesFile = new File(rootQueriesDir + "queries.iris");
+        Reader queriesReader;
+        try {
+            queriesReader = new FileReader(queriesFile);
             parser.parse(queriesReader);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (ParserException e) {
             e.printStackTrace();
         }
@@ -126,6 +131,8 @@ public class Driver {
 
         // Enable Magic Sets together with rule filtering.
         configuration.programOptmimisers.add(new MagicSets());
+        for (IRule rule : rules)
+            configuration.ruleSafetyProcessor.process(rule);
 
         // Create the knowledge base.
         IKnowledgeBase knowledgeBase = new KnowledgeBase(factMap, rules, configuration);

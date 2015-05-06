@@ -1,2 +1,4 @@
-constMove('MAIN',7,'10').
-constMove('Fac_ComputeFac',13,'1').
+constMove('MAIN',8,'TEMP 31',10).
+constMove('Fac_ComputeFac',0,'TEMP 33',1).
+constMove('Fac_ComputeFac',3,'TEMP 20',1).
+constMove('Fac_ComputeFac',9,'TEMP 35',1).

@@ -179,7 +179,7 @@ public class InstructionHasLabelGen extends DepthFirstVoidArguVisitor<String> im
     public void visit(final Label n, final String argu) {
         n.f0.accept(this, argu);
         String instructionHasLabelEDB = "instructionHasLabel(\'" + argu + "\'," + primaryVisitor.getInstructionCounter() + ",\'" + n.f0.tokenImage + "\').";
-        System.out.println(instructionHasLabelEDB);
+        primaryVisitor.getInstructionHasLabelWriter().println(instructionHasLabelEDB);
     }
 
 }

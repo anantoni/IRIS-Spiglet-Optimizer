@@ -172,7 +172,7 @@ public class VarDefFactGen extends DepthFirstVoidArguVisitor<String> implements 
         n.f1.accept(this, argu);
 
         String var = n.f0.tokenImage + " " + n.f1.f0.tokenImage;
-        String varDefEDB = "varDef(" + argu + ",\'" + primaryVisitor.getInstructionCounter() + ",\'" + var + "\').";
+        String varDefEDB = "varDef(\'" + argu + "\'," + primaryVisitor.getInstructionCounter() + ",\'" + var + "\').";
         primaryVisitor.getVarDefWriter().println(varDefEDB);
     }
 

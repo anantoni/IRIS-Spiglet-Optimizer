@@ -1,21 +1,25 @@
-instruction('MAIN',0,'MOVE TEMP 2 HALLOCATE 4').
-instruction('MAIN',1,'MOVE TEMP 3 HALLOCATE 4').
-instruction('MAIN',2,'MOVE TEMP 9 Fac_ComputeFac').
-instruction('MAIN',3,'HSTORE TEMP 2 0TEMP 9').
-instruction('MAIN',4,'HSTORE TEMP 3 0TEMP 2').
-instruction('MAIN',5,'HLOAD TEMP 6 TEMP 3 0').
-instruction('MAIN',6,'HLOAD TEMP 7 TEMP 6 0').
-instruction('MAIN',7,'MOVE TEMP 12 10').
-instruction('MAIN',8,'MOVE TEMP 10 CALL TEMP 7 ( TEMP 3 TEMP 12 )').
-instruction('MAIN',9,'MOVE TEMP 5 TEMP 10').
-instruction('MAIN',10,'PRINT TEMP 5').
-instruction('Fac_ComputeFac',11,'MOVE TEMP 3 LT TEMP 1 1').
-instruction('Fac_ComputeFac',13,'MOVE TEMP 2 1').
-instruction('Fac_ComputeFac',15,'HLOAD TEMP 6 TEMP 0 0').
-instruction('Fac_ComputeFac',16,'HLOAD TEMP 7 TEMP 6 0').
-instruction('Fac_ComputeFac',17,'MOVE TEMP 8 MINUS TEMP 1 1').
-instruction('Fac_ComputeFac',18,'MOVE TEMP 13 CALL TEMP 7 ( TEMP 0 TEMP 8 )').
-instruction('Fac_ComputeFac',19,'MOVE TEMP 5 TEMP 13').
-instruction('Fac_ComputeFac',20,'MOVE TEMP 4 TIMES TEMP 1 TEMP 5').
-instruction('Fac_ComputeFac',21,'MOVE TEMP 2 TEMP 4').
-instruction('Fac_ComputeFac',22,'NOOP').
+instruction('MAIN',0,'MOVE TEMP 24 HALLOCATE 4').
+instruction('MAIN',1,'MOVE TEMP 25 HALLOCATE 4').
+instruction('MAIN',2,'MOVE TEMP 30 Fac_ComputeFac').
+instruction('MAIN',3,'HSTORE TEMP 24 0TEMP 30').
+instruction('MAIN',4,'HSTORE TEMP 25 0TEMP 24').
+instruction('MAIN',5,'MOVE TEMP 23 TEMP 25').
+instruction('MAIN',6,'HLOAD TEMP 21 TEMP 23 0').
+instruction('MAIN',7,'HLOAD TEMP 22 TEMP 21 0').
+instruction('MAIN',8,'MOVE TEMP 31 10').
+instruction('MAIN',9,'MOVE TEMP 32 CALL TEMP 22 ( TEMP 23 TEMP 31 )').
+instruction('MAIN',10,'PRINT TEMP 32').
+instruction('Fac_ComputeFac',0,'MOVE TEMP 33 1').
+instruction('Fac_ComputeFac',1,'MOVE TEMP 34 LT TEMP 1 TEMP 33').
+instruction('Fac_ComputeFac',3,'MOVE TEMP 20 1').
+instruction('Fac_ComputeFac',4,'JUMP L3').
+instruction('Fac_ComputeFac',5,'NOOP').
+instruction('Fac_ComputeFac',6,'MOVE TEMP 29 TEMP 0').
+instruction('Fac_ComputeFac',7,'HLOAD TEMP 27 TEMP 29 0').
+instruction('Fac_ComputeFac',8,'HLOAD TEMP 28 TEMP 27 0').
+instruction('Fac_ComputeFac',9,'MOVE TEMP 35 1').
+instruction('Fac_ComputeFac',10,'MOVE TEMP 36 MINUS TEMP 1 TEMP 35').
+instruction('Fac_ComputeFac',11,'MOVE TEMP 37 CALL TEMP 28 ( TEMP 29 TEMP 36 )').
+instruction('Fac_ComputeFac',12,'MOVE TEMP 38 TIMES TEMP 1 TEMP 37').
+instruction('Fac_ComputeFac',13,'MOVE TEMP 20 TEMP 38').
+instruction('Fac_ComputeFac',14,'NOOP').

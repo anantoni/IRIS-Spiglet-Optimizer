@@ -1,2 +1,2 @@
-instruction('Fac_ComputeFac',12,'CJUMP TEMP 3 L2').
-instructionJumpsToLabel('Fac_ComputeFac',14,'L3').
+instruction('Fac_ComputeFac',2,'CJUMP TEMP 34 L2').
+instructionJumpsToLabel('Fac_ComputeFac',4,'L3').

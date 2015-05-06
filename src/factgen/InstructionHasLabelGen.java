@@ -7,13 +7,13 @@ import visitor.IVoidArguVisitor;
 import java.util.Iterator;
 
 /**
- * Created by anantoni on 5/5/2015.
+ * Created by anantoni on 6/5/2015.
  */
-public class UseVarFactGen extends DepthFirstVoidArguVisitor<String> implements IVoidArguVisitor<String> {
+public class InstructionHasLabelGen extends DepthFirstVoidArguVisitor<String> implements IVoidArguVisitor<String> {
 
     private FactGenerator primaryVisitor;
 
-    public UseVarFactGen(FactGenerator primaryVisitor) {
+    public InstructionHasLabelGen(FactGenerator primaryVisitor) {
         this.primaryVisitor = primaryVisitor;
     }
 
@@ -170,10 +170,6 @@ public class UseVarFactGen extends DepthFirstVoidArguVisitor<String> implements 
     public void visit(final Temp n, final String argu) {
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
-
-        String var = n.f0.tokenImage + " " + n.f1.f0.tokenImage;
-        String varUseEDB = "varUse(\'" + argu + "\'," + primaryVisitor.getInstructionCounter() + ",\'" + var + "\').";
-        System.out.println(varUseEDB);
     }
 
     public void visit(final IntegerLiteral n, final String argu) {
@@ -182,6 +178,8 @@ public class UseVarFactGen extends DepthFirstVoidArguVisitor<String> implements 
 
     public void visit(final Label n, final String argu) {
         n.f0.accept(this, argu);
+        String instructionHasLabelEDB = "instructionHasLabel(\'" + argu + "\'," + primaryVisitor.getInstructionCounter() + ",\'" + n.f0.tokenImage + "\').";
+        System.out.println(instructionHasLabelEDB);
     }
 
 }

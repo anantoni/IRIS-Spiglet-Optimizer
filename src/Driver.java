@@ -2,9 +2,9 @@
  * Created by anantoni on 1/5/2015.
  */
 import factgen.FactGenerator;
-import parser.*;
-import visitor.*;
-import syntaxtree.*;
+import parser.ParseException;
+import parser.SpigletParser;
+import syntaxtree.Goal;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

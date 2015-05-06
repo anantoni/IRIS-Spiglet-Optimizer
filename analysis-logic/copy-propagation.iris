@@ -1,0 +1,12 @@
+copyPropagation(?m, ?i, ?v1, ?v2) :- instruction(?m, ?i, ?a),
+                                     instruction(?m, ?k, ?b),
+                                     instruction(?m, ?l, ?c),
+                                     varMove(?m, ?j, ?v1, ?v2),
+                                     ?j < ?i,
+                                     !varDef(?m, ?k, ?v1),
+                                     ?k > ?j,
+                                     ?k <= ?i,
+                                     !varDef(?m, ?l, ?v2),
+                                     ?l > ?j,
+                                     ?l <= ?i.
+                            

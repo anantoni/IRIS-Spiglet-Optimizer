@@ -1,0 +1,9 @@
+constantPropagation(?m, ?i, ?v, ?c) :- instruction(?m, ?i, ?ins1),
+                                       instruction(?m, ?k, ?ins2),
+                                       instruction(?m, ?j, ?ins3),
+                                       constMove(?m, ?j, ?v, ?c),
+                                       ?j < ?i,
+                                       !varDef(?m, ?k, ?v),
+                                       ?k > ?j,
+                                       ?k <= ?i,
+                                       varUse(?m, ?i, ?v).

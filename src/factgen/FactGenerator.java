@@ -5,24 +5,124 @@ import visitor.DepthFirstRetArguVisitor;
 import visitor.IRetArguVisitor;
 import visitor.IVoidArguVisitor;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
  * Created by anantoni on 1/5/2015.
  */
 public class FactGenerator extends DepthFirstRetArguVisitor<String, String> implements IRetArguVisitor<String, String> {
+    private PrintWriter instructionHasLabelWriter;
+    private PrintWriter constMoveWriter;
+    private PrintWriter varMoveWriter;
+    private PrintWriter varUseWriter;
+    private PrintWriter varDefWriter;
+    private PrintWriter instructionWriter;
+    private PrintWriter instructionJumpsToLabelWriter;
+    private PrintWriter instructionCJumpsToLabelWriter;
     private int instructionCounter;
     private IVoidArguVisitor<String> useVarFactGen;
     private IVoidArguVisitor<String> defVarFactGen;
     private IVoidArguVisitor<String> instructionHasLabelGen;
     private Map<String, Set<String>> methodVarsMap;
 
-    public FactGenerator() {
-        useVarFactGen = new UseVarFactGen(this);
-        defVarFactGen = new DefVarFactGen(this);
+    public FactGenerator(String projectFactsDir) {
+
+        try {
+
+            instructionWriter = new PrintWriter(projectFactsDir + "instruction.iris", "UTF-8");
+            instructionJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionJumpsToLabel.iris", "UTF-8");
+            instructionCJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionCJumpsToLabel.iris", "UTF-8");
+            instructionHasLabelWriter = new PrintWriter(projectFactsDir + "instructionHasLabel.iris", "UTF-8");
+            varDefWriter = new PrintWriter(projectFactsDir + "varDef.iris", "UTF-8");
+            varUseWriter = new PrintWriter(projectFactsDir + "varUse.iris", "UTF-8");
+            varMoveWriter = new PrintWriter(projectFactsDir + "varMove.iris", "UTF-8");
+            constMoveWriter = new PrintWriter(projectFactsDir + "constMove.iris", "UTF-8");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        useVarFactGen = new VarUseFactGen(this);
+        defVarFactGen = new VarDefFactGen(this);
         instructionHasLabelGen = new InstructionHasLabelGen(this);
         instructionCounter = 0;
         methodVarsMap = new HashMap<>();
+    }
+
+    public void closeAllFiles() {
+        instructionWriter.close();
+        instructionJumpsToLabelWriter.close();
+        instructionCJumpsToLabelWriter.close();
+        instructionHasLabelWriter.close();
+        varDefWriter.close();
+        varUseWriter.close();
+        varMoveWriter.close();
+        constMoveWriter.close();
+    }
+
+    public PrintWriter getConstMoveWriter() {
+        return constMoveWriter;
+    }
+
+    public PrintWriter getVarMoveWriter() {
+        return varMoveWriter;
+    }
+
+    public PrintWriter getVarUseWriter() {
+        return varUseWriter;
+    }
+
+    public PrintWriter getVarDefWriter() {
+        return varDefWriter;
+    }
+
+    public PrintWriter getMoveConstWriter() {
+        return constMoveWriter;
+    }
+
+    public PrintWriter getMoveVarWriter() {
+        return varMoveWriter;
+    }
+
+    public PrintWriter getDefVarWriter() {
+        return varDefWriter;
+    }
+
+    public PrintWriter getUseVarWriter() {
+        return varUseWriter;
+    }
+
+    public PrintWriter getInstructionWriter() {
+        return instructionWriter;
+    }
+
+    public PrintWriter getInstructionJumpsToLabelWriter() {
+        return instructionJumpsToLabelWriter;
+    }
+
+    public PrintWriter getInstructionCJumpsToLabelWriter() {
+        return instructionCJumpsToLabelWriter;
+    }
+
+    public IVoidArguVisitor<String> getUseVarFactGen() {
+        return useVarFactGen;
+    }
+
+    public IVoidArguVisitor<String> getDefVarFactGen() {
+        return defVarFactGen;
+    }
+
+    public IVoidArguVisitor<String> getInstructionHasLabelGen() {
+        return instructionHasLabelGen;
+    }
+
+    public Map<String, Set<String>> getMethodVarsMap() {
+        return methodVarsMap;
     }
 
     public int getInstructionCounter() {
@@ -139,7 +239,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         n.f0.accept(this, argu);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'NOOP\').";
-        System.out.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
 
         return n.f0.toString();
     }
@@ -148,7 +248,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         n.f0.accept(this, argu);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'ERROR\').";
-        System.out.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
         return n.f0.toString();
     }
 
@@ -162,10 +262,10 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         instructionLiteral += " " + label;
 
         String instructionCJumpsToLabelEDB = "instructionCJumpsToLabel(\'" + argu + "\'," + instructionCounter + ",\'" + label + "\').";
-        System.out.println(instructionCJumpsToLabelEDB);
+        instructionCJumpsToLabelWriter.println(instructionCJumpsToLabelEDB);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'" + instructionLiteral + "\').";
-        System.out.println(instructionEDB);
+        instructionJumpsToLabelWriter.println(instructionEDB);
         return instructionLiteral;
     }
 
@@ -176,8 +276,8 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         String label = n.f1.accept(this, argu);
         instructionLiteral += " " + label;
 
-        String instructionCJumpsToLabelEDB = "instructionJumpsToLabel(\'" + argu + "\'," + instructionCounter + ",\'" + label + "\').";
-        System.out.println(instructionCJumpsToLabelEDB);
+        String instructionJumpsToLabelEDB = "instructionJumpsToLabel(\'" + argu + "\'," + instructionCounter + ",\'" + label + "\').";
+        instructionJumpsToLabelWriter.println(instructionJumpsToLabelEDB);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'"  + instructionLiteral + "\').";
         System.out.println(instructionEDB);
@@ -196,7 +296,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         n.f3.accept(this.useVarFactGen, argu);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'" +  instructionLiteral + "\').";
-        System.out.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
 
         return instructionLiteral;
     }
@@ -213,7 +313,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         instructionLiteral += " " + n.f3.accept(this, argu);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + instructionCounter++ + ",\'" + instructionLiteral + "\').";
-        System.out.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
 
         return instructionLiteral;
     }
@@ -230,15 +330,15 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         instructionLiteral += " " + simpleExp;
         if (simpleExp.startsWith("TEMP")) {
             String varMoveEDB = "varMove(\'" + argu + "\'," + this.instructionCounter + ",\'" + simpleExp + "\').";
-            System.out.println(varMoveEDB);
+            varMoveWriter.println(varMoveEDB);
         }
         else if (isInteger(simpleExp)) {
             String varMoveEDB = "constMove(\'" + argu + "\'," + this.instructionCounter + ",\'" + simpleExp + "\').";
-            System.out.println(varMoveEDB);
+            constMoveWriter.println(varMoveEDB);
         }
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'" + instructionLiteral + "\').";
-        System.out.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
 
         assert(methodVarsMap.containsKey(argu));
         if (!methodVarsMap.get(argu).contains(varDecl)) {
@@ -257,7 +357,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         n.f1.accept(this.useVarFactGen, argu);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'" + instructionLiteral + "\').";
-        System.out.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
         return instructionLiteral;
     }
 

@@ -1,0 +1,17 @@
+varDef(MAIN,'0,'TEMP 2').
+varDef(MAIN,'1,'TEMP 3').
+varDef(MAIN,'2,'TEMP 9').
+varDef(MAIN,'5,'TEMP 6').
+varDef(MAIN,'6,'TEMP 7').
+varDef(MAIN,'7,'TEMP 12').
+varDef(MAIN,'8,'TEMP 10').
+varDef(MAIN,'9,'TEMP 5').
+varDef(Fac_ComputeFac,'11,'TEMP 3').
+varDef(Fac_ComputeFac,'13,'TEMP 2').
+varDef(Fac_ComputeFac,'15,'TEMP 6').
+varDef(Fac_ComputeFac,'16,'TEMP 7').
+varDef(Fac_ComputeFac,'17,'TEMP 8').
+varDef(Fac_ComputeFac,'18,'TEMP 13').
+varDef(Fac_ComputeFac,'19,'TEMP 5').
+varDef(Fac_ComputeFac,'20,'TEMP 4').
+varDef(Fac_ComputeFac,'21,'TEMP 2').

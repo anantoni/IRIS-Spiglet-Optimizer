@@ -9,11 +9,11 @@ import java.util.Iterator;
 /**
  * Created by anantoni on 5/5/2015.
  */
-public class UseVarFactGen extends DepthFirstVoidArguVisitor<String> implements IVoidArguVisitor<String> {
+public class VarDefFactGen extends DepthFirstVoidArguVisitor<String> implements IVoidArguVisitor<String> {
 
     private FactGenerator primaryVisitor;
 
-    public UseVarFactGen(FactGenerator primaryVisitor) {
+    public VarDefFactGen(FactGenerator primaryVisitor) {
         this.primaryVisitor = primaryVisitor;
     }
 
@@ -172,8 +172,8 @@ public class UseVarFactGen extends DepthFirstVoidArguVisitor<String> implements 
         n.f1.accept(this, argu);
 
         String var = n.f0.tokenImage + " " + n.f1.f0.tokenImage;
-        String varUseEDB = "varUse(\'" + argu + "\'," + primaryVisitor.getInstructionCounter() + ",\'" + var + "\').";
-        System.out.println(varUseEDB);
+        String varDefEDB = "varDef(" + argu + ",\'" + primaryVisitor.getInstructionCounter() + ",\'" + var + "\').";
+        primaryVisitor.getVarDefWriter().println(varDefEDB);
     }
 
     public void visit(final IntegerLiteral n, final String argu) {

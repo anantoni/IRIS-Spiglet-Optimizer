@@ -272,7 +272,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         instructionCJumpsToLabelWriter.println(instructionCJumpsToLabelEDB);
 
         String instructionEDB = "instruction(\'" + argu + "\'," + this.instructionCounter++ + ",\'" + instructionLiteral + "\').";
-        instructionJumpsToLabelWriter.println(instructionEDB);
+        instructionWriter.println(instructionEDB);
         return instructionLiteral;
     }
 

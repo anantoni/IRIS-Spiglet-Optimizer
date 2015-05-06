@@ -11,6 +11,7 @@ instruction('MAIN',9,'MOVE TEMP 32 CALL TEMP 22 ( TEMP 23 TEMP 31 )').
 instruction('MAIN',10,'PRINT TEMP 32').
 instruction('Fac_ComputeFac',0,'MOVE TEMP 33 1').
 instruction('Fac_ComputeFac',1,'MOVE TEMP 34 LT TEMP 1 TEMP 33').
+instruction('Fac_ComputeFac',2,'CJUMP TEMP 34 L2').
 instruction('Fac_ComputeFac',3,'MOVE TEMP 20 1').
 instruction('Fac_ComputeFac',4,'JUMP L3').
 instruction('Fac_ComputeFac',5,'NOOP').

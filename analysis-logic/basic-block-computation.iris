@@ -1,0 +1,54 @@
+next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
+                    instruction(?m, ?j, ?instr2),
+                    ?i + 1 = ?j,
+                    !instructionJumpsToLabel(?m, ?i, ?l).
+
+next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
+                    instruction(?m, ?j, ?instr2),
+                    instructionJumpsToLabel(?m, ?i, ?l),
+                    instructionHasLabel(?m, ?j, ?l).
+
+next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
+                    instruction(?m, ?j, ?instr2),
+                    instructionCJumpsToLabel(?m, ?i, ?l),
+                    instructionHasLabel(?m, ?j, ?l).
+
+jump(?m, ?i) :- instructionCJumpsToLabel(?m, ?i, ?l).
+
+jump(?m, ?i) :- instructionJumpsToLabel(?m, ?i, ?l).
+
+afterJump(?m, ?i ) :- jump(?m, ?j),
+                      ?j + 1 = ?i.
+
+beforeLabel(?m, ?i) :- instruction(?m, ?i, ?instr),
+                       ?i + 1 = ?j,
+                       instructionHasLabel(?m, ?j, ?l).
+                       
+atLabel(?m, ?i) :- instructionHasLabel(?m, ?i, ?l).
+
+basicBlockHead(?m, ?i) :- atLabel(?m, ?i).
+
+basicBlockHead(?m, ?i) :- afterJump(?m, ?i).
+
+basicBlockHead(?m, ?i) :- instruction(?m, ?i, ?instr),
+                          ?i = 0.
+
+basicBlockEnd(?m, ?i) :- beforeLabel(?m, ?i).
+
+basicBlockEnd(?m, ?i) :- jump(?m, ?i)
+.
+basicBlockEnd(?m, ?i) :- instruction(?m, ?i, ?instr),
+                         !instruction(?m, ?j, ?instr1),
+                         ?i + 1 = ?j.
+
+basicBlock(?m, ?i, ?j) :- basicBlockHead(?m, ?i),
+                          basicBlockEnd(?m, ?j),
+                          ?i <= ?j,
+                          instruction(?m, ?k, ?instr),
+                          instruction(?m, ?l, ?instr1),
+                          !next(?m, ?k, ?l),
+                          ?k + 1 = ?z,
+                          ?z != ?l,
+                          ?k > ?i,
+                          ?k < ?j.
+                         

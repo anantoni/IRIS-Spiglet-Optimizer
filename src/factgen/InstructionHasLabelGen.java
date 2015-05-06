@@ -95,12 +95,12 @@ public class InstructionHasLabelGen extends DepthFirstVoidArguVisitor<String> im
     public void visit(final CJumpStmt n, final String argu) {
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
-        n.f2.accept(this, argu);
+        //n.f2.accept(this, argu);
     }
 
     public void visit(final JumpStmt n, final String argu) {
         n.f0.accept(this, argu);
-        n.f1.accept(this, argu);
+        //n.f1.accept(this, argu);
     }
 
     public void visit(final HStoreStmt n, final String argu) {
@@ -120,7 +120,7 @@ public class InstructionHasLabelGen extends DepthFirstVoidArguVisitor<String> im
     public void visit(final MoveStmt n, final String argu) {
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
-        n.f2.accept(this, argu);
+//        n.f2.accept(this, argu);
     }
 
     public void visit(final PrintStmt n, final String argu) {

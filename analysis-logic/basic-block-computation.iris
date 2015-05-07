@@ -26,11 +26,11 @@ beforeLabel(?m, ?i) :- instruction(?m, ?i, ?instr),
                        
 atLabel(?m, ?i) :- instructionHasLabel(?m, ?i, ?l).
 
-basicBlockHead(?m, ?i) :- atLabel(?m, ?i).
+basicBlockBegin(?m, ?i) :- atLabel(?m, ?i).
 
-basicBlockHead(?m, ?i) :- afterJump(?m, ?i).
+basicBlockBegin(?m, ?i) :- afterJump(?m, ?i).
 
-basicBlockHead(?m, ?i) :- instruction(?m, ?i, ?instr),
+basicBlocBegin(?m, ?i) :- instruction(?m, ?i, ?instr),
                           ?i = 0.
 
 basicBlockEnd(?m, ?i) :- beforeLabel(?m, ?i).
@@ -41,7 +41,12 @@ basicBlockEnd(?m, ?i) :- instruction(?m, ?i, ?instr),
                          !instruction(?m, ?j, ?instr1),
                          ?i + 1 = ?j.
 
-basicBlock(?m, ?i, ?j) :- basicBlockHead(?m, ?i),
+nextInSameBlock(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
+                               instruction(?m, ?j, ?instr2),
+                               next(?m, ?i, ?j),
+                               !basicBlockBegin(?m, ?j).
+
+/* basicBlock(?m, ?i, ?j) :- basicBlockHead(?m, ?i),
                           basicBlockEnd(?m, ?j),
                           ?i <= ?j,
                           instruction(?m, ?k, ?instr),
@@ -51,4 +56,6 @@ basicBlock(?m, ?i, ?j) :- basicBlockHead(?m, ?i),
                           ?z != ?l,
                           ?k > ?i,
                           ?k < ?j.
+
+*/
                          

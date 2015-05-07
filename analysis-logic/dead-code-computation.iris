@@ -1,0 +1,3 @@
+deadVar(?m, ?i, ?v) :- varDef(?m, ?i, ?v),
+                       !in(?m, ?j, ?v),
+                       next(?m, ?i, ?j).

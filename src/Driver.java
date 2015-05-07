@@ -124,6 +124,28 @@ public class Driver {
         }
         rules.addAll(parser.getRules());
 
+        File liveRangeComputationLogic = new File(rootAnalysisLogicDir + "live-range-computation.iris");
+        try {
+            rulesReader = new FileReader(liveRangeComputationLogic);
+            parser.parse(rulesReader);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParserException e) {
+            e.printStackTrace();
+        }
+        rules.addAll(parser.getRules());
+
+        File deadCodeComputationLogic = new File(rootAnalysisLogicDir + "dead-code-computation.iris");
+        try {
+            rulesReader = new FileReader(deadCodeComputationLogic);
+            parser.parse(rulesReader);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParserException e) {
+            e.printStackTrace();
+        }
+        rules.addAll(parser.getRules());
+
         File queriesFile = new File(rootQueriesDir + "queries.iris");
         Reader queriesReader;
         try {

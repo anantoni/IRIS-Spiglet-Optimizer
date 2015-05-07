@@ -1,2 +1,2 @@
-instructionHasLabel('Fac_ComputeFac',5,'L2').
-instructionHasLabel('Fac_ComputeFac',14,'L3').
+instructionHasLabel('Fac_ComputeFac',6,'L2').
+instructionHasLabel('Fac_ComputeFac',15,'L3').

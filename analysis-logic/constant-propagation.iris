@@ -1,9 +1,29 @@
 constantPropagation(?m, ?i, ?v, ?c) :- instruction(?m, ?i, ?ins1),
-                                       instruction(?m, ?k, ?ins2),
-                                       instruction(?m, ?j, ?ins3),
+                                       instruction(?m, ?j, ?ins2),
                                        constMove(?m, ?j, ?v, ?c),
-                                       ?j < ?i,
-                                       !varDef(?m, ?k, ?v),
-                                       ?k > ?j,
-                                       ?k <= ?i,
-                                       varUse(?m, ?i, ?v).
+                                       next(?m, ?j, ?i),
+                                       !varDef(?m, ?i, ?v),
+                                       ?j + 1 = ?i.
+
+constantPropagation(?m, ?i, ?v, ?c) :- constantPropagation(?m, ?j, ?v, ?c),
+                                       next(?m, ?j, ?i),
+                                       !varDef(?m, ?i, ?v),
+                                       ?j + 1 = ?i.
+
+jumpInstruction(?m, ?i) :- next(?m, ?i, ?j),
+                           ?i+1 = ?k,
+                           ?j != ?k,
+                           !next(?m, ?i, ?k).
+
+cJumpInstruction(?m, ?i) :- next(?m, ?i, ?j),
+                            next(?m, ?i, ?k),
+                            ?i+1 = ?k,
+                            ?j != ?k.
+
+constantPropagation(?m, ?i, ?v, ?c) :- constantPropagation(?m, ?j, ?v, ?c),
+                                       jumpInstruction(?m, ?i),
+                                       next(?m, ?j, ?i).
+
+
+
+

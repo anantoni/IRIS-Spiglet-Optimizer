@@ -1,12 +1,28 @@
-copyPropagation(?m, ?i, ?v1, ?v2) :- instruction(?m, ?i, ?a),
-                                     instruction(?m, ?k, ?b),
-                                     instruction(?m, ?l, ?c),
-                                     varMove(?m, ?j, ?v1, ?v2),
-                                     ?j < ?i,
-                                     !varDef(?m, ?k, ?v1),
-                                     ?k > ?j,
-                                     ?k <= ?i,
-                                     !varDef(?m, ?l, ?v2),
-                                     ?l > ?j,
-                                     ?l <= ?i.
-                            
+copyPropagation(?m, ?i, ?v1, ?v2) :- instruction(?m, ?i, ?ins1),
+                                       instruction(?m, ?j, ?ins2),
+                                       varMove(?m, ?j, ?v1, ?v2),
+                                       next(?m, ?j, ?i),
+                                       !varDef(?m, ?i, ?v1),
+                                       ?j + 1 = ?i.
+
+copyPropagation(?m, ?i, ?v1, ?v2) :- constantPropagation(?m, ?j, ?v1, ?v2),
+                                       next(?m, ?j, ?i),
+                                       !varDef(?m, ?i, ?v1),
+                                       ?j + 1 = ?i.
+
+jumpInstruction(?m, ?i) :- next(?m, ?i, ?j),
+                           ?i+1 = ?k,
+                           ?j != ?k,
+                           !next(?m, ?i, ?k).
+
+cJumpInstruction(?m, ?i) :- next(?m, ?i, ?j),
+                            next(?m, ?i, ?k),
+                            ?i+1 = ?k,
+                            ?j != ?k.
+
+copyPropagation(?m, ?i, ?v1, ?v2) :- copyPropagation(?m, ?j, ?v1, ?v2),
+                                   jumpInstruction(?m, ?i),
+                                   next(?m, ?j, ?i).
+
+
+//Need to add logic for CJUMP

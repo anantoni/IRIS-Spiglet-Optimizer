@@ -1,6 +1,15 @@
 deadVar(?m, ?i, ?v) :- varDef(?m, ?i, ?v),
                        !in(?m, ?j, ?v),
-                       next(?m, ?i, ?j).
+                       next(?m, ?i, ?j),
+                       next(?m, ?i, ?k),
+                       ?i = ?k.
+
+deadVar(?m, ?i, ?v) :- varDef(?m, ?i, ?v),
+                       !in(?m, ?j, ?v),
+                       !in(?m, ?k, ?k),
+                       next(?m, ?i, ?j),
+                       next(?m, ?i, ?k),
+                       ?i != ?k.
                        
 deadVar(?m, ?i, ?v) :- deadVar(?m, ?j, ?v),
                        next(?m, ?i, ?j),

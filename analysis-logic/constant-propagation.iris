@@ -25,5 +25,8 @@ constantPropagation(?m, ?i, ?v, ?c) :- constantPropagation(?m, ?j, ?v, ?c),
                                        next(?m, ?j, ?i).
 
 
+//Need to add logic for CJUMP
+
+
 
 

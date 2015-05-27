@@ -89,8 +89,19 @@ public class Driver {
             System.exit(-1);
         }
 
-        File copyPropagationRuleFile = new File(rootAnalysisLogicDir + "copy-propagation.iris");
+        File jumpInstructionsRuleFile = new File(rootAnalysisLogicDir + "jump-instructions.iris");
         Reader rulesReader;
+        try {
+            rulesReader = new FileReader(jumpInstructionsRuleFile);
+            parser.parse(rulesReader);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParserException e) {
+            e.printStackTrace();
+        }
+        List<IRule> rules = parser.getRules();
+
+        File copyPropagationRuleFile = new File(rootAnalysisLogicDir + "copy-propagation.iris");
         try {
             rulesReader = new FileReader(copyPropagationRuleFile);
             parser.parse(rulesReader);
@@ -99,7 +110,7 @@ public class Driver {
         } catch (ParserException e) {
             e.printStackTrace();
         }
-        List<IRule> rules = parser.getRules();
+        rules.addAll(parser.getRules());
 
 
         File constantPropagationRuleFile = new File(rootAnalysisLogicDir + "constant-propagation.iris");

@@ -56,6 +56,17 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         methodVarsMap = new HashMap<>();
     }
 
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
     public void closeAllFiles() {
         instructionWriter.close();
         instructionJumpsToLabelWriter.close();
@@ -133,17 +144,6 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
 
     public int getInstructionCounter() {
         return instructionCounter;
-    }
-
-    public static boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch(NumberFormatException e) {
-            return false;
-        } catch(NullPointerException e) {
-            return false;
-        }
-        return true;
     }
 
     public String visit(final NodeChoice n, final String argu) {

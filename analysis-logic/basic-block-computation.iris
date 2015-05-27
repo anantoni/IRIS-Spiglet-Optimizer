@@ -26,36 +26,56 @@ beforeLabel(?m, ?i) :- instruction(?m, ?i, ?instr),
                        
 atLabel(?m, ?i) :- instructionHasLabel(?m, ?i, ?l).
 
-basicBlockBegin(?m, ?i) :- atLabel(?m, ?i).
+bbBegin(?m, ?i) :- atLabel(?m, ?i).
 
-basicBlockBegin(?m, ?i) :- afterJump(?m, ?i).
+bbBegin(?m, ?i) :- afterJump(?m, ?i).
 
-basicBlocBegin(?m, ?i) :- instruction(?m, ?i, ?instr),
-                          ?i = 0.
+bbBegin(?m, ?i) :- instruction(?m, ?i, ?instr),
+                   ?i = 1.
 
-basicBlockEnd(?m, ?i) :- beforeLabel(?m, ?i).
+bbEnd(?m, ?i) :- beforeLabel(?m, ?i).
 
-basicBlockEnd(?m, ?i) :- jump(?m, ?i)
-.
-basicBlockEnd(?m, ?i) :- instruction(?m, ?i, ?instr),
-                         !instruction(?m, ?j, ?instr1),
-                         ?i + 1 = ?j.
+bbEnd(?m, ?i) :- jump(?m, ?i).
 
-nextInSameBlock(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
-                               instruction(?m, ?j, ?instr2),
-                               next(?m, ?i, ?j),
-                               !basicBlockBegin(?m, ?j).
+bbEnd(?m, ?i) :- instruction(?m, ?i, ?instr),
+                 !instruction(?m, ?j, ?instr1),
+                 ?i + 1 = ?j.
 
-/* basicBlock(?m, ?i, ?j) :- basicBlockHead(?m, ?i),
-                          basicBlockEnd(?m, ?j),
+basicBlock(?m, ?i, ?j) :- bbBegin(?m, ?i),
+                          bbEnd(?m, ?j),
                           ?i <= ?j,
-                          instruction(?m, ?k, ?instr),
-                          instruction(?m, ?l, ?instr1),
-                          !next(?m, ?k, ?l),
-                          ?k + 1 = ?z,
-                          ?z != ?l,
-                          ?k > ?i,
-                          ?k < ?j.
+                          !hasBBBegin(?m, ?i, ?j).
 
-*/
-                         
+
+hasBBBegin(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
+                          instruction(?m, ?j, ?instr2),
+                          ?i < ?j,
+                          ?k > ?i,
+                          ?k < ?j,
+                          bbBegin(?m, ?k).
+
+inSameBasicBlock(?m, ?i, ?i) :- bbBegin(?m, ?i).
+
+
+inSameBasicBlock(?m, ?i, ?k) :- inSameBasicBlock(?m, ?i, ?j),
+                                ?j + 1 = ?k,
+                                !bbEnd(?m, ?j).
+
+basicBlock2(?m, ?i, ?j) :- inSameBasicBlock(?m, ?i, ?j),
+                           bbEnd(?m, ?j).
+
+inSameBasicBlock2(?m, ?i, ?j) :- bbBegin(?m, ?i),
+                                 next(?m, ?i, ?j),
+                                 ?i + 1 = ?j.
+
+inSameBasicBlock2(?m, ?i, ?k) :- inSameBasicBlock2(?m, ?i, ?j),
+                                 next(?m, ?j, ?k),
+                                 ?j + 1 = ?k,
+                                 !bbEnd(?m, ?j).
+
+basicBlock3(?m, ?i, ?j) :- inSameBasicBlock2(?m, ?i, ?j),
+                           bbEnd(?m, ?j).
+
+
+
+

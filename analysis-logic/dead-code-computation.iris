@@ -10,7 +10,3 @@ deadVar(?m, ?i, ?v) :- varDef(?m, ?i, ?v),
                        next(?m, ?i, ?j),
                        next(?m, ?i, ?k),
                        ?i != ?k.
-                       
-deadVar(?m, ?i, ?v) :- deadVar(?m, ?j, ?v),
-                       next(?m, ?i, ?j),
-                       !varDef(?m, ?i, ?v).

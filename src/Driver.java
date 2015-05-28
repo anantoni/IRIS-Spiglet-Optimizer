@@ -1,6 +1,7 @@
 /**
  * Created by anantoni on 1/5/2015.
  */
+
 import factgen.FactGenerator;
 import org.deri.iris.Configuration;
 import org.deri.iris.EvaluationException;
@@ -17,15 +18,14 @@ import org.deri.iris.storage.IRelation;
 import parser.ParseException;
 import parser.SpigletParser;
 import syntaxtree.Goal;
+import transformer.Transformer;
+import utilities.Triple;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Driver {
@@ -44,11 +44,13 @@ public class Driver {
         String rootFactsDir = "../generated-facts/";
         String rootAnalysisLogicDir = "../analysis-logic/";
         String rootQueriesDir = "../queries/";
+        String rootOptOutDir = "../optimizedSpiglet";
         String projectFactsDir = rootFactsDir + spigletFilePath.getName().replace(".spg", "/");
 
+        Goal goal = null;
         try {
             SpigletParser spigletParser = new SpigletParser(new FileReader(args[0]));
-            Goal goal = spigletParser.Goal();
+            goal = spigletParser.Goal();
             FactGenerator factGenerator = new FactGenerator(projectFactsDir);
             goal.accept(factGenerator, null);
             factGenerator.closeAllFiles();
@@ -182,6 +184,10 @@ public class Driver {
         IKnowledgeBase knowledgeBase = new KnowledgeBase(factMap, rules, configuration);
 
         // Evaluate all queries over the knowledge base.
+        Map<Triple<String, Integer>, Integer> constantMap = new HashMap<>();
+        Map<Triple<String, Integer>, String> copyMap = new HashMap<>();
+        Map<String, Set<Integer>> deadInstructionMap = new HashMap<>();
+
         for (IQuery query : queries) {
             List<IVariable> variableBindings = new ArrayList<>();
             IRelation relation = knowledgeBase.execute(query, variableBindings);
@@ -194,8 +200,27 @@ public class Driver {
             // bindings list.
             for (int i = 0; i < relation.size(); i++) {
                 System.out.println(relation.get(i));
+
+                if (query.toString().contains("constantPropagation")) {
+                    constantMap.put(new Triple(relation.get(i).get(0).toString(), Integer.parseInt(relation.get(i).get(1).toString()), relation.get(i).get(2).toString()), Integer.parseInt(relation.get(i).get(3).toString()));
+                } else if (query.toString().contains("copyPropagation")) {
+                    copyMap.put(new Triple(relation.get(i).get(0).toString(), Integer.parseInt(relation.get(i).get(1).toString()), relation.get(i).get(2).toString()), relation.get(i).get(3).toString());
+                } else if (query.toString().contains("deadVar")) {
+                    Set<Integer> value;
+                    if ((value = deadInstructionMap.get(relation.get(i).get(0).toString())) == null) {
+                        Set<Integer> methodDeadInstructionSet = new HashSet<>();
+                        methodDeadInstructionSet.add(Integer.parseInt(relation.get(i).get(1).toString()));
+                        deadInstructionMap.put(relation.get(i).get(0).toString(), methodDeadInstructionSet);
+                    }
+                    else {
+                        value.add(Integer.parseInt(relation.get(i).get(1).toString()));
+                    }
+                }
             }
         }
 
+        Transformer spigletTransformer = new Transformer(rootOptOutDir, spigletFilePath.getName().replace(".spg", "-opt.spg"), constantMap, copyMap, deadInstructionMap);
+        goal.accept(spigletTransformer, null);
+        spigletTransformer.closeSpigletFile();
     }
 }

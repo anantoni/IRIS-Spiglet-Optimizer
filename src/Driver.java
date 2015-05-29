@@ -64,8 +64,10 @@ public class Driver {
                 factGenerator.closeAllFiles();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                System.exit(-1);
             } catch (ParseException e) {
                 e.printStackTrace();
+                System.exit(-1);
             }
 
             Parser parser = new Parser();
@@ -215,7 +217,6 @@ public class Driver {
                         copyMap.put(new Triple(relation.get(i).get(0).toString().replace("\'", ""), Integer.parseInt(relation.get(i).get(1).toString()), relation.get(i).get(2).toString().replace("\'", "")), relation.get(i).get(3).toString().replace("\'", ""));
 
                     else if (query.toString().contains("deadVar")) {
-                        System.out.println("Building dead instruction map");
                         String methodName = relation.get(i).get(0).toString().replace("\'", "");
                         if (deadInstructionMap.containsKey(methodName)) {
                             deadInstructionMap.get(methodName).add(Integer.parseInt(relation.get(i).get(1).toString()));
@@ -234,6 +235,7 @@ public class Driver {
             currentOptCode = spigletTransformer.getOptCode();
             System.out.println("Optimized code: " + currentOptCode);
             counter++;
+            break;
         }
         while (!currentOptCode.equals(previousOptCode) || currentOptCode.equals(""));
         spigletTransformer.writeCode();

@@ -246,8 +246,10 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
         instructionLiteral += " " + simpleExp;
         String key = argu;
         if (deadInstructionMap.containsKey(key)) {
-            if (!(deadInstructionMap.get(key).contains(this.instructionCounter)))
+            if (!(deadInstructionMap.get(key).contains(this.instructionCounter)) || instructionLiteral.contains("CALL"))
                 optimizedSpigletBuffer.append(instructionLiteral + "\n");
+            else
+                optimizedSpigletBuffer.append("NOOP\n");
         }
         else {
             optimizedSpigletBuffer.append(instructionLiteral + "\n");
@@ -322,9 +324,9 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
             else if (operator.equals("TIMES"))
                 return String.valueOf(Integer.parseInt(firstOperand) * Integer.parseInt(secondOperand));
             else
-                return String.valueOf(Integer.parseInt(firstOperand) * Integer.parseInt(secondOperand));
+                return String.valueOf(Integer.parseInt(firstOperand) / Integer.parseInt(secondOperand));
         else
-            return operator + " " + firstOperand + " " + secondOperand;
+            return operator + " " + n.f1.f0.tokenImage + " " + n.f1.f1.f0.tokenImage + " " + secondOperand;
 
     }
 

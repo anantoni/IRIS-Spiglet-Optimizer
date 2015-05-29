@@ -1,23 +1,19 @@
 package transformer;
 
-import factgen.FactGenerator;
 import syntaxtree.*;
 import visitor.DepthFirstVoidArguVisitor;
 import visitor.IVoidArguVisitor;
 
-import java.io.PrintWriter;
 import java.util.Iterator;
 
 /**
  * Created by anantoni on 28/5/2015.
  */
 public class InstructionLabelTransformer extends DepthFirstVoidArguVisitor<String> implements IVoidArguVisitor<String> {
+    private StringBuffer optimizedSpigletBuffer;
 
-    private PrintWriter optimizedSpigletWriter;
-    private FactGenerator primaryVisitor;
-
-    public InstructionLabelTransformer(PrintWriter optimizedSpigletWriter) {
-        this.optimizedSpigletWriter = optimizedSpigletWriter;
+    public InstructionLabelTransformer(StringBuffer optimizedSpigletBuffer) {
+        this.optimizedSpigletBuffer = optimizedSpigletBuffer;
     }
 
     public void visit(final NodeChoice n, final String argu) {
@@ -181,7 +177,7 @@ public class InstructionLabelTransformer extends DepthFirstVoidArguVisitor<Strin
 
     public void visit(final Label n, final String argu) {
         n.f0.accept(this, argu);
-        optimizedSpigletWriter.print(n.f0.toString() + " ");
+        optimizedSpigletBuffer.append(n.f0.toString() + " ");
     }
 
 }

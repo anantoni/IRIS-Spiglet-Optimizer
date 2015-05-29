@@ -4,7 +4,9 @@ import syntaxtree.*;
 
 public class SpigletParser implements SpigletParserConstants {
 
-/***********************************
+
+
+  /***********************************
  * The Spiglet Grammar Starts Here *
  ***********************************/
   final public Goal Goal() throws ParseException {

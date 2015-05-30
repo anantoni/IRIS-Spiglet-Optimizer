@@ -8,36 +8,37 @@ import visitor.IVoidArguVisitor;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by anantoni on 1/5/2015.
  */
 public class Transformer extends DepthFirstRetArguVisitor<String, String> implements IRetArguVisitor<String, String> {
 
+    private StringBuffer optimizedSpigletBuffer;
     private PrintWriter optimizedSpigletWriter;
     private int instructionCounter;
     private IRetArguVisitor<String, String> varUseTransformer;
     private IVoidArguVisitor<String> instructionLabelTransformer;
-    private Map<Triple<String, Integer>, Integer> constantMap;
-    private Map<Triple<String, Integer>, String> copyMap;
+    Map<Triple<String, Integer>, Integer> constantMap;
+    Map<Triple<String, Integer>, String> copyMap;
     Map<String, Set<Integer>> deadInstructionMap;
 
     public Transformer(String projectOptOutDir, String outFile, Map<Triple<String, Integer>, Integer> constantMap,  Map<Triple<String, Integer>, String> copyMap, Map<String, Set<Integer>> deadInstructionMap) {
-
+        this.optimizedSpigletBuffer = new StringBuffer();
+        this.constantMap = constantMap;
+        this.copyMap = copyMap;
+        this.deadInstructionMap = deadInstructionMap;
         try {
-            optimizedSpigletWriter = new PrintWriter(projectOptOutDir + "/" + outFile, "UTF-8");
-
+            this.optimizedSpigletWriter = new PrintWriter(projectOptOutDir +  "/" + outFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
-
         this.varUseTransformer = new VarUseTransformer(this);
-        this.instructionLabelTransformer = new InstructionLabelTransformer(optimizedSpigletWriter);
-        this.instructionCounter = 1;
+        this.instructionLabelTransformer = new InstructionLabelTransformer(optimizedSpigletBuffer);
+        this.instructionCounter = 0;
         this.constantMap = constantMap;
         this.copyMap = copyMap;
         this.deadInstructionMap = deadInstructionMap;
@@ -54,7 +55,12 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
         return true;
     }
 
-    public void closeSpigletFile() {
+    public String getOptCode() {
+        return optimizedSpigletBuffer.toString();
+    }
+
+    public void writeCode() {
+        optimizedSpigletWriter.write(optimizedSpigletBuffer.toString());
         optimizedSpigletWriter.close();
     }
 
@@ -124,11 +130,11 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
     public String visit(final Goal n, String argu) {
         String nRes = null;
         argu = "MAIN";
-        optimizedSpigletWriter.println("MAIN");
+        optimizedSpigletBuffer.append("MAIN\n");
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
         n.f2.accept(this, argu);
-        optimizedSpigletWriter.println("END");
+        optimizedSpigletBuffer.append("END\n");
         n.f3.accept(this, argu);
         n.f4.accept(this, argu);
         return nRes;
@@ -142,14 +148,14 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
     }
 
     public String visit(final Procedure n, String argu) {
-        this.instructionCounter = 1;
+        this.instructionCounter = 0;
         argu = n.f0.accept(this, argu);
 
         String instructionLiteral = argu;
         instructionLiteral += " [";
         instructionLiteral += n.f2.accept(this, argu);
         instructionLiteral += "]";
-        optimizedSpigletWriter.println(instructionLiteral);
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
         n.f4.accept(this, argu);
 
         return null;
@@ -162,21 +168,22 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
     }
 
     public String visit(final NoOpStmt n, final String argu) {
+        this.instructionCounter++;
         n.f0.accept(this, argu);
-
-        optimizedSpigletWriter.println("NOOP");
+        optimizedSpigletBuffer.append("NOOP\n");
 
         return n.f0.toString();
     }
 
     public String visit(final ErrorStmt n, final String argu) {
+        this.instructionCounter++;
         n.f0.accept(this, argu);
-
-        optimizedSpigletWriter.println("ERROR");
+        optimizedSpigletBuffer.append("ERROR\n");
         return n.f0.toString();
     }
 
     public String visit(final CJumpStmt n, final String argu) {
+        this.instructionCounter++;
         String instructionLiteral = n.f0.toString();
 
         n.f0.accept(this, argu);
@@ -185,49 +192,50 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
         String label = n.f2.accept(this, argu);
         instructionLiteral += " " + label;
 
-        optimizedSpigletWriter.println(instructionLiteral);
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
         return instructionLiteral;
     }
 
     public String visit(final JumpStmt n, final String argu) {
+        this.instructionCounter++;
         String instructionLiteral = n.f0.toString();
 
         n.f0.accept(this, argu);
         String label = n.f1.accept(this, argu);
         instructionLiteral += " " + label;
 
-        optimizedSpigletWriter.println(instructionLiteral);
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
         return instructionLiteral;
     }
 
     public String visit(final HStoreStmt n, final String argu) {
-        String instructionLiteral = n.f0.toString();
-
-        n.f0.accept(this, argu);
-        instructionLiteral += " " + n.f1.accept(this.varUseTransformer, argu);
-        instructionLiteral += " " + n.f2.accept(this, argu);
-        instructionLiteral += " " + n.f3.accept(this.varUseTransformer, argu);
-
-        optimizedSpigletWriter.println(instructionLiteral);
-
-        return instructionLiteral;
-    }
-
-    public String visit(final HLoadStmt n, final String argu) {
+        this.instructionCounter++;
         String instructionLiteral = n.f0.toString();
 
         n.f0.accept(this, argu);
         instructionLiteral += " " + n.f1.accept(this, argu);
-
-        instructionLiteral += " " + n.f2.accept(this.varUseTransformer, argu);
-
+        instructionLiteral += " " + n.f2.accept(this, argu);
         instructionLiteral += " " + n.f3.accept(this, argu);
 
-        optimizedSpigletWriter.println(instructionLiteral);
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
+        return instructionLiteral;
+    }
+
+    public String visit(final HLoadStmt n, final String argu) {
+        this.instructionCounter++;
+        String instructionLiteral = n.f0.toString();
+
+        n.f0.accept(this, argu);
+        instructionLiteral += " " + n.f1.accept(this, argu);
+        instructionLiteral += " " + n.f2.accept(this, argu);
+        instructionLiteral += " " + n.f3.accept(this, argu);
+
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
         return instructionLiteral;
     }
 
     public String visit(final MoveStmt n, final String argu) {
+        this.instructionCounter++;
         String instructionLiteral = n.f0.toString();
 
         n.f0.accept(this, argu);
@@ -236,19 +244,28 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
 
         String simpleExp = n.f2.accept(this, argu);
         instructionLiteral += " " + simpleExp;
-
-
+        String key = argu;
+        if (deadInstructionMap.containsKey(key)) {
+            if (!(deadInstructionMap.get(key).contains(this.instructionCounter)) || instructionLiteral.contains("CALL"))
+                optimizedSpigletBuffer.append(instructionLiteral + "\n");
+            else
+                optimizedSpigletBuffer.append("NOOP\n");
+        }
+        else {
+            optimizedSpigletBuffer.append(instructionLiteral + "\n");
+        }
         return instructionLiteral;
     }
 
     public String visit(final PrintStmt n, final String argu) {
+        this.instructionCounter++;
         String instructionLiteral = n.f0.toString();
 
         n.f0.accept(this, argu);
         instructionLiteral += " " + n.f1.accept(this, argu);
         n.f1.accept(this.varUseTransformer, argu);
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
 
-        optimizedSpigletWriter.println();
         return instructionLiteral;
     }
 
@@ -257,15 +274,16 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
     }
 
     public String visit(final StmtExp n, final String argu) {
+        optimizedSpigletBuffer.append("BEGIN\n");
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
         n.f2.accept(this, argu);
         String instructionLiteral = n.f2.tokenImage;
         instructionLiteral += " " + n.f3.accept(this, argu);
-        n.f3.accept(this.varUseTransformer, argu);
         n.f4.accept(this, argu);
 
-        optimizedSpigletWriter.println(instructionLiteral);
+        optimizedSpigletBuffer.append(instructionLiteral + "\n");
+        optimizedSpigletBuffer.append("END\n");
         return instructionLiteral;
     }
 
@@ -273,10 +291,10 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
         String instructionLiteral = n.f0.toString();
 
         n.f0.accept(this, argu);
-        instructionLiteral += " " + n.f1.accept(this.varUseTransformer, argu);
+        instructionLiteral += " " + n.f1.accept(this, argu);
         n.f2.accept(this, argu);
         instructionLiteral += " " + n.f2.tokenImage;
-        instructionLiteral += " " + n.f3.accept(this.varUseTransformer, argu);
+        instructionLiteral += " " + n.f3.accept(this, argu);
 
         n.f4.accept(this, argu);
         instructionLiteral += " " + n.f4.tokenImage;
@@ -293,17 +311,23 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
     }
 
     public String visit(final BinOp n, final String argu) {
-        String instructionLiteral = n.f0.f0.choice.toString();
+        String operator = n.f0.f0.choice.toString();
         n.f0.accept(this, argu);
-        instructionLiteral += " " + n.f1.accept(this, argu);
         String firstOperand = n.f1.accept(this.varUseTransformer, argu);
 
-        instructionLiteral += " " + n.f2.accept(this, argu);
-        String secondOperand = n.f1.accept(this.varUseTransformer, argu);
+        String secondOperand = n.f2.accept(this.varUseTransformer, argu);
+        if (isInteger(firstOperand) && isInteger(secondOperand))
+            if (operator.equals("PLUS"))
+                return String.valueOf(Integer.parseInt(firstOperand) + Integer.parseInt(secondOperand));
+            else if (operator.equals("MINUS"))
+                return String.valueOf(Integer.parseInt(firstOperand) - Integer.parseInt(secondOperand));
+            else if (operator.equals("TIMES"))
+                return String.valueOf(Integer.parseInt(firstOperand) * Integer.parseInt(secondOperand));
+            else
+                return String.valueOf(Integer.parseInt(firstOperand) / Integer.parseInt(secondOperand));
+        else
+            return operator + " " + n.f1.f0.tokenImage + " " + n.f1.f1.f0.tokenImage + " " + secondOperand;
 
-
-
-        return instructionLiteral;
     }
 
     public String visit(final Operator n, final String argu) {

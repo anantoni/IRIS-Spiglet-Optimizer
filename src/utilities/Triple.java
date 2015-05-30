@@ -37,4 +37,22 @@ public class Triple<String, Integer> {
     public void setVar(String var) {
         this.var = var;
     }
+
+    @Override
+    public java.lang.String toString() {
+        return "(" + method + ", " + iCounter.toString() + ", " + var + ")";
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        Triple<String, Integer> otherTriple = (Triple) otherObject;
+        return (method.equals(otherTriple.method) && (iCounter == otherTriple.iCounter) && (var.equals(otherTriple.var)));
+
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        return prime * method.hashCode() + iCounter.hashCode() + var.hashCode();
+    }
 }

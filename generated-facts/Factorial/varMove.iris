@@ -1,3 +1,2 @@
-varMove('MAIN',6,'TEMP 23','TEMP 25').
-varMove('Fac_ComputeFac',7,'TEMP 29','TEMP 0').
-varMove('Fac_ComputeFac',14,'TEMP 20','TEMP 38').
+varMove('MAIN',10,'TEMP 5','TEMP 10').
+varMove('Fac_ComputeFac',11,'TEMP 2','TEMP 4').

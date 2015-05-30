@@ -1,10 +1,13 @@
 package transformer;
 
 import syntaxtree.*;
+import utilities.Triple;
 import visitor.DepthFirstRetArguVisitor;
 import visitor.IRetArguVisitor;
 
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by anantoni on 28/5/2015.
@@ -12,9 +15,16 @@ import java.util.Iterator;
 public class VarUseTransformer extends DepthFirstRetArguVisitor<String, String> implements IRetArguVisitor<String, String> {
 
     private Transformer primaryVisitor;
+    private Map<Triple<String, Integer>, Integer> constantMap;
+    private Map<Triple<String, Integer>, String> copyMap;
+    private Map<String, Set<Integer>> deadInstructionMap;
+
 
     public VarUseTransformer(Transformer primaryVisitor) {
         this.primaryVisitor = primaryVisitor;
+        this.constantMap = primaryVisitor.constantMap;
+        this.copyMap = primaryVisitor.copyMap;
+        this.deadInstructionMap = primaryVisitor.deadInstructionMap;
     }
 
     public String visit(final NodeChoice n, final String argu) {
@@ -200,28 +210,35 @@ public class VarUseTransformer extends DepthFirstRetArguVisitor<String, String> 
     }
 
     public String visit(final SimpleExp n, final String argu) {
-        n.f0.accept(this, argu);
-
-        return null;
+        return n.f0.accept(this, argu);
     }
 
     public String visit(final Temp n, final String argu) {
+        int iCounter = this.primaryVisitor.getInstructionCounter();
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
 
-        return null;
+        String var = n.f0.tokenImage + " " + n.f1.f0.tokenImage;
+        Triple key = new Triple(argu, iCounter, var);
+        if (constantMap.containsKey(key)) {
+            return constantMap.get(key).toString();
+        }
+        else if (copyMap.containsKey(key))
+            return copyMap.get(key).toString();
+        else
+            return var;
     }
 
     public String visit(final IntegerLiteral n, final String argu) {
         n.f0.accept(this, argu);
 
-        return null;
+        return n.f0.tokenImage;
     }
 
     public String visit(final Label n, final String argu) {
         n.f0.accept(this, argu);
 
-        return null;
+        return n.f0.tokenImage;
     }
 }
 

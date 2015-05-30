@@ -76,6 +76,8 @@ inSameBasicBlock2(?m, ?i, ?k) :- inSameBasicBlock2(?m, ?i, ?j),
 basicBlock3(?m, ?i, ?j) :- inSameBasicBlock2(?m, ?i, ?j),
                            bbEnd(?m, ?j).
 
+                            C(?m,?instr,?var) :- varDef(?m,?instr,?var).
+
 
 
 

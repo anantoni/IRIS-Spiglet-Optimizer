@@ -21,7 +21,7 @@ constantPropagation(?m, ?i, ?v, ?c) :- next(?m, ?j, ?i),
                                        constantPropagation(?m, ?j, ?v, ?c),
                                        constantPropagation(?m, ?k, ?v, ?c).
 
-constantPropagation(?m, ?i, ?v, ?c) :- varMove(?m, ?i, ?v, ?v1),
+constantPropagation(?m, ?i, ?v, ?c) :- copyPropagation(?m, ?i, ?v, ?v1),
                                        constantPropagation(?m, ?i, ?v1, ?c).
 
 

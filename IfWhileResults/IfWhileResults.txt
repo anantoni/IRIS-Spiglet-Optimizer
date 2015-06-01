@@ -1,0 +1,15 @@
+?- basicBlock(?method, ?start, ?end).
+[?method, ?start, ?end]
+('MAIN', 1, 4)
+('MAIN', 5, 8)
+('MAIN', 14, 22)
+('MAIN', 26, 28)
+('MAIN', 29, 33)
+('MAIN', 37, 38)
+('MAIN', 44, 49)
+('MAIN', 44, 48)
+('MAIN', 49, 49)
+('MAIN', 9, 13)
+('MAIN', 23, 25)
+('MAIN', 34, 36)
+('MAIN', 39, 43)

@@ -1,0 +1,73 @@
+instruction('MAIN',1,'MOVE TEMP 3 10').
+instruction('MAIN',2,'MOVE TEMP 1 TEMP 3').
+instruction('MAIN',3,'MOVE TEMP 4 5').
+instruction('MAIN',4,'MOVE TEMP 100 555').
+instruction('MAIN',5,'MOVE TEMP 2 TEMP 4').
+instruction('MAIN',6,'NOOP').
+instruction('MAIN',7,'PRINT TEMP 100').
+instruction('MAIN',8,'MOVE TEMP 100 444').
+instruction('MAIN',9,'MOVE TEMP 6 20').
+instruction('MAIN',10,'MOVE TEMP 5 LT TEMP 1 TEMP 6').
+instruction('MAIN',11,'PRINT TEMP 100').
+instruction('MAIN',12,'MOVE TEMP 100 555').
+instruction('MAIN',13,'CJUMP TEMP 5 L1').
+instruction('MAIN',14,'PRINT TEMP 1').
+instruction('MAIN',15,'MOVE TEMP 8 1').
+instruction('MAIN',16,'MOVE TEMP 7 PLUS TEMP 1 TEMP 8').
+instruction('MAIN',17,'MOVE TEMP 100 555').
+instruction('MAIN',18,'MOVE TEMP 1 TEMP 7').
+instruction('MAIN',19,'PRINT TEMP 100').
+instruction('MAIN',20,'JUMP L0').
+instruction('MAIN',21,'NOOP').
+instruction('MAIN',22,'PRINT TEMP 100').
+instruction('MAIN',23,'MOVE TEMP 9 6').
+instruction('MAIN',24,'MOVE TEMP 2 TEMP 9').
+instruction('MAIN',25,'MOVE TEMP 12 2').
+instruction('MAIN',26,'MOVE TEMP 13 3').
+instruction('MAIN',27,'MOVE TEMP 11 LT TEMP 12 TEMP 13').
+instruction('MAIN',28,'MOVE TEMP 10 1').
+instruction('MAIN',29,'MOVE TEMP 10 MINUS TEMP 10 TEMP 11').
+instruction('MAIN',30,'MOVE TEMP 101 444').
+instruction('MAIN',31,'PRINT TEMP 101').
+instruction('MAIN',32,'CJUMP TEMP 10 L2').
+instruction('MAIN',33,'MOVE TEMP 14 111').
+instruction('MAIN',34,'MOVE TEMP 101 555').
+instruction('MAIN',35,'PRINT TEMP 101').
+instruction('MAIN',36,'PRINT TEMP 14').
+instruction('MAIN',37,'JUMP L3').
+instruction('MAIN',38,'NOOP').
+instruction('MAIN',39,'MOVE TEMP 101 666').
+instruction('MAIN',40,'PRINT TEMP 101').
+instruction('MAIN',41,'MOVE TEMP 15 100').
+instruction('MAIN',42,'PRINT TEMP 15').
+instruction('MAIN',43,'NOOP').
+instruction('MAIN',44,'MOVE TEMP 18 6').
+instruction('MAIN',45,'MOVE TEMP 17 LT TEMP 1 TEMP 18').
+instruction('MAIN',46,'MOVE TEMP 101 666').
+instruction('MAIN',47,'PRINT TEMP 101').
+instruction('MAIN',48,'MOVE TEMP 16 TEMP 17').
+instruction('MAIN',49,'CJUMP TEMP 17 L6').
+instruction('MAIN',50,'MOVE TEMP 101 777').
+instruction('MAIN',51,'PRINT TEMP 101').
+instruction('MAIN',52,'MOVE TEMP 20 4').
+instruction('MAIN',53,'MOVE TEMP 19 LT TEMP 20 TEMP 1').
+instruction('MAIN',54,'MOVE TEMP 16 TEMP 19').
+instruction('MAIN',55,'NOOP').
+instruction('MAIN',56,'MOVE TEMP 102 444').
+instruction('MAIN',57,'PRINT TEMP 102').
+instruction('MAIN',58,'CJUMP TEMP 16 L4').
+instruction('MAIN',59,'MOVE TEMP 102 444').
+instruction('MAIN',60,'PRINT TEMP 102').
+instruction('MAIN',61,'MOVE TEMP 21 100').
+instruction('MAIN',62,'PRINT TEMP 21').
+instruction('MAIN',63,'MOVE TEMP 22 3').
+instruction('MAIN',64,'MOVE TEMP 1 TEMP 22').
+instruction('MAIN',65,'JUMP L5').
+instruction('MAIN',66,'NOOP').
+instruction('MAIN',67,'PRINT TEMP 102').
+instruction('MAIN',68,'MOVE TEMP 102 555').
+instruction('MAIN',69,'MOVE TEMP 23 4').
+instruction('MAIN',70,'MOVE TEMP 1 TEMP 23').
+instruction('MAIN',71,'MOVE TEMP 24 200').
+instruction('MAIN',72,'PRINT TEMP 24').
+instruction('MAIN',73,'NOOP').

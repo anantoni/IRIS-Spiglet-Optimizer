@@ -1,0 +1,836 @@
+instruction('MAIN',1,'MOVE TEMP 56 HALLOCATE 4').
+instruction('MAIN',2,'MOVE TEMP 57 HALLOCATE 4').
+instruction('MAIN',3,'MOVE TEMP 372 TV_Start').
+instruction('MAIN',4,'HSTORE TEMP 56 0 TEMP 372').
+instruction('MAIN',5,'HSTORE TEMP 57 0 TEMP 56').
+instruction('MAIN',6,'MOVE TEMP 55 TEMP 57').
+instruction('MAIN',7,'HLOAD TEMP 53 TEMP 55 0').
+instruction('MAIN',8,'HLOAD TEMP 54 TEMP 53 0').
+instruction('MAIN',9,'MOVE TEMP 373 CALL TEMP 54 ( TEMP 55 )').
+instruction('MAIN',10,'PRINT TEMP 373').
+instruction('TV_Start',1,'MOVE TEMP 59 HALLOCATE 84').
+instruction('TV_Start',2,'MOVE TEMP 60 HALLOCATE 28').
+instruction('TV_Start',3,'MOVE TEMP 374 Tree_accept').
+instruction('TV_Start',4,'HSTORE TEMP 59 80 TEMP 374').
+instruction('TV_Start',5,'MOVE TEMP 375 Tree_RecPrint').
+instruction('TV_Start',6,'HSTORE TEMP 59 76 TEMP 375').
+instruction('TV_Start',7,'MOVE TEMP 376 Tree_Print').
+instruction('TV_Start',8,'HSTORE TEMP 59 72 TEMP 376').
+instruction('TV_Start',9,'MOVE TEMP 377 Tree_Search').
+instruction('TV_Start',10,'HSTORE TEMP 59 68 TEMP 377').
+instruction('TV_Start',11,'MOVE TEMP 378 Tree_RemoveLeft').
+instruction('TV_Start',12,'HSTORE TEMP 59 64 TEMP 378').
+instruction('TV_Start',13,'MOVE TEMP 379 Tree_RemoveRight').
+instruction('TV_Start',14,'HSTORE TEMP 59 60 TEMP 379').
+instruction('TV_Start',15,'MOVE TEMP 380 Tree_Remove').
+instruction('TV_Start',16,'HSTORE TEMP 59 56 TEMP 380').
+instruction('TV_Start',17,'MOVE TEMP 381 Tree_Delete').
+instruction('TV_Start',18,'HSTORE TEMP 59 52 TEMP 381').
+instruction('TV_Start',19,'MOVE TEMP 382 Tree_Insert').
+instruction('TV_Start',20,'HSTORE TEMP 59 48 TEMP 382').
+instruction('TV_Start',21,'MOVE TEMP 383 Tree_Compare').
+instruction('TV_Start',22,'HSTORE TEMP 59 44 TEMP 383').
+instruction('TV_Start',23,'MOVE TEMP 384 Tree_SetHas_Right').
+instruction('TV_Start',24,'HSTORE TEMP 59 40 TEMP 384').
+instruction('TV_Start',25,'MOVE TEMP 385 Tree_SetHas_Left').
+instruction('TV_Start',26,'HSTORE TEMP 59 36 TEMP 385').
+instruction('TV_Start',27,'MOVE TEMP 386 Tree_GetHas_Left').
+instruction('TV_Start',28,'HSTORE TEMP 59 32 TEMP 386').
+instruction('TV_Start',29,'MOVE TEMP 387 Tree_GetHas_Right').
+instruction('TV_Start',30,'HSTORE TEMP 59 28 TEMP 387').
+instruction('TV_Start',31,'MOVE TEMP 388 Tree_SetKey').
+instruction('TV_Start',32,'HSTORE TEMP 59 24 TEMP 388').
+instruction('TV_Start',33,'MOVE TEMP 389 Tree_GetKey').
+instruction('TV_Start',34,'HSTORE TEMP 59 20 TEMP 389').
+instruction('TV_Start',35,'MOVE TEMP 390 Tree_GetLeft').
+instruction('TV_Start',36,'HSTORE TEMP 59 16 TEMP 390').
+instruction('TV_Start',37,'MOVE TEMP 391 Tree_GetRight').
+instruction('TV_Start',38,'HSTORE TEMP 59 12 TEMP 391').
+instruction('TV_Start',39,'MOVE TEMP 392 Tree_SetLeft').
+instruction('TV_Start',40,'HSTORE TEMP 59 8 TEMP 392').
+instruction('TV_Start',41,'MOVE TEMP 393 Tree_SetRight').
+instruction('TV_Start',42,'HSTORE TEMP 59 4 TEMP 393').
+instruction('TV_Start',43,'MOVE TEMP 394 Tree_Init').
+instruction('TV_Start',44,'HSTORE TEMP 59 0 TEMP 394').
+instruction('TV_Start',45,'MOVE TEMP 61 4').
+instruction('TV_Start',46,'NOOP').
+instruction('TV_Start',47,'MOVE TEMP 395 28').
+instruction('TV_Start',48,'MOVE TEMP 396 LT TEMP 61 TEMP 395').
+instruction('TV_Start',49,'CJUMP TEMP 396 L3').
+instruction('TV_Start',50,'MOVE TEMP 397 PLUS TEMP 60 TEMP 61').
+instruction('TV_Start',51,'MOVE TEMP 398 0').
+instruction('TV_Start',52,'HSTORE TEMP 397 0 TEMP 398').
+instruction('TV_Start',53,'MOVE TEMP 61 PLUS TEMP 61 4').
+instruction('TV_Start',54,'JUMP L2').
+instruction('TV_Start',55,'NOOP').
+instruction('TV_Start',56,'HSTORE TEMP 60 0 TEMP 59').
+instruction('TV_Start',57,'MOVE TEMP 20 TEMP 60').
+instruction('TV_Start',58,'MOVE TEMP 64 TEMP 20').
+instruction('TV_Start',59,'HLOAD TEMP 62 TEMP 64 0').
+instruction('TV_Start',60,'HLOAD TEMP 63 TEMP 62 0').
+instruction('TV_Start',61,'MOVE TEMP 399 16').
+instruction('TV_Start',62,'MOVE TEMP 400 CALL TEMP 63 ( TEMP 64 TEMP 399 )').
+instruction('TV_Start',63,'MOVE TEMP 21 TEMP 400').
+instruction('TV_Start',64,'MOVE TEMP 67 TEMP 20').
+instruction('TV_Start',65,'HLOAD TEMP 65 TEMP 67 0').
+instruction('TV_Start',66,'HLOAD TEMP 66 TEMP 65 72').
+instruction('TV_Start',67,'MOVE TEMP 401 CALL TEMP 66 ( TEMP 67 )').
+instruction('TV_Start',68,'MOVE TEMP 21 TEMP 401').
+instruction('TV_Start',69,'MOVE TEMP 402 100000000').
+instruction('TV_Start',70,'PRINT TEMP 402').
+instruction('TV_Start',71,'MOVE TEMP 70 TEMP 20').
+instruction('TV_Start',72,'HLOAD TEMP 68 TEMP 70 0').
+instruction('TV_Start',73,'HLOAD TEMP 69 TEMP 68 48').
+instruction('TV_Start',74,'MOVE TEMP 403 8').
+instruction('TV_Start',75,'MOVE TEMP 404 CALL TEMP 69 ( TEMP 70 TEMP 403 )').
+instruction('TV_Start',76,'MOVE TEMP 21 TEMP 404').
+instruction('TV_Start',77,'MOVE TEMP 73 TEMP 20').
+instruction('TV_Start',78,'HLOAD TEMP 71 TEMP 73 0').
+instruction('TV_Start',79,'HLOAD TEMP 72 TEMP 71 48').
+instruction('TV_Start',80,'MOVE TEMP 405 24').
+instruction('TV_Start',81,'MOVE TEMP 406 CALL TEMP 72 ( TEMP 73 TEMP 405 )').
+instruction('TV_Start',82,'MOVE TEMP 21 TEMP 406').
+instruction('TV_Start',83,'MOVE TEMP 76 TEMP 20').
+instruction('TV_Start',84,'HLOAD TEMP 74 TEMP 76 0').
+instruction('TV_Start',85,'HLOAD TEMP 75 TEMP 74 48').
+instruction('TV_Start',86,'MOVE TEMP 407 4').
+instruction('TV_Start',87,'MOVE TEMP 408 CALL TEMP 75 ( TEMP 76 TEMP 407 )').
+instruction('TV_Start',88,'MOVE TEMP 21 TEMP 408').
+instruction('TV_Start',89,'MOVE TEMP 79 TEMP 20').
+instruction('TV_Start',90,'HLOAD TEMP 77 TEMP 79 0').
+instruction('TV_Start',91,'HLOAD TEMP 78 TEMP 77 48').
+instruction('TV_Start',92,'MOVE TEMP 409 12').
+instruction('TV_Start',93,'MOVE TEMP 410 CALL TEMP 78 ( TEMP 79 TEMP 409 )').
+instruction('TV_Start',94,'MOVE TEMP 21 TEMP 410').
+instruction('TV_Start',95,'MOVE TEMP 82 TEMP 20').
+instruction('TV_Start',96,'HLOAD TEMP 80 TEMP 82 0').
+instruction('TV_Start',97,'HLOAD TEMP 81 TEMP 80 48').
+instruction('TV_Start',98,'MOVE TEMP 411 20').
+instruction('TV_Start',99,'MOVE TEMP 412 CALL TEMP 81 ( TEMP 82 TEMP 411 )').
+instruction('TV_Start',100,'MOVE TEMP 21 TEMP 412').
+instruction('TV_Start',101,'MOVE TEMP 85 TEMP 20').
+instruction('TV_Start',102,'HLOAD TEMP 83 TEMP 85 0').
+instruction('TV_Start',103,'HLOAD TEMP 84 TEMP 83 48').
+instruction('TV_Start',104,'MOVE TEMP 413 28').
+instruction('TV_Start',105,'MOVE TEMP 414 CALL TEMP 84 ( TEMP 85 TEMP 413 )').
+instruction('TV_Start',106,'MOVE TEMP 21 TEMP 414').
+instruction('TV_Start',107,'MOVE TEMP 88 TEMP 20').
+instruction('TV_Start',108,'HLOAD TEMP 86 TEMP 88 0').
+instruction('TV_Start',109,'HLOAD TEMP 87 TEMP 86 48').
+instruction('TV_Start',110,'MOVE TEMP 415 14').
+instruction('TV_Start',111,'MOVE TEMP 416 CALL TEMP 87 ( TEMP 88 TEMP 415 )').
+instruction('TV_Start',112,'MOVE TEMP 21 TEMP 416').
+instruction('TV_Start',113,'MOVE TEMP 91 TEMP 20').
+instruction('TV_Start',114,'HLOAD TEMP 89 TEMP 91 0').
+instruction('TV_Start',115,'HLOAD TEMP 90 TEMP 89 72').
+instruction('TV_Start',116,'MOVE TEMP 417 CALL TEMP 90 ( TEMP 91 )').
+instruction('TV_Start',117,'MOVE TEMP 21 TEMP 417').
+instruction('TV_Start',118,'MOVE TEMP 418 100000000').
+instruction('TV_Start',119,'PRINT TEMP 418').
+instruction('TV_Start',120,'MOVE TEMP 92 HALLOCATE 4').
+instruction('TV_Start',121,'MOVE TEMP 93 HALLOCATE 12').
+instruction('TV_Start',122,'MOVE TEMP 419 MyVisitor_visit').
+instruction('TV_Start',123,'HSTORE TEMP 92 0 TEMP 419').
+instruction('TV_Start',124,'MOVE TEMP 94 4').
+instruction('TV_Start',125,'NOOP').
+instruction('TV_Start',126,'MOVE TEMP 420 12').
+instruction('TV_Start',127,'MOVE TEMP 421 LT TEMP 94 TEMP 420').
+instruction('TV_Start',128,'CJUMP TEMP 421 L5').
+instruction('TV_Start',129,'MOVE TEMP 422 PLUS TEMP 93 TEMP 94').
+instruction('TV_Start',130,'MOVE TEMP 423 0').
+instruction('TV_Start',131,'HSTORE TEMP 422 0 TEMP 423').
+instruction('TV_Start',132,'MOVE TEMP 94 PLUS TEMP 94 4').
+instruction('TV_Start',133,'JUMP L4').
+instruction('TV_Start',134,'NOOP').
+instruction('TV_Start',135,'HSTORE TEMP 93 0 TEMP 92').
+instruction('TV_Start',136,'MOVE TEMP 23 TEMP 93').
+instruction('TV_Start',137,'MOVE TEMP 424 50000000').
+instruction('TV_Start',138,'PRINT TEMP 424').
+instruction('TV_Start',139,'MOVE TEMP 97 TEMP 20').
+instruction('TV_Start',140,'HLOAD TEMP 95 TEMP 97 0').
+instruction('TV_Start',141,'HLOAD TEMP 96 TEMP 95 80').
+instruction('TV_Start',142,'MOVE TEMP 425 CALL TEMP 96 ( TEMP 97 TEMP 23 )').
+instruction('TV_Start',143,'MOVE TEMP 22 TEMP 425').
+instruction('TV_Start',144,'MOVE TEMP 426 100000000').
+instruction('TV_Start',145,'PRINT TEMP 426').
+instruction('TV_Start',146,'MOVE TEMP 100 TEMP 20').
+instruction('TV_Start',147,'HLOAD TEMP 98 TEMP 100 0').
+instruction('TV_Start',148,'HLOAD TEMP 99 TEMP 98 68').
+instruction('TV_Start',149,'MOVE TEMP 427 24').
+instruction('TV_Start',150,'MOVE TEMP 428 CALL TEMP 99 ( TEMP 100 TEMP 427 )').
+instruction('TV_Start',151,'PRINT TEMP 428').
+instruction('TV_Start',152,'MOVE TEMP 103 TEMP 20').
+instruction('TV_Start',153,'HLOAD TEMP 101 TEMP 103 0').
+instruction('TV_Start',154,'HLOAD TEMP 102 TEMP 101 68').
+instruction('TV_Start',155,'MOVE TEMP 429 12').
+instruction('TV_Start',156,'MOVE TEMP 430 CALL TEMP 102 ( TEMP 103 TEMP 429 )').
+instruction('TV_Start',157,'PRINT TEMP 430').
+instruction('TV_Start',158,'MOVE TEMP 106 TEMP 20').
+instruction('TV_Start',159,'HLOAD TEMP 104 TEMP 106 0').
+instruction('TV_Start',160,'HLOAD TEMP 105 TEMP 104 68').
+instruction('TV_Start',161,'MOVE TEMP 431 16').
+instruction('TV_Start',162,'MOVE TEMP 432 CALL TEMP 105 ( TEMP 106 TEMP 431 )').
+instruction('TV_Start',163,'PRINT TEMP 432').
+instruction('TV_Start',164,'MOVE TEMP 109 TEMP 20').
+instruction('TV_Start',165,'HLOAD TEMP 107 TEMP 109 0').
+instruction('TV_Start',166,'HLOAD TEMP 108 TEMP 107 68').
+instruction('TV_Start',167,'MOVE TEMP 433 50').
+instruction('TV_Start',168,'MOVE TEMP 434 CALL TEMP 108 ( TEMP 109 TEMP 433 )').
+instruction('TV_Start',169,'PRINT TEMP 434').
+instruction('TV_Start',170,'MOVE TEMP 112 TEMP 20').
+instruction('TV_Start',171,'HLOAD TEMP 110 TEMP 112 0').
+instruction('TV_Start',172,'HLOAD TEMP 111 TEMP 110 68').
+instruction('TV_Start',173,'MOVE TEMP 435 12').
+instruction('TV_Start',174,'MOVE TEMP 436 CALL TEMP 111 ( TEMP 112 TEMP 435 )').
+instruction('TV_Start',175,'PRINT TEMP 436').
+instruction('TV_Start',176,'MOVE TEMP 115 TEMP 20').
+instruction('TV_Start',177,'HLOAD TEMP 113 TEMP 115 0').
+instruction('TV_Start',178,'HLOAD TEMP 114 TEMP 113 52').
+instruction('TV_Start',179,'MOVE TEMP 437 12').
+instruction('TV_Start',180,'MOVE TEMP 438 CALL TEMP 114 ( TEMP 115 TEMP 437 )').
+instruction('TV_Start',181,'MOVE TEMP 21 TEMP 438').
+instruction('TV_Start',182,'MOVE TEMP 118 TEMP 20').
+instruction('TV_Start',183,'HLOAD TEMP 116 TEMP 118 0').
+instruction('TV_Start',184,'HLOAD TEMP 117 TEMP 116 72').
+instruction('TV_Start',185,'MOVE TEMP 439 CALL TEMP 117 ( TEMP 118 )').
+instruction('TV_Start',186,'MOVE TEMP 21 TEMP 439').
+instruction('TV_Start',187,'MOVE TEMP 121 TEMP 20').
+instruction('TV_Start',188,'HLOAD TEMP 119 TEMP 121 0').
+instruction('TV_Start',189,'HLOAD TEMP 120 TEMP 119 68').
+instruction('TV_Start',190,'MOVE TEMP 440 12').
+instruction('TV_Start',191,'MOVE TEMP 441 CALL TEMP 120 ( TEMP 121 TEMP 440 )').
+instruction('TV_Start',192,'PRINT TEMP 441').
+instruction('TV_Start',193,'MOVE TEMP 442 0').
+instruction('TV_Start',194,'RETURN TEMP 442').
+instruction('Tree_Init',1,'HSTORE TEMP 0 12 TEMP 1').
+instruction('Tree_Init',2,'MOVE TEMP 443 0').
+instruction('Tree_Init',3,'HSTORE TEMP 0 16 TEMP 443').
+instruction('Tree_Init',4,'MOVE TEMP 444 0').
+instruction('Tree_Init',5,'HSTORE TEMP 0 20 TEMP 444').
+instruction('Tree_Init',6,'MOVE TEMP 445 1').
+instruction('Tree_Init',7,'RETURN TEMP 445').
+instruction('Tree_SetRight',1,'HSTORE TEMP 0 8 TEMP 1').
+instruction('Tree_SetRight',2,'MOVE TEMP 446 1').
+instruction('Tree_SetRight',3,'RETURN TEMP 446').
+instruction('Tree_SetLeft',1,'HSTORE TEMP 0 4 TEMP 1').
+instruction('Tree_SetLeft',2,'MOVE TEMP 447 1').
+instruction('Tree_SetLeft',3,'RETURN TEMP 447').
+instruction('Tree_GetRight',1,'HLOAD TEMP 122 TEMP 0 8').
+instruction('Tree_GetRight',2,'RETURN TEMP 122').
+instruction('Tree_GetLeft',1,'HLOAD TEMP 124 TEMP 0 4').
+instruction('Tree_GetLeft',2,'RETURN TEMP 124').
+instruction('Tree_GetKey',1,'HLOAD TEMP 126 TEMP 0 12').
+instruction('Tree_GetKey',2,'RETURN TEMP 126').
+instruction('Tree_SetKey',1,'HSTORE TEMP 0 12 TEMP 1').
+instruction('Tree_SetKey',2,'MOVE TEMP 448 1').
+instruction('Tree_SetKey',3,'RETURN TEMP 448').
+instruction('Tree_GetHas_Right',1,'HLOAD TEMP 128 TEMP 0 20').
+instruction('Tree_GetHas_Right',2,'RETURN TEMP 128').
+instruction('Tree_GetHas_Left',1,'HLOAD TEMP 130 TEMP 0 16').
+instruction('Tree_GetHas_Left',2,'RETURN TEMP 130').
+instruction('Tree_SetHas_Left',1,'HSTORE TEMP 0 16 TEMP 1').
+instruction('Tree_SetHas_Left',2,'MOVE TEMP 449 1').
+instruction('Tree_SetHas_Left',3,'RETURN TEMP 449').
+instruction('Tree_SetHas_Right',1,'HSTORE TEMP 0 20 TEMP 1').
+instruction('Tree_SetHas_Right',2,'MOVE TEMP 450 1').
+instruction('Tree_SetHas_Right',3,'RETURN TEMP 450').
+instruction('Tree_Compare',1,'MOVE TEMP 24 0').
+instruction('Tree_Compare',2,'MOVE TEMP 25 PLUS TEMP 2 1').
+instruction('Tree_Compare',3,'MOVE TEMP 451 LT TEMP 1 TEMP 2').
+instruction('Tree_Compare',4,'CJUMP TEMP 451 L6').
+instruction('Tree_Compare',5,'MOVE TEMP 24 0').
+instruction('Tree_Compare',6,'JUMP L7').
+instruction('Tree_Compare',7,'NOOP').
+instruction('Tree_Compare',8,'MOVE TEMP 452 1').
+instruction('Tree_Compare',9,'MOVE TEMP 453 LT TEMP 1 TEMP 25').
+instruction('Tree_Compare',10,'MOVE TEMP 454 MINUS TEMP 452 TEMP 453').
+instruction('Tree_Compare',11,'CJUMP TEMP 454 L8').
+instruction('Tree_Compare',12,'MOVE TEMP 24 0').
+instruction('Tree_Compare',13,'JUMP L9').
+instruction('Tree_Compare',14,'NOOP').
+instruction('Tree_Compare',15,'MOVE TEMP 24 1').
+instruction('Tree_Compare',16,'NOOP').
+instruction('Tree_Compare',17,'NOOP').
+instruction('Tree_Compare',18,'RETURN TEMP 24').
+instruction('Tree_Insert',1,'MOVE TEMP 132 HALLOCATE 84').
+instruction('Tree_Insert',2,'MOVE TEMP 133 HALLOCATE 28').
+instruction('Tree_Insert',3,'MOVE TEMP 455 Tree_accept').
+instruction('Tree_Insert',4,'HSTORE TEMP 132 80 TEMP 455').
+instruction('Tree_Insert',5,'MOVE TEMP 456 Tree_RecPrint').
+instruction('Tree_Insert',6,'HSTORE TEMP 132 76 TEMP 456').
+instruction('Tree_Insert',7,'MOVE TEMP 457 Tree_Print').
+instruction('Tree_Insert',8,'HSTORE TEMP 132 72 TEMP 457').
+instruction('Tree_Insert',9,'MOVE TEMP 458 Tree_Search').
+instruction('Tree_Insert',10,'HSTORE TEMP 132 68 TEMP 458').
+instruction('Tree_Insert',11,'MOVE TEMP 459 Tree_RemoveLeft').
+instruction('Tree_Insert',12,'HSTORE TEMP 132 64 TEMP 459').
+instruction('Tree_Insert',13,'MOVE TEMP 460 Tree_RemoveRight').
+instruction('Tree_Insert',14,'HSTORE TEMP 132 60 TEMP 460').
+instruction('Tree_Insert',15,'MOVE TEMP 461 Tree_Remove').
+instruction('Tree_Insert',16,'HSTORE TEMP 132 56 TEMP 461').
+instruction('Tree_Insert',17,'MOVE TEMP 462 Tree_Delete').
+instruction('Tree_Insert',18,'HSTORE TEMP 132 52 TEMP 462').
+instruction('Tree_Insert',19,'MOVE TEMP 463 Tree_Insert').
+instruction('Tree_Insert',20,'HSTORE TEMP 132 48 TEMP 463').
+instruction('Tree_Insert',21,'MOVE TEMP 464 Tree_Compare').
+instruction('Tree_Insert',22,'HSTORE TEMP 132 44 TEMP 464').
+instruction('Tree_Insert',23,'MOVE TEMP 465 Tree_SetHas_Right').
+instruction('Tree_Insert',24,'HSTORE TEMP 132 40 TEMP 465').
+instruction('Tree_Insert',25,'MOVE TEMP 466 Tree_SetHas_Left').
+instruction('Tree_Insert',26,'HSTORE TEMP 132 36 TEMP 466').
+instruction('Tree_Insert',27,'MOVE TEMP 467 Tree_GetHas_Left').
+instruction('Tree_Insert',28,'HSTORE TEMP 132 32 TEMP 467').
+instruction('Tree_Insert',29,'MOVE TEMP 468 Tree_GetHas_Right').
+instruction('Tree_Insert',30,'HSTORE TEMP 132 28 TEMP 468').
+instruction('Tree_Insert',31,'MOVE TEMP 469 Tree_SetKey').
+instruction('Tree_Insert',32,'HSTORE TEMP 132 24 TEMP 469').
+instruction('Tree_Insert',33,'MOVE TEMP 470 Tree_GetKey').
+instruction('Tree_Insert',34,'HSTORE TEMP 132 20 TEMP 470').
+instruction('Tree_Insert',35,'MOVE TEMP 471 Tree_GetLeft').
+instruction('Tree_Insert',36,'HSTORE TEMP 132 16 TEMP 471').
+instruction('Tree_Insert',37,'MOVE TEMP 472 Tree_GetRight').
+instruction('Tree_Insert',38,'HSTORE TEMP 132 12 TEMP 472').
+instruction('Tree_Insert',39,'MOVE TEMP 473 Tree_SetLeft').
+instruction('Tree_Insert',40,'HSTORE TEMP 132 8 TEMP 473').
+instruction('Tree_Insert',41,'MOVE TEMP 474 Tree_SetRight').
+instruction('Tree_Insert',42,'HSTORE TEMP 132 4 TEMP 474').
+instruction('Tree_Insert',43,'MOVE TEMP 475 Tree_Init').
+instruction('Tree_Insert',44,'HSTORE TEMP 132 0 TEMP 475').
+instruction('Tree_Insert',45,'MOVE TEMP 134 4').
+instruction('Tree_Insert',46,'NOOP').
+instruction('Tree_Insert',47,'MOVE TEMP 476 28').
+instruction('Tree_Insert',48,'MOVE TEMP 477 LT TEMP 134 TEMP 476').
+instruction('Tree_Insert',49,'CJUMP TEMP 477 L11').
+instruction('Tree_Insert',50,'MOVE TEMP 478 PLUS TEMP 133 TEMP 134').
+instruction('Tree_Insert',51,'MOVE TEMP 479 0').
+instruction('Tree_Insert',52,'HSTORE TEMP 478 0 TEMP 479').
+instruction('Tree_Insert',53,'MOVE TEMP 134 PLUS TEMP 134 4').
+instruction('Tree_Insert',54,'JUMP L10').
+instruction('Tree_Insert',55,'NOOP').
+instruction('Tree_Insert',56,'HSTORE TEMP 133 0 TEMP 132').
+instruction('Tree_Insert',57,'MOVE TEMP 26 TEMP 133').
+instruction('Tree_Insert',58,'MOVE TEMP 137 TEMP 26').
+instruction('Tree_Insert',59,'HLOAD TEMP 135 TEMP 137 0').
+instruction('Tree_Insert',60,'HLOAD TEMP 136 TEMP 135 0').
+instruction('Tree_Insert',61,'MOVE TEMP 480 CALL TEMP 136 ( TEMP 137 TEMP 1 )').
+instruction('Tree_Insert',62,'MOVE TEMP 27 TEMP 480').
+instruction('Tree_Insert',63,'MOVE TEMP 28 TEMP 0').
+instruction('Tree_Insert',64,'MOVE TEMP 29 1').
+instruction('Tree_Insert',65,'NOOP').
+instruction('Tree_Insert',66,'CJUMP TEMP 29 L13').
+instruction('Tree_Insert',67,'MOVE TEMP 141 TEMP 28').
+instruction('Tree_Insert',68,'HLOAD TEMP 139 TEMP 141 0').
+instruction('Tree_Insert',69,'HLOAD TEMP 140 TEMP 139 20').
+instruction('Tree_Insert',70,'MOVE TEMP 481 CALL TEMP 140 ( TEMP 141 )').
+instruction('Tree_Insert',71,'MOVE TEMP 30 TEMP 481').
+instruction('Tree_Insert',72,'MOVE TEMP 482 LT TEMP 1 TEMP 30').
+instruction('Tree_Insert',73,'CJUMP TEMP 482 L14').
+instruction('Tree_Insert',74,'MOVE TEMP 144 TEMP 28').
+instruction('Tree_Insert',75,'HLOAD TEMP 142 TEMP 144 0').
+instruction('Tree_Insert',76,'HLOAD TEMP 143 TEMP 142 32').
+instruction('Tree_Insert',77,'MOVE TEMP 483 CALL TEMP 143 ( TEMP 144 )').
+instruction('Tree_Insert',78,'CJUMP TEMP 483 L16').
+instruction('Tree_Insert',79,'MOVE TEMP 147 TEMP 28').
+instruction('Tree_Insert',80,'HLOAD TEMP 145 TEMP 147 0').
+instruction('Tree_Insert',81,'HLOAD TEMP 146 TEMP 145 16').
+instruction('Tree_Insert',82,'MOVE TEMP 484 CALL TEMP 146 ( TEMP 147 )').
+instruction('Tree_Insert',83,'MOVE TEMP 28 TEMP 484').
+instruction('Tree_Insert',84,'JUMP L17').
+instruction('Tree_Insert',85,'NOOP').
+instruction('Tree_Insert',86,'MOVE TEMP 29 0').
+instruction('Tree_Insert',87,'MOVE TEMP 150 TEMP 28').
+instruction('Tree_Insert',88,'HLOAD TEMP 148 TEMP 150 0').
+instruction('Tree_Insert',89,'HLOAD TEMP 149 TEMP 148 36').
+instruction('Tree_Insert',90,'MOVE TEMP 485 1').
+instruction('Tree_Insert',91,'MOVE TEMP 486 CALL TEMP 149 ( TEMP 150 TEMP 485 )').
+instruction('Tree_Insert',92,'MOVE TEMP 27 TEMP 486').
+instruction('Tree_Insert',93,'MOVE TEMP 153 TEMP 28').
+instruction('Tree_Insert',94,'HLOAD TEMP 151 TEMP 153 0').
+instruction('Tree_Insert',95,'HLOAD TEMP 152 TEMP 151 8').
+instruction('Tree_Insert',96,'MOVE TEMP 487 CALL TEMP 152 ( TEMP 153 TEMP 26 )').
+instruction('Tree_Insert',97,'MOVE TEMP 27 TEMP 487').
+instruction('Tree_Insert',98,'NOOP').
+instruction('Tree_Insert',99,'JUMP L15').
+instruction('Tree_Insert',100,'NOOP').
+instruction('Tree_Insert',101,'MOVE TEMP 156 TEMP 28').
+instruction('Tree_Insert',102,'HLOAD TEMP 154 TEMP 156 0').
+instruction('Tree_Insert',103,'HLOAD TEMP 155 TEMP 154 28').
+instruction('Tree_Insert',104,'MOVE TEMP 488 CALL TEMP 155 ( TEMP 156 )').
+instruction('Tree_Insert',105,'CJUMP TEMP 488 L18').
+instruction('Tree_Insert',106,'MOVE TEMP 159 TEMP 28').
+instruction('Tree_Insert',107,'HLOAD TEMP 157 TEMP 159 0').
+instruction('Tree_Insert',108,'HLOAD TEMP 158 TEMP 157 12').
+instruction('Tree_Insert',109,'MOVE TEMP 489 CALL TEMP 158 ( TEMP 159 )').
+instruction('Tree_Insert',110,'MOVE TEMP 28 TEMP 489').
+instruction('Tree_Insert',111,'JUMP L19').
+instruction('Tree_Insert',112,'NOOP').
+instruction('Tree_Insert',113,'MOVE TEMP 29 0').
+instruction('Tree_Insert',114,'MOVE TEMP 162 TEMP 28').
+instruction('Tree_Insert',115,'HLOAD TEMP 160 TEMP 162 0').
+instruction('Tree_Insert',116,'HLOAD TEMP 161 TEMP 160 40').
+instruction('Tree_Insert',117,'MOVE TEMP 490 1').
+instruction('Tree_Insert',118,'MOVE TEMP 491 CALL TEMP 161 ( TEMP 162 TEMP 490 )').
+instruction('Tree_Insert',119,'MOVE TEMP 27 TEMP 491').
+instruction('Tree_Insert',120,'MOVE TEMP 165 TEMP 28').
+instruction('Tree_Insert',121,'HLOAD TEMP 163 TEMP 165 0').
+instruction('Tree_Insert',122,'HLOAD TEMP 164 TEMP 163 4').
+instruction('Tree_Insert',123,'MOVE TEMP 492 CALL TEMP 164 ( TEMP 165 TEMP 26 )').
+instruction('Tree_Insert',124,'MOVE TEMP 27 TEMP 492').
+instruction('Tree_Insert',125,'NOOP').
+instruction('Tree_Insert',126,'NOOP').
+instruction('Tree_Insert',127,'JUMP L12').
+instruction('Tree_Insert',128,'NOOP').
+instruction('Tree_Insert',129,'MOVE TEMP 493 1').
+instruction('Tree_Insert',130,'RETURN TEMP 493').
+instruction('Tree_Delete',1,'MOVE TEMP 31 TEMP 0').
+instruction('Tree_Delete',2,'MOVE TEMP 32 TEMP 0').
+instruction('Tree_Delete',3,'MOVE TEMP 33 1').
+instruction('Tree_Delete',4,'MOVE TEMP 34 0').
+instruction('Tree_Delete',5,'MOVE TEMP 36 1').
+instruction('Tree_Delete',6,'NOOP').
+instruction('Tree_Delete',7,'CJUMP TEMP 33 L21').
+instruction('Tree_Delete',8,'MOVE TEMP 169 TEMP 31').
+instruction('Tree_Delete',9,'HLOAD TEMP 167 TEMP 169 0').
+instruction('Tree_Delete',10,'HLOAD TEMP 168 TEMP 167 20').
+instruction('Tree_Delete',11,'MOVE TEMP 494 CALL TEMP 168 ( TEMP 169 )').
+instruction('Tree_Delete',12,'MOVE TEMP 37 TEMP 494').
+instruction('Tree_Delete',13,'MOVE TEMP 495 LT TEMP 1 TEMP 37').
+instruction('Tree_Delete',14,'CJUMP TEMP 495 L22').
+instruction('Tree_Delete',15,'MOVE TEMP 172 TEMP 31').
+instruction('Tree_Delete',16,'HLOAD TEMP 170 TEMP 172 0').
+instruction('Tree_Delete',17,'HLOAD TEMP 171 TEMP 170 32').
+instruction('Tree_Delete',18,'MOVE TEMP 496 CALL TEMP 171 ( TEMP 172 )').
+instruction('Tree_Delete',19,'CJUMP TEMP 496 L24').
+instruction('Tree_Delete',20,'MOVE TEMP 32 TEMP 31').
+instruction('Tree_Delete',21,'MOVE TEMP 175 TEMP 31').
+instruction('Tree_Delete',22,'HLOAD TEMP 173 TEMP 175 0').
+instruction('Tree_Delete',23,'HLOAD TEMP 174 TEMP 173 16').
+instruction('Tree_Delete',24,'MOVE TEMP 497 CALL TEMP 174 ( TEMP 175 )').
+instruction('Tree_Delete',25,'MOVE TEMP 31 TEMP 497').
+instruction('Tree_Delete',26,'JUMP L25').
+instruction('Tree_Delete',27,'NOOP').
+instruction('Tree_Delete',28,'MOVE TEMP 33 0').
+instruction('Tree_Delete',29,'NOOP').
+instruction('Tree_Delete',30,'JUMP L23').
+instruction('Tree_Delete',31,'NOOP').
+instruction('Tree_Delete',32,'MOVE TEMP 498 LT TEMP 37 TEMP 1').
+instruction('Tree_Delete',33,'CJUMP TEMP 498 L26').
+instruction('Tree_Delete',34,'MOVE TEMP 178 TEMP 31').
+instruction('Tree_Delete',35,'HLOAD TEMP 176 TEMP 178 0').
+instruction('Tree_Delete',36,'HLOAD TEMP 177 TEMP 176 28').
+instruction('Tree_Delete',37,'MOVE TEMP 499 CALL TEMP 177 ( TEMP 178 )').
+instruction('Tree_Delete',38,'CJUMP TEMP 499 L28').
+instruction('Tree_Delete',39,'MOVE TEMP 32 TEMP 31').
+instruction('Tree_Delete',40,'MOVE TEMP 181 TEMP 31').
+instruction('Tree_Delete',41,'HLOAD TEMP 179 TEMP 181 0').
+instruction('Tree_Delete',42,'HLOAD TEMP 180 TEMP 179 12').
+instruction('Tree_Delete',43,'MOVE TEMP 500 CALL TEMP 180 ( TEMP 181 )').
+instruction('Tree_Delete',44,'MOVE TEMP 31 TEMP 500').
+instruction('Tree_Delete',45,'JUMP L29').
+instruction('Tree_Delete',46,'NOOP').
+instruction('Tree_Delete',47,'MOVE TEMP 33 0').
+instruction('Tree_Delete',48,'NOOP').
+instruction('Tree_Delete',49,'JUMP L27').
+instruction('Tree_Delete',50,'NOOP').
+instruction('Tree_Delete',51,'CJUMP TEMP 36 L30').
+instruction('Tree_Delete',52,'MOVE TEMP 188 0').
+instruction('Tree_Delete',53,'MOVE TEMP 501 1').
+instruction('Tree_Delete',54,'MOVE TEMP 184 TEMP 31').
+instruction('Tree_Delete',55,'HLOAD TEMP 182 TEMP 184 0').
+instruction('Tree_Delete',56,'HLOAD TEMP 183 TEMP 182 28').
+instruction('Tree_Delete',57,'MOVE TEMP 502 CALL TEMP 183 ( TEMP 184 )').
+instruction('Tree_Delete',58,'MOVE TEMP 503 MINUS TEMP 501 TEMP 502').
+instruction('Tree_Delete',59,'CJUMP TEMP 503 L34').
+instruction('Tree_Delete',60,'MOVE TEMP 504 1').
+instruction('Tree_Delete',61,'MOVE TEMP 187 TEMP 31').
+instruction('Tree_Delete',62,'HLOAD TEMP 185 TEMP 187 0').
+instruction('Tree_Delete',63,'HLOAD TEMP 186 TEMP 185 32').
+instruction('Tree_Delete',64,'MOVE TEMP 505 CALL TEMP 186 ( TEMP 187 )').
+instruction('Tree_Delete',65,'MOVE TEMP 506 MINUS TEMP 504 TEMP 505').
+instruction('Tree_Delete',66,'CJUMP TEMP 506 L34').
+instruction('Tree_Delete',67,'MOVE TEMP 188 1').
+instruction('Tree_Delete',68,'NOOP').
+instruction('Tree_Delete',69,'CJUMP TEMP 188 L32').
+instruction('Tree_Delete',70,'MOVE TEMP 35 1').
+instruction('Tree_Delete',71,'JUMP L33').
+instruction('Tree_Delete',72,'NOOP').
+instruction('Tree_Delete',73,'MOVE TEMP 191 TEMP 0').
+instruction('Tree_Delete',74,'HLOAD TEMP 189 TEMP 191 0').
+instruction('Tree_Delete',75,'HLOAD TEMP 190 TEMP 189 56').
+instruction('Tree_Delete',76,'MOVE TEMP 507 CALL TEMP 190 ( TEMP 191 TEMP 32 TEMP 31 )').
+instruction('Tree_Delete',77,'MOVE TEMP 35 TEMP 507').
+instruction('Tree_Delete',78,'NOOP').
+instruction('Tree_Delete',79,'JUMP L31').
+instruction('Tree_Delete',80,'NOOP').
+instruction('Tree_Delete',81,'MOVE TEMP 194 TEMP 0').
+instruction('Tree_Delete',82,'HLOAD TEMP 192 TEMP 194 0').
+instruction('Tree_Delete',83,'HLOAD TEMP 193 TEMP 192 56').
+instruction('Tree_Delete',84,'MOVE TEMP 508 CALL TEMP 193 ( TEMP 194 TEMP 32 TEMP 31 )').
+instruction('Tree_Delete',85,'MOVE TEMP 35 TEMP 508').
+instruction('Tree_Delete',86,'NOOP').
+instruction('Tree_Delete',87,'MOVE TEMP 34 1').
+instruction('Tree_Delete',88,'MOVE TEMP 33 0').
+instruction('Tree_Delete',89,'NOOP').
+instruction('Tree_Delete',90,'NOOP').
+instruction('Tree_Delete',91,'MOVE TEMP 36 0').
+instruction('Tree_Delete',92,'JUMP L20').
+instruction('Tree_Delete',93,'NOOP').
+instruction('Tree_Delete',94,'RETURN TEMP 34').
+instruction('Tree_Remove',1,'MOVE TEMP 197 TEMP 2').
+instruction('Tree_Remove',2,'HLOAD TEMP 195 TEMP 197 0').
+instruction('Tree_Remove',3,'HLOAD TEMP 196 TEMP 195 32').
+instruction('Tree_Remove',4,'MOVE TEMP 509 CALL TEMP 196 ( TEMP 197 )').
+instruction('Tree_Remove',5,'CJUMP TEMP 509 L35').
+instruction('Tree_Remove',6,'MOVE TEMP 200 TEMP 0').
+instruction('Tree_Remove',7,'HLOAD TEMP 198 TEMP 200 0').
+instruction('Tree_Remove',8,'HLOAD TEMP 199 TEMP 198 64').
+instruction('Tree_Remove',9,'MOVE TEMP 510 CALL TEMP 199 ( TEMP 200 TEMP 1 TEMP 2 )').
+instruction('Tree_Remove',10,'MOVE TEMP 38 TEMP 510').
+instruction('Tree_Remove',11,'JUMP L36').
+instruction('Tree_Remove',12,'NOOP').
+instruction('Tree_Remove',13,'MOVE TEMP 203 TEMP 2').
+instruction('Tree_Remove',14,'HLOAD TEMP 201 TEMP 203 0').
+instruction('Tree_Remove',15,'HLOAD TEMP 202 TEMP 201 28').
+instruction('Tree_Remove',16,'MOVE TEMP 511 CALL TEMP 202 ( TEMP 203 )').
+instruction('Tree_Remove',17,'CJUMP TEMP 511 L37').
+instruction('Tree_Remove',18,'MOVE TEMP 206 TEMP 0').
+instruction('Tree_Remove',19,'HLOAD TEMP 204 TEMP 206 0').
+instruction('Tree_Remove',20,'HLOAD TEMP 205 TEMP 204 60').
+instruction('Tree_Remove',21,'MOVE TEMP 512 CALL TEMP 205 ( TEMP 206 TEMP 1 TEMP 2 )').
+instruction('Tree_Remove',22,'MOVE TEMP 38 TEMP 512').
+instruction('Tree_Remove',23,'JUMP L38').
+instruction('Tree_Remove',24,'NOOP').
+instruction('Tree_Remove',25,'MOVE TEMP 209 TEMP 2').
+instruction('Tree_Remove',26,'HLOAD TEMP 207 TEMP 209 0').
+instruction('Tree_Remove',27,'HLOAD TEMP 208 TEMP 207 20').
+instruction('Tree_Remove',28,'MOVE TEMP 513 CALL TEMP 208 ( TEMP 209 )').
+instruction('Tree_Remove',29,'MOVE TEMP 39 TEMP 513').
+instruction('Tree_Remove',30,'MOVE TEMP 215 TEMP 1').
+instruction('Tree_Remove',31,'HLOAD TEMP 213 TEMP 215 0').
+instruction('Tree_Remove',32,'HLOAD TEMP 214 TEMP 213 16').
+instruction('Tree_Remove',33,'MOVE TEMP 514 CALL TEMP 214 ( TEMP 215 )').
+instruction('Tree_Remove',34,'MOVE TEMP 212 TEMP 514').
+instruction('Tree_Remove',35,'HLOAD TEMP 210 TEMP 212 0').
+instruction('Tree_Remove',36,'HLOAD TEMP 211 TEMP 210 20').
+instruction('Tree_Remove',37,'MOVE TEMP 515 CALL TEMP 211 ( TEMP 212 )').
+instruction('Tree_Remove',38,'MOVE TEMP 40 TEMP 515').
+instruction('Tree_Remove',39,'MOVE TEMP 218 TEMP 0').
+instruction('Tree_Remove',40,'HLOAD TEMP 216 TEMP 218 0').
+instruction('Tree_Remove',41,'HLOAD TEMP 217 TEMP 216 44').
+instruction('Tree_Remove',42,'MOVE TEMP 516 CALL TEMP 217 ( TEMP 218 TEMP 39 TEMP 40 )').
+instruction('Tree_Remove',43,'CJUMP TEMP 516 L39').
+instruction('Tree_Remove',44,'MOVE TEMP 221 TEMP 1').
+instruction('Tree_Remove',45,'HLOAD TEMP 219 TEMP 221 0').
+instruction('Tree_Remove',46,'HLOAD TEMP 220 TEMP 219 8').
+instruction('Tree_Remove',47,'HLOAD TEMP 222 TEMP 0 24').
+instruction('Tree_Remove',48,'MOVE TEMP 517 CALL TEMP 220 ( TEMP 221 TEMP 222 )').
+instruction('Tree_Remove',49,'MOVE TEMP 38 TEMP 517').
+instruction('Tree_Remove',50,'MOVE TEMP 226 TEMP 1').
+instruction('Tree_Remove',51,'HLOAD TEMP 224 TEMP 226 0').
+instruction('Tree_Remove',52,'HLOAD TEMP 225 TEMP 224 36').
+instruction('Tree_Remove',53,'MOVE TEMP 518 0').
+instruction('Tree_Remove',54,'MOVE TEMP 519 CALL TEMP 225 ( TEMP 226 TEMP 518 )').
+instruction('Tree_Remove',55,'MOVE TEMP 38 TEMP 519').
+instruction('Tree_Remove',56,'JUMP L40').
+instruction('Tree_Remove',57,'NOOP').
+instruction('Tree_Remove',58,'MOVE TEMP 229 TEMP 1').
+instruction('Tree_Remove',59,'HLOAD TEMP 227 TEMP 229 0').
+instruction('Tree_Remove',60,'HLOAD TEMP 228 TEMP 227 4').
+instruction('Tree_Remove',61,'HLOAD TEMP 230 TEMP 0 24').
+instruction('Tree_Remove',62,'MOVE TEMP 520 CALL TEMP 228 ( TEMP 229 TEMP 230 )').
+instruction('Tree_Remove',63,'MOVE TEMP 38 TEMP 520').
+instruction('Tree_Remove',64,'MOVE TEMP 234 TEMP 1').
+instruction('Tree_Remove',65,'HLOAD TEMP 232 TEMP 234 0').
+instruction('Tree_Remove',66,'HLOAD TEMP 233 TEMP 232 40').
+instruction('Tree_Remove',67,'MOVE TEMP 521 0').
+instruction('Tree_Remove',68,'MOVE TEMP 522 CALL TEMP 233 ( TEMP 234 TEMP 521 )').
+instruction('Tree_Remove',69,'MOVE TEMP 38 TEMP 522').
+instruction('Tree_Remove',70,'NOOP').
+instruction('Tree_Remove',71,'NOOP').
+instruction('Tree_Remove',72,'NOOP').
+instruction('Tree_Remove',73,'MOVE TEMP 523 1').
+instruction('Tree_Remove',74,'RETURN TEMP 523').
+instruction('Tree_RemoveRight',1,'NOOP').
+instruction('Tree_RemoveRight',2,'MOVE TEMP 238 TEMP 2').
+instruction('Tree_RemoveRight',3,'HLOAD TEMP 236 TEMP 238 0').
+instruction('Tree_RemoveRight',4,'HLOAD TEMP 237 TEMP 236 28').
+instruction('Tree_RemoveRight',5,'MOVE TEMP 524 CALL TEMP 237 ( TEMP 238 )').
+instruction('Tree_RemoveRight',6,'CJUMP TEMP 524 L42').
+instruction('Tree_RemoveRight',7,'MOVE TEMP 241 TEMP 2').
+instruction('Tree_RemoveRight',8,'HLOAD TEMP 239 TEMP 241 0').
+instruction('Tree_RemoveRight',9,'HLOAD TEMP 240 TEMP 239 24').
+instruction('Tree_RemoveRight',10,'MOVE TEMP 247 TEMP 2').
+instruction('Tree_RemoveRight',11,'HLOAD TEMP 245 TEMP 247 0').
+instruction('Tree_RemoveRight',12,'HLOAD TEMP 246 TEMP 245 12').
+instruction('Tree_RemoveRight',13,'MOVE TEMP 525 CALL TEMP 246 ( TEMP 247 )').
+instruction('Tree_RemoveRight',14,'MOVE TEMP 244 TEMP 525').
+instruction('Tree_RemoveRight',15,'HLOAD TEMP 242 TEMP 244 0').
+instruction('Tree_RemoveRight',16,'HLOAD TEMP 243 TEMP 242 20').
+instruction('Tree_RemoveRight',17,'MOVE TEMP 526 CALL TEMP 243 ( TEMP 244 )').
+instruction('Tree_RemoveRight',18,'MOVE TEMP 527 CALL TEMP 240 ( TEMP 241 TEMP 526 )').
+instruction('Tree_RemoveRight',19,'MOVE TEMP 41 TEMP 527').
+instruction('Tree_RemoveRight',20,'MOVE TEMP 1 TEMP 2').
+instruction('Tree_RemoveRight',21,'MOVE TEMP 250 TEMP 2').
+instruction('Tree_RemoveRight',22,'HLOAD TEMP 248 TEMP 250 0').
+instruction('Tree_RemoveRight',23,'HLOAD TEMP 249 TEMP 248 12').
+instruction('Tree_RemoveRight',24,'MOVE TEMP 528 CALL TEMP 249 ( TEMP 250 )').
+instruction('Tree_RemoveRight',25,'MOVE TEMP 2 TEMP 528').
+instruction('Tree_RemoveRight',26,'JUMP L41').
+instruction('Tree_RemoveRight',27,'NOOP').
+instruction('Tree_RemoveRight',28,'MOVE TEMP 253 TEMP 1').
+instruction('Tree_RemoveRight',29,'HLOAD TEMP 251 TEMP 253 0').
+instruction('Tree_RemoveRight',30,'HLOAD TEMP 252 TEMP 251 4').
+instruction('Tree_RemoveRight',31,'HLOAD TEMP 254 TEMP 0 24').
+instruction('Tree_RemoveRight',32,'MOVE TEMP 529 CALL TEMP 252 ( TEMP 253 TEMP 254 )').
+instruction('Tree_RemoveRight',33,'MOVE TEMP 41 TEMP 529').
+instruction('Tree_RemoveRight',34,'MOVE TEMP 258 TEMP 1').
+instruction('Tree_RemoveRight',35,'HLOAD TEMP 256 TEMP 258 0').
+instruction('Tree_RemoveRight',36,'HLOAD TEMP 257 TEMP 256 40').
+instruction('Tree_RemoveRight',37,'MOVE TEMP 530 0').
+instruction('Tree_RemoveRight',38,'MOVE TEMP 531 CALL TEMP 257 ( TEMP 258 TEMP 530 )').
+instruction('Tree_RemoveRight',39,'MOVE TEMP 41 TEMP 531').
+instruction('Tree_RemoveRight',40,'MOVE TEMP 532 1').
+instruction('Tree_RemoveRight',41,'RETURN TEMP 532').
+instruction('Tree_RemoveLeft',1,'NOOP').
+instruction('Tree_RemoveLeft',2,'MOVE TEMP 262 TEMP 2').
+instruction('Tree_RemoveLeft',3,'HLOAD TEMP 260 TEMP 262 0').
+instruction('Tree_RemoveLeft',4,'HLOAD TEMP 261 TEMP 260 32').
+instruction('Tree_RemoveLeft',5,'MOVE TEMP 533 CALL TEMP 261 ( TEMP 262 )').
+instruction('Tree_RemoveLeft',6,'CJUMP TEMP 533 L44').
+instruction('Tree_RemoveLeft',7,'MOVE TEMP 265 TEMP 2').
+instruction('Tree_RemoveLeft',8,'HLOAD TEMP 263 TEMP 265 0').
+instruction('Tree_RemoveLeft',9,'HLOAD TEMP 264 TEMP 263 24').
+instruction('Tree_RemoveLeft',10,'MOVE TEMP 271 TEMP 2').
+instruction('Tree_RemoveLeft',11,'HLOAD TEMP 269 TEMP 271 0').
+instruction('Tree_RemoveLeft',12,'HLOAD TEMP 270 TEMP 269 16').
+instruction('Tree_RemoveLeft',13,'MOVE TEMP 534 CALL TEMP 270 ( TEMP 271 )').
+instruction('Tree_RemoveLeft',14,'MOVE TEMP 268 TEMP 534').
+instruction('Tree_RemoveLeft',15,'HLOAD TEMP 266 TEMP 268 0').
+instruction('Tree_RemoveLeft',16,'HLOAD TEMP 267 TEMP 266 20').
+instruction('Tree_RemoveLeft',17,'MOVE TEMP 535 CALL TEMP 267 ( TEMP 268 )').
+instruction('Tree_RemoveLeft',18,'MOVE TEMP 536 CALL TEMP 264 ( TEMP 265 TEMP 535 )').
+instruction('Tree_RemoveLeft',19,'MOVE TEMP 42 TEMP 536').
+instruction('Tree_RemoveLeft',20,'MOVE TEMP 1 TEMP 2').
+instruction('Tree_RemoveLeft',21,'MOVE TEMP 274 TEMP 2').
+instruction('Tree_RemoveLeft',22,'HLOAD TEMP 272 TEMP 274 0').
+instruction('Tree_RemoveLeft',23,'HLOAD TEMP 273 TEMP 272 16').
+instruction('Tree_RemoveLeft',24,'MOVE TEMP 537 CALL TEMP 273 ( TEMP 274 )').
+instruction('Tree_RemoveLeft',25,'MOVE TEMP 2 TEMP 537').
+instruction('Tree_RemoveLeft',26,'JUMP L43').
+instruction('Tree_RemoveLeft',27,'NOOP').
+instruction('Tree_RemoveLeft',28,'MOVE TEMP 277 TEMP 1').
+instruction('Tree_RemoveLeft',29,'HLOAD TEMP 275 TEMP 277 0').
+instruction('Tree_RemoveLeft',30,'HLOAD TEMP 276 TEMP 275 8').
+instruction('Tree_RemoveLeft',31,'HLOAD TEMP 278 TEMP 0 24').
+instruction('Tree_RemoveLeft',32,'MOVE TEMP 538 CALL TEMP 276 ( TEMP 277 TEMP 278 )').
+instruction('Tree_RemoveLeft',33,'MOVE TEMP 42 TEMP 538').
+instruction('Tree_RemoveLeft',34,'MOVE TEMP 282 TEMP 1').
+instruction('Tree_RemoveLeft',35,'HLOAD TEMP 280 TEMP 282 0').
+instruction('Tree_RemoveLeft',36,'HLOAD TEMP 281 TEMP 280 36').
+instruction('Tree_RemoveLeft',37,'MOVE TEMP 539 0').
+instruction('Tree_RemoveLeft',38,'MOVE TEMP 540 CALL TEMP 281 ( TEMP 282 TEMP 539 )').
+instruction('Tree_RemoveLeft',39,'MOVE TEMP 42 TEMP 540').
+instruction('Tree_RemoveLeft',40,'MOVE TEMP 541 1').
+instruction('Tree_RemoveLeft',41,'RETURN TEMP 541').
+instruction('Tree_Search',1,'MOVE TEMP 43 TEMP 0').
+instruction('Tree_Search',2,'MOVE TEMP 45 1').
+instruction('Tree_Search',3,'MOVE TEMP 44 0').
+instruction('Tree_Search',4,'NOOP').
+instruction('Tree_Search',5,'CJUMP TEMP 45 L46').
+instruction('Tree_Search',6,'MOVE TEMP 286 TEMP 43').
+instruction('Tree_Search',7,'HLOAD TEMP 284 TEMP 286 0').
+instruction('Tree_Search',8,'HLOAD TEMP 285 TEMP 284 20').
+instruction('Tree_Search',9,'MOVE TEMP 542 CALL TEMP 285 ( TEMP 286 )').
+instruction('Tree_Search',10,'MOVE TEMP 46 TEMP 542').
+instruction('Tree_Search',11,'MOVE TEMP 543 LT TEMP 1 TEMP 46').
+instruction('Tree_Search',12,'CJUMP TEMP 543 L47').
+instruction('Tree_Search',13,'MOVE TEMP 289 TEMP 43').
+instruction('Tree_Search',14,'HLOAD TEMP 287 TEMP 289 0').
+instruction('Tree_Search',15,'HLOAD TEMP 288 TEMP 287 32').
+instruction('Tree_Search',16,'MOVE TEMP 544 CALL TEMP 288 ( TEMP 289 )').
+instruction('Tree_Search',17,'CJUMP TEMP 544 L49').
+instruction('Tree_Search',18,'MOVE TEMP 292 TEMP 43').
+instruction('Tree_Search',19,'HLOAD TEMP 290 TEMP 292 0').
+instruction('Tree_Search',20,'HLOAD TEMP 291 TEMP 290 16').
+instruction('Tree_Search',21,'MOVE TEMP 545 CALL TEMP 291 ( TEMP 292 )').
+instruction('Tree_Search',22,'MOVE TEMP 43 TEMP 545').
+instruction('Tree_Search',23,'JUMP L50').
+instruction('Tree_Search',24,'NOOP').
+instruction('Tree_Search',25,'MOVE TEMP 45 0').
+instruction('Tree_Search',26,'NOOP').
+instruction('Tree_Search',27,'JUMP L48').
+instruction('Tree_Search',28,'NOOP').
+instruction('Tree_Search',29,'MOVE TEMP 546 LT TEMP 46 TEMP 1').
+instruction('Tree_Search',30,'CJUMP TEMP 546 L51').
+instruction('Tree_Search',31,'MOVE TEMP 295 TEMP 43').
+instruction('Tree_Search',32,'HLOAD TEMP 293 TEMP 295 0').
+instruction('Tree_Search',33,'HLOAD TEMP 294 TEMP 293 28').
+instruction('Tree_Search',34,'MOVE TEMP 547 CALL TEMP 294 ( TEMP 295 )').
+instruction('Tree_Search',35,'CJUMP TEMP 547 L53').
+instruction('Tree_Search',36,'MOVE TEMP 298 TEMP 43').
+instruction('Tree_Search',37,'HLOAD TEMP 296 TEMP 298 0').
+instruction('Tree_Search',38,'HLOAD TEMP 297 TEMP 296 12').
+instruction('Tree_Search',39,'MOVE TEMP 548 CALL TEMP 297 ( TEMP 298 )').
+instruction('Tree_Search',40,'MOVE TEMP 43 TEMP 548').
+instruction('Tree_Search',41,'JUMP L54').
+instruction('Tree_Search',42,'NOOP').
+instruction('Tree_Search',43,'MOVE TEMP 45 0').
+instruction('Tree_Search',44,'NOOP').
+instruction('Tree_Search',45,'JUMP L52').
+instruction('Tree_Search',46,'NOOP').
+instruction('Tree_Search',47,'MOVE TEMP 44 1').
+instruction('Tree_Search',48,'MOVE TEMP 45 0').
+instruction('Tree_Search',49,'NOOP').
+instruction('Tree_Search',50,'NOOP').
+instruction('Tree_Search',51,'JUMP L45').
+instruction('Tree_Search',52,'NOOP').
+instruction('Tree_Search',53,'RETURN TEMP 44').
+instruction('Tree_Print',1,'MOVE TEMP 48 TEMP 0').
+instruction('Tree_Print',2,'MOVE TEMP 301 TEMP 0').
+instruction('Tree_Print',3,'HLOAD TEMP 299 TEMP 301 0').
+instruction('Tree_Print',4,'HLOAD TEMP 300 TEMP 299 76').
+instruction('Tree_Print',5,'MOVE TEMP 549 CALL TEMP 300 ( TEMP 301 TEMP 48 )').
+instruction('Tree_Print',6,'MOVE TEMP 47 TEMP 549').
+instruction('Tree_Print',7,'MOVE TEMP 550 1').
+instruction('Tree_Print',8,'RETURN TEMP 550').
+instruction('Tree_RecPrint',1,'MOVE TEMP 304 TEMP 1').
+instruction('Tree_RecPrint',2,'HLOAD TEMP 302 TEMP 304 0').
+instruction('Tree_RecPrint',3,'HLOAD TEMP 303 TEMP 302 32').
+instruction('Tree_RecPrint',4,'MOVE TEMP 551 CALL TEMP 303 ( TEMP 304 )').
+instruction('Tree_RecPrint',5,'CJUMP TEMP 551 L55').
+instruction('Tree_RecPrint',6,'MOVE TEMP 307 TEMP 0').
+instruction('Tree_RecPrint',7,'HLOAD TEMP 305 TEMP 307 0').
+instruction('Tree_RecPrint',8,'HLOAD TEMP 306 TEMP 305 76').
+instruction('Tree_RecPrint',9,'MOVE TEMP 310 TEMP 1').
+instruction('Tree_RecPrint',10,'HLOAD TEMP 308 TEMP 310 0').
+instruction('Tree_RecPrint',11,'HLOAD TEMP 309 TEMP 308 16').
+instruction('Tree_RecPrint',12,'MOVE TEMP 552 CALL TEMP 309 ( TEMP 310 )').
+instruction('Tree_RecPrint',13,'MOVE TEMP 553 CALL TEMP 306 ( TEMP 307 TEMP 552 )').
+instruction('Tree_RecPrint',14,'MOVE TEMP 49 TEMP 553').
+instruction('Tree_RecPrint',15,'JUMP L56').
+instruction('Tree_RecPrint',16,'NOOP').
+instruction('Tree_RecPrint',17,'MOVE TEMP 49 1').
+instruction('Tree_RecPrint',18,'NOOP').
+instruction('Tree_RecPrint',19,'MOVE TEMP 313 TEMP 1').
+instruction('Tree_RecPrint',20,'HLOAD TEMP 311 TEMP 313 0').
+instruction('Tree_RecPrint',21,'HLOAD TEMP 312 TEMP 311 20').
+instruction('Tree_RecPrint',22,'MOVE TEMP 554 CALL TEMP 312 ( TEMP 313 )').
+instruction('Tree_RecPrint',23,'PRINT TEMP 554').
+instruction('Tree_RecPrint',24,'MOVE TEMP 316 TEMP 1').
+instruction('Tree_RecPrint',25,'HLOAD TEMP 314 TEMP 316 0').
+instruction('Tree_RecPrint',26,'HLOAD TEMP 315 TEMP 314 28').
+instruction('Tree_RecPrint',27,'MOVE TEMP 555 CALL TEMP 315 ( TEMP 316 )').
+instruction('Tree_RecPrint',28,'CJUMP TEMP 555 L57').
+instruction('Tree_RecPrint',29,'MOVE TEMP 319 TEMP 0').
+instruction('Tree_RecPrint',30,'HLOAD TEMP 317 TEMP 319 0').
+instruction('Tree_RecPrint',31,'HLOAD TEMP 318 TEMP 317 76').
+instruction('Tree_RecPrint',32,'MOVE TEMP 322 TEMP 1').
+instruction('Tree_RecPrint',33,'HLOAD TEMP 320 TEMP 322 0').
+instruction('Tree_RecPrint',34,'HLOAD TEMP 321 TEMP 320 12').
+instruction('Tree_RecPrint',35,'MOVE TEMP 556 CALL TEMP 321 ( TEMP 322 )').
+instruction('Tree_RecPrint',36,'MOVE TEMP 557 CALL TEMP 318 ( TEMP 319 TEMP 556 )').
+instruction('Tree_RecPrint',37,'MOVE TEMP 49 TEMP 557').
+instruction('Tree_RecPrint',38,'JUMP L58').
+instruction('Tree_RecPrint',39,'NOOP').
+instruction('Tree_RecPrint',40,'MOVE TEMP 49 1').
+instruction('Tree_RecPrint',41,'NOOP').
+instruction('Tree_RecPrint',42,'MOVE TEMP 558 1').
+instruction('Tree_RecPrint',43,'RETURN TEMP 558').
+instruction('Tree_accept',1,'MOVE TEMP 559 333').
+instruction('Tree_accept',2,'PRINT TEMP 559').
+instruction('Tree_accept',3,'MOVE TEMP 325 TEMP 1').
+instruction('Tree_accept',4,'HLOAD TEMP 323 TEMP 325 0').
+instruction('Tree_accept',5,'HLOAD TEMP 324 TEMP 323 0').
+instruction('Tree_accept',6,'MOVE TEMP 560 CALL TEMP 324 ( TEMP 325 TEMP 0 )').
+instruction('Tree_accept',7,'MOVE TEMP 50 TEMP 560').
+instruction('Tree_accept',8,'MOVE TEMP 561 0').
+instruction('Tree_accept',9,'RETURN TEMP 561').
+instruction('Visitor_visit',1,'MOVE TEMP 328 TEMP 1').
+instruction('Visitor_visit',2,'HLOAD TEMP 326 TEMP 328 0').
+instruction('Visitor_visit',3,'HLOAD TEMP 327 TEMP 326 28').
+instruction('Visitor_visit',4,'MOVE TEMP 562 CALL TEMP 327 ( TEMP 328 )').
+instruction('Visitor_visit',5,'CJUMP TEMP 562 L59').
+instruction('Visitor_visit',6,'MOVE TEMP 331 TEMP 1').
+instruction('Visitor_visit',7,'HLOAD TEMP 329 TEMP 331 0').
+instruction('Visitor_visit',8,'HLOAD TEMP 330 TEMP 329 12').
+instruction('Visitor_visit',9,'MOVE TEMP 563 CALL TEMP 330 ( TEMP 331 )').
+instruction('Visitor_visit',10,'HSTORE TEMP 0 8 TEMP 563').
+instruction('Visitor_visit',11,'HLOAD TEMP 335 TEMP 0 8').
+instruction('Visitor_visit',12,'MOVE TEMP 334 TEMP 335').
+instruction('Visitor_visit',13,'HLOAD TEMP 332 TEMP 334 0').
+instruction('Visitor_visit',14,'HLOAD TEMP 333 TEMP 332 80').
+instruction('Visitor_visit',15,'MOVE TEMP 564 CALL TEMP 333 ( TEMP 334 TEMP 0 )').
+instruction('Visitor_visit',16,'MOVE TEMP 51 TEMP 564').
+instruction('Visitor_visit',17,'JUMP L60').
+instruction('Visitor_visit',18,'NOOP').
+instruction('Visitor_visit',19,'MOVE TEMP 51 0').
+instruction('Visitor_visit',20,'NOOP').
+instruction('Visitor_visit',21,'MOVE TEMP 339 TEMP 1').
+instruction('Visitor_visit',22,'HLOAD TEMP 337 TEMP 339 0').
+instruction('Visitor_visit',23,'HLOAD TEMP 338 TEMP 337 32').
+instruction('Visitor_visit',24,'MOVE TEMP 565 CALL TEMP 338 ( TEMP 339 )').
+instruction('Visitor_visit',25,'CJUMP TEMP 565 L61').
+instruction('Visitor_visit',26,'MOVE TEMP 342 TEMP 1').
+instruction('Visitor_visit',27,'HLOAD TEMP 340 TEMP 342 0').
+instruction('Visitor_visit',28,'HLOAD TEMP 341 TEMP 340 16').
+instruction('Visitor_visit',29,'MOVE TEMP 566 CALL TEMP 341 ( TEMP 342 )').
+instruction('Visitor_visit',30,'HSTORE TEMP 0 4 TEMP 566').
+instruction('Visitor_visit',31,'HLOAD TEMP 346 TEMP 0 4').
+instruction('Visitor_visit',32,'MOVE TEMP 345 TEMP 346').
+instruction('Visitor_visit',33,'HLOAD TEMP 343 TEMP 345 0').
+instruction('Visitor_visit',34,'HLOAD TEMP 344 TEMP 343 80').
+instruction('Visitor_visit',35,'MOVE TEMP 567 CALL TEMP 344 ( TEMP 345 TEMP 0 )').
+instruction('Visitor_visit',36,'MOVE TEMP 51 TEMP 567').
+instruction('Visitor_visit',37,'JUMP L62').
+instruction('Visitor_visit',38,'NOOP').
+instruction('Visitor_visit',39,'MOVE TEMP 51 0').
+instruction('Visitor_visit',40,'NOOP').
+instruction('Visitor_visit',41,'MOVE TEMP 568 0').
+instruction('Visitor_visit',42,'RETURN TEMP 568').
+instruction('MyVisitor_visit',1,'MOVE TEMP 350 TEMP 1').
+instruction('MyVisitor_visit',2,'HLOAD TEMP 348 TEMP 350 0').
+instruction('MyVisitor_visit',3,'HLOAD TEMP 349 TEMP 348 28').
+instruction('MyVisitor_visit',4,'MOVE TEMP 569 CALL TEMP 349 ( TEMP 350 )').
+instruction('MyVisitor_visit',5,'CJUMP TEMP 569 L63').
+instruction('MyVisitor_visit',6,'MOVE TEMP 353 TEMP 1').
+instruction('MyVisitor_visit',7,'HLOAD TEMP 351 TEMP 353 0').
+instruction('MyVisitor_visit',8,'HLOAD TEMP 352 TEMP 351 12').
+instruction('MyVisitor_visit',9,'MOVE TEMP 570 CALL TEMP 352 ( TEMP 353 )').
+instruction('MyVisitor_visit',10,'HSTORE TEMP 0 8 TEMP 570').
+instruction('MyVisitor_visit',11,'HLOAD TEMP 357 TEMP 0 8').
+instruction('MyVisitor_visit',12,'MOVE TEMP 356 TEMP 357').
+instruction('MyVisitor_visit',13,'HLOAD TEMP 354 TEMP 356 0').
+instruction('MyVisitor_visit',14,'HLOAD TEMP 355 TEMP 354 80').
+instruction('MyVisitor_visit',15,'MOVE TEMP 571 CALL TEMP 355 ( TEMP 356 TEMP 0 )').
+instruction('MyVisitor_visit',16,'MOVE TEMP 52 TEMP 571').
+instruction('MyVisitor_visit',17,'JUMP L64').
+instruction('MyVisitor_visit',18,'NOOP').
+instruction('MyVisitor_visit',19,'MOVE TEMP 52 0').
+instruction('MyVisitor_visit',20,'NOOP').
+instruction('MyVisitor_visit',21,'MOVE TEMP 361 TEMP 1').
+instruction('MyVisitor_visit',22,'HLOAD TEMP 359 TEMP 361 0').
+instruction('MyVisitor_visit',23,'HLOAD TEMP 360 TEMP 359 20').
+instruction('MyVisitor_visit',24,'MOVE TEMP 572 CALL TEMP 360 ( TEMP 361 )').
+instruction('MyVisitor_visit',25,'PRINT TEMP 572').
+instruction('MyVisitor_visit',26,'MOVE TEMP 364 TEMP 1').
+instruction('MyVisitor_visit',27,'HLOAD TEMP 362 TEMP 364 0').
+instruction('MyVisitor_visit',28,'HLOAD TEMP 363 TEMP 362 32').
+instruction('MyVisitor_visit',29,'MOVE TEMP 573 CALL TEMP 363 ( TEMP 364 )').
+instruction('MyVisitor_visit',30,'CJUMP TEMP 573 L65').
+instruction('MyVisitor_visit',31,'MOVE TEMP 367 TEMP 1').
+instruction('MyVisitor_visit',32,'HLOAD TEMP 365 TEMP 367 0').
+instruction('MyVisitor_visit',33,'HLOAD TEMP 366 TEMP 365 16').
+instruction('MyVisitor_visit',34,'MOVE TEMP 574 CALL TEMP 366 ( TEMP 367 )').
+instruction('MyVisitor_visit',35,'HSTORE TEMP 0 4 TEMP 574').
+instruction('MyVisitor_visit',36,'HLOAD TEMP 371 TEMP 0 4').
+instruction('MyVisitor_visit',37,'MOVE TEMP 370 TEMP 371').
+instruction('MyVisitor_visit',38,'HLOAD TEMP 368 TEMP 370 0').
+instruction('MyVisitor_visit',39,'HLOAD TEMP 369 TEMP 368 80').
+instruction('MyVisitor_visit',40,'MOVE TEMP 575 CALL TEMP 369 ( TEMP 370 TEMP 0 )').
+instruction('MyVisitor_visit',41,'MOVE TEMP 52 TEMP 575').
+instruction('MyVisitor_visit',42,'JUMP L66').
+instruction('MyVisitor_visit',43,'NOOP').
+instruction('MyVisitor_visit',44,'MOVE TEMP 52 0').
+instruction('MyVisitor_visit',45,'NOOP').
+instruction('MyVisitor_visit',46,'MOVE TEMP 576 0').
+instruction('MyVisitor_visit',47,'RETURN TEMP 576').

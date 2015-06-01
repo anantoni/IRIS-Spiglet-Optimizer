@@ -1,0 +1,5 @@
+('MAIN', 5, 'TEMP 2')
+('MAIN', 24, 'TEMP 2')
+('MAIN', 64, 'TEMP 1')
+('MAIN', 68, 'TEMP 102')
+('MAIN', 70, 'TEMP 1')

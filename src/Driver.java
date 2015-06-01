@@ -229,11 +229,9 @@ public class Driver {
                     }
                 }
             }
-            System.out.println(deadInstructionMap);
             spigletTransformer = new Transformer(rootOptOutDir, spigletFilePath.getName().replace(".spg", "-opt.spg"), constantMap, copyMap, deadInstructionMap);
             goal.accept(spigletTransformer, null);
             currentOptCode = spigletTransformer.getOptCode();
-            System.out.println("Optimized code: " + currentOptCode);
             counter++;
             break;
         }

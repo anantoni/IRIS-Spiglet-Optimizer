@@ -1,0 +1,36 @@
+unreachableInstruction(?m, ?i) :- unreachableInstruction(?m, ?j),
+                                  next(?m, ?j, ?i),
+                                  !twoPred(?m, ?i).
+
+unreachableInstruction(?m, ?i) :- unreachableInstruction(?m, ?j),
+                                  next(?m, ?j, ?i),
+                                  next(?m, ?k, ?i),
+                                  ?j != ?k,
+                                  unreachableInstruction(?m, ?j),
+                                  unreachableInstruction(?m, ?k).
+
+
+constantPropagation(?m, ?i, 1) :- //moveLessThanInstruction(?m, ?i, ?v1, ?v2),
+                                  constantPropagation(?m, ?i, ?v1, ?c1),
+                                  constantPropagation(?m, ?i, ?v2, ?c2),
+                                  ?c1 < ?c2.
+
+constantPropagation(?m ?i, 1) :- //moveLessThanInstruction(?m, ?i, ?v1, ?c),
+                                 !varUse(?m, ?i, ?c),
+                                 constantPropagation(?m, ?i, ?v1, ?c1),
+                                 ?c1 < ?c.
+
+constantPropagation(?m, ?i, 0) :- //moveLessThanInstruction(?m, ?i, ?v1, ?v2),
+                                  constantPropagation(?m, ?i, ?v1, ?c1),
+                                  constantPropagation(?m, ?i, ?v2, ?c2),
+                                  ?c1 >= ?c2.
+
+constantPropagation(?m ?i, 0) :- //moveLessThanInstruction(?m, ?i, ?v1, ?c),
+                                 !varUse(?m, ?i, ?c),
+                                 constantPropagation(?m, ?i, ?v1, ?c1),
+                                 ?c1 >= ?c.
+
+
+
+
+

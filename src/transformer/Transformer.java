@@ -8,6 +8,7 @@ import visitor.IVoidArguVisitor;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -32,8 +33,10 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
         this.copyMap = copyMap;
         this.deadInstructionMap = deadInstructionMap;
         try {
-            this.optimizedSpigletWriter = new PrintWriter(projectOptOutDir +  "/" + outFile);
+            this.optimizedSpigletWriter = new PrintWriter(projectOptOutDir +  "/" + outFile, "UTF-8");
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         this.varUseTransformer = new VarUseTransformer(this);

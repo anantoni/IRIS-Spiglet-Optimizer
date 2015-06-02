@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_iris-optimizer" default="compile.module.iris-optimizer">
+  <dirname property="module.iris-optimizer.basedir" file="${ant.file.module_iris-optimizer}"/>
+  
+  <property name="module.jdk.home.iris-optimizer" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.iris-optimizer" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.iris-optimizer" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.iris-optimizer" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="iris-optimizer.output.dir" value="${module.iris-optimizer.basedir}/out/production/iris-optimizer"/>
+  <property name="iris-optimizer.testoutput.dir" value="${module.iris-optimizer.basedir}/out/test/iris-optimizer"/>
+  
+  <path id="iris-optimizer.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="iris-optimizer.module.production.classpath">
+    <path refid="${module.jdk.classpath.iris-optimizer}"/>
+    <path refid="library.jgrapht-core-0.9.1.classpath"/>
+  </path>
+  
+  <path id="iris-optimizer.runtime.production.module.classpath">
+    <pathelement location="${iris-optimizer.output.dir}"/>
+    <path refid="library.jgrapht-core-0.9.1.classpath"/>
+  </path>
+  
+  <path id="iris-optimizer.module.classpath">
+    <path refid="${module.jdk.classpath.iris-optimizer}"/>
+    <pathelement location="${iris-optimizer.output.dir}"/>
+    <path refid="library.jgrapht-core-0.9.1.classpath"/>
+  </path>
+  
+  <path id="iris-optimizer.runtime.module.classpath">
+    <pathelement location="${iris-optimizer.testoutput.dir}"/>
+    <pathelement location="${iris-optimizer.output.dir}"/>
+    <path refid="library.jgrapht-core-0.9.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.iris-optimizer">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.iris-optimizer">
+    <patternset refid="excluded.from.module.iris-optimizer"/>
+  </patternset>
+  
+  <path id="iris-optimizer.module.sourcepath">
+    <dirset dir="${module.iris-optimizer.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.iris-optimizer" depends="compile.module.iris-optimizer.production,compile.module.iris-optimizer.tests" description="Compile module iris-optimizer"/>
+  
+  <target name="compile.module.iris-optimizer.production" depends="register.custom.compilers" description="Compile module iris-optimizer; production classes">
+    <mkdir dir="${iris-optimizer.output.dir}"/>
+    <javac2 destdir="${iris-optimizer.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.iris-optimizer}/javac">
+      <compilerarg line="${compiler.args.iris-optimizer}"/>
+      <bootclasspath refid="iris-optimizer.module.bootclasspath"/>
+      <classpath refid="iris-optimizer.module.production.classpath"/>
+      <src refid="iris-optimizer.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.iris-optimizer"/>
+    </javac2>
+    
+    <copy todir="${iris-optimizer.output.dir}">
+      <fileset dir="${module.iris-optimizer.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.iris-optimizer.tests" depends="register.custom.compilers,compile.module.iris-optimizer.production" description="compile module iris-optimizer; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.iris-optimizer" description="cleanup module">
+    <delete dir="${iris-optimizer.output.dir}"/>
+    <delete dir="${iris-optimizer.testoutput.dir}"/>
+  </target>
+</project>

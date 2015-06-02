@@ -29,8 +29,8 @@ import java.util.*;
 public class Driver {
 
     public static void main(String[] args) throws EvaluationException {
-        if (args.length != 5) {
-            System.err.println("Please give input file");
+        if (args.length != 6) {
+            System.err.println("Invalid number of arguments");
             System.exit(-1);
         }
         else if (!args[0].endsWith(".spg")) {
@@ -43,22 +43,33 @@ public class Driver {
         String analysisLogicPath = args[2];
         String queriesPath = args[3];
         String optimizedSpigletPath = args[4];
+        int maxOptLevel = Integer.parseInt(args[5]);
+
         String projectFactsDir = factsPath + "/" + spigletFile.getName().replace(".spg", "/");
 
         String previousOptCode, currentOptCode = "";
 
         Transformer spigletTransformer = null;
-        int counter = 0;
+        final File factsDirectory = new File(projectFactsDir);
+        if (!factsDirectory.exists()) {
+            boolean factsDirCreated = factsDirectory.mkdir();
+            if (!factsDirCreated) {
+                System.err.println("Could not create project facts directory");
+                System.exit(-1);
+            }
+        }
+        int optLevel = 0;
         do {
             previousOptCode = currentOptCode;
             Goal goal = null;
             try {
                 SpigletParser spigletParser;
-                if (counter == 0)
+                if (optLevel == 0)
                    spigletParser  = new SpigletParser(new FileReader(args[0]));
                 else
                     spigletParser = new SpigletParser(new ByteArrayInputStream(currentOptCode.getBytes(StandardCharsets.UTF_8)));
                 goal = spigletParser.Goal();
+
                 FactGenerator factGenerator = new FactGenerator(projectFactsDir);
                 goal.accept(factGenerator, null);
                 factGenerator.closeAllFiles();
@@ -73,10 +84,7 @@ public class Driver {
             Parser parser = new Parser();
             Map<IPredicate, IRelation> factMap = new HashMap<>();
 
-            final File factsDirectory = new File(projectFactsDir);
-            factsDirectory.mkdir();
-
-            if (factsDirectory.isDirectory())
+            if (factsDirectory.exists() && factsDirectory.isDirectory())
                 for (final File fileEntry : factsDirectory.listFiles()) {
                     if (fileEntry.isDirectory() || !fileEntry.getName().endsWith(".iris"))
                         System.out.println("Omitting file " + fileEntry.getPath());
@@ -211,8 +219,9 @@ public class Driver {
             spigletTransformer = new Transformer(optimizedSpigletPath, spigletFile.getName().replace(".spg", "-opt.spg"), constantMap, copyMap, deadInstructionMap);
             goal.accept(spigletTransformer, null);
             currentOptCode = spigletTransformer.getOptCode();
-            counter++;
-            break;
+            optLevel++;
+            if (optLevel > maxOptLevel)
+                break;
         }
         while (!currentOptCode.equals(previousOptCode) || currentOptCode.equals(""));
         spigletTransformer.writeCode();

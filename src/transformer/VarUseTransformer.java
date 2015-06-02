@@ -7,7 +7,6 @@ import visitor.IRetArguVisitor;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by anantoni on 28/5/2015.
@@ -17,14 +16,11 @@ public class VarUseTransformer extends DepthFirstRetArguVisitor<String, String> 
     private Transformer primaryVisitor;
     private Map<Triple<String, Integer>, Integer> constantMap;
     private Map<Triple<String, Integer>, String> copyMap;
-    private Map<String, Set<Integer>> deadInstructionMap;
-
 
     public VarUseTransformer(Transformer primaryVisitor) {
         this.primaryVisitor = primaryVisitor;
         this.constantMap = primaryVisitor.constantMap;
         this.copyMap = primaryVisitor.copyMap;
-        this.deadInstructionMap = primaryVisitor.deadInstructionMap;
     }
 
     public String visit(final NodeChoice n, final String argu) {
@@ -33,17 +29,15 @@ public class VarUseTransformer extends DepthFirstRetArguVisitor<String, String> 
     }
 
     public String visit(final NodeList n, final String argu) {
-        for (final Iterator<INode> e = n.elements(); e.hasNext();) {
+        for (final Iterator<INode> e = n.elements(); e.hasNext();)
             e.next().accept(this, argu);
-        }
         return null;
     }
 
     public String visit(final NodeListOptional n, final String argu) {
         if (n.present()) {
-            for (final Iterator<INode> e = n.elements(); e.hasNext();) {
+            for (final Iterator<INode> e = n.elements(); e.hasNext();)
                 e.next().accept(this, argu);
-            }
             return null;
         } else
             return null;
@@ -58,9 +52,8 @@ public class VarUseTransformer extends DepthFirstRetArguVisitor<String, String> 
     }
 
     public String visit(final NodeSequence n, final String argu) {
-        for (final Iterator<INode> e = n.elements(); e.hasNext();) {
+        for (final Iterator<INode> e = n.elements(); e.hasNext();)
             e.next().accept(this, argu);
-        }
         return null;
     }
 
@@ -220,11 +213,10 @@ public class VarUseTransformer extends DepthFirstRetArguVisitor<String, String> 
 
         String var = n.f0.tokenImage + " " + n.f1.f0.tokenImage;
         Triple key = new Triple(argu, iCounter, var);
-        if (constantMap.containsKey(key)) {
-            return constantMap.get(key).toString();
-        }
-        else if (copyMap.containsKey(key))
-            return copyMap.get(key).toString();
+        if (this.constantMap.containsKey(key))
+            return this.constantMap.get(key).toString();
+        else if (this.copyMap.containsKey(key))
+            return this.copyMap.get(key);
         else
             return var;
     }

@@ -29,7 +29,7 @@ import java.util.*;
 public class Driver {
 
     public static void main(String[] args) throws EvaluationException {
-        if (args.length != 1) {
+        if (args.length != 5) {
             System.err.println("Please give input file");
             System.exit(-1);
         }
@@ -38,12 +38,12 @@ public class Driver {
             System.exit(-1);
         }
 
-        File spigletFilePath = new File(args[0]);
-        String rootFactsDir = "../generated-facts/";
-        String rootAnalysisLogicDir = "../analysis-logic/";
-        String rootQueriesDir = "../queries/";
-        String rootOptOutDir = "../optimizedSpiglet";
-        String projectFactsDir = rootFactsDir + spigletFilePath.getName().replace(".spg", "/");
+        File spigletFile = new File(args[0]);
+        String factsPath = args[1];
+        String analysisLogicPath = args[2];
+        String queriesPath = args[3];
+        String optimizedSpigletPath = args[4];
+        String projectFactsDir = factsPath + "/" + spigletFile.getName().replace(".spg", "/");
 
         String previousOptCode, currentOptCode = "";
 
@@ -75,24 +75,26 @@ public class Driver {
 
             final File factsDirectory = new File(projectFactsDir);
             factsDirectory.mkdir();
-            if (factsDirectory.isDirectory()) for (final File fileEntry : factsDirectory.listFiles()) {
-                if (fileEntry.isDirectory())
-                    System.out.println("Omitting directory " + fileEntry.getPath());
 
-                else {
-                    Reader factsReader;
-                    try {
-                        factsReader = new FileReader(fileEntry);
-                        parser.parse(factsReader);
-                    } catch (ParserException e) {
-                        System.err.println("Parse exception in file: " + fileEntry.getName());
-                        e.printStackTrace();
-                        System.exit(-1);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    // Retrieve the facts and put all of them in factMap
-                    factMap.putAll(parser.getFacts());
+            if (factsDirectory.isDirectory())
+                for (final File fileEntry : factsDirectory.listFiles()) {
+                    if (fileEntry.isDirectory() || !fileEntry.getName().endsWith(".iris"))
+                        System.out.println("Omitting file " + fileEntry.getPath());
+
+                    else {
+                        Reader factsReader;
+                        try {
+                            factsReader = new FileReader(fileEntry);
+                            parser.parse(factsReader);
+                        } catch (ParserException e) {
+                            System.err.println("Parse exception in file: " + fileEntry.getName());
+                            e.printStackTrace();
+                            System.exit(-1);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        // Retrieve the facts and put all of them in factMap
+                        factMap.putAll(parser.getFacts());
                 }
             }
             else {
@@ -100,86 +102,63 @@ public class Driver {
                 System.exit(-1);
             }
 
-            File jumpInstructionsRuleFile = new File(rootAnalysisLogicDir + "jump-instructions.iris");
-            Reader rulesReader;
-            try {
-                rulesReader = new FileReader(jumpInstructionsRuleFile);
-                parser.parse(rulesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
-            }
-            List<IRule> rules = parser.getRules();
+            final File analysisLogicDir = new File(analysisLogicPath);
+            List<IRule> rules = new ArrayList<>();
+            if (analysisLogicDir.isDirectory())
+                for (final File fileEntry : analysisLogicDir.listFiles()) {
+                    if (fileEntry.isDirectory() || !fileEntry.getName().endsWith(".iris"))
+                        System.out.println("Omitting file " + fileEntry.getPath());
 
-            File copyPropagationRuleFile = new File(rootAnalysisLogicDir + "copy-propagation.iris");
-            try {
-                rulesReader = new FileReader(copyPropagationRuleFile);
-                parser.parse(rulesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
+                    else {
+                        Reader rulesReader;
+                        try {
+                            rulesReader = new FileReader(fileEntry);
+                            parser.parse(rulesReader);
+                            rules.addAll(parser.getRules());
+                        } catch (ParserException e) {
+                            System.err.println("Parse exception in file: " + fileEntry.getName());
+                            e.printStackTrace();
+                            System.exit(-1);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        // Retrieve the facts and put all of them in factMap
+                        factMap.putAll(parser.getFacts());
+                    }
+                }
+            else {
+                System.err.println("Invalid facts directory path: " + analysisLogicDir);
+                System.exit(-1);
             }
-            rules.addAll(parser.getRules());
 
+            final File queriesDir = new File(queriesPath);
+            List<IQuery> queries = new ArrayList<>();
+            if (queriesDir.isDirectory())
+                for (final File fileEntry : queriesDir.listFiles()) {
+                    if (fileEntry.isDirectory() || !fileEntry.getName().endsWith(".iris"))
+                        System.out.println("Omitting file " + fileEntry.getPath());
 
-            File constantPropagationRuleFile = new File(rootAnalysisLogicDir + "constant-propagation.iris");
-            try {
-                rulesReader = new FileReader(constantPropagationRuleFile);
-                parser.parse(rulesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
+                    else {
+                        Reader queriesReader;
+                        try {
+                            queriesReader = new FileReader(fileEntry);
+                            parser.parse(queriesReader);
+                            queries.addAll(parser.getQueries());
+                        } catch (ParserException e) {
+                            System.err.println("Parse exception in file: " + fileEntry.getName());
+                            e.printStackTrace();
+                            System.exit(-1);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        // Retrieve the facts and put all of them in factMap
+                        factMap.putAll(parser.getFacts());
+                    }
+                }
+            else {
+                System.err.println("Invalid facts directory path: " + analysisLogicDir);
+                System.exit(-1);
             }
-            rules.addAll(parser.getRules());
-
-            File basicBlockComputationRuleFile = new File(rootAnalysisLogicDir + "basic-block-computation.iris");
-            try {
-                rulesReader = new FileReader(basicBlockComputationRuleFile);
-                parser.parse(rulesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
-            }
-            rules.addAll(parser.getRules());
-
-            File liveRangeComputationLogic = new File(rootAnalysisLogicDir + "live-range-computation.iris");
-            try {
-                rulesReader = new FileReader(liveRangeComputationLogic);
-                parser.parse(rulesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
-            }
-            rules.addAll(parser.getRules());
-
-            File deadCodeComputationLogic = new File(rootAnalysisLogicDir + "dead-code-computation.iris");
-            try {
-                rulesReader = new FileReader(deadCodeComputationLogic);
-                parser.parse(rulesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
-            }
-            rules.addAll(parser.getRules());
-
-            File queriesFile = new File(rootQueriesDir + "queries.iris");
-            Reader queriesReader;
-            try {
-                queriesReader = new FileReader(queriesFile);
-                parser.parse(queriesReader);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ParserException e) {
-                e.printStackTrace();
-            }
-            // Retrieve the queries from the parsed file.
-            List<IQuery> queries = parser.getQueries();
 
             // Create a default configuration.
             Configuration configuration = new Configuration();
@@ -229,7 +208,7 @@ public class Driver {
                     }
                 }
             }
-            spigletTransformer = new Transformer(rootOptOutDir, spigletFilePath.getName().replace(".spg", "-opt.spg"), constantMap, copyMap, deadInstructionMap);
+            spigletTransformer = new Transformer(optimizedSpigletPath, spigletFile.getName().replace(".spg", "-opt.spg"), constantMap, copyMap, deadInstructionMap);
             goal.accept(spigletTransformer, null);
             currentOptCode = spigletTransformer.getOptCode();
             counter++;

@@ -2,7 +2,8 @@
 package visitor;
 
 import syntaxtree.*;
-import java.util.*;
+
+import java.util.Iterator;
 
 public class DepthFirstRetVisitor<R> implements IRetVisitor<R> {
 

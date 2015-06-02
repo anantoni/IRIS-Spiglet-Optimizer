@@ -1,0 +1,4 @@
+instructionCJumpsToLabel('MAIN',13,'L1').
+instructionCJumpsToLabel('MAIN',32,'L2').
+instructionCJumpsToLabel('MAIN',49,'L6').
+instructionCJumpsToLabel('MAIN',58,'L4').

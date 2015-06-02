@@ -6,7 +6,9 @@ import visitor.IRetVisitor;
 import visitor.IVoidArguVisitor;
 import visitor.IVoidVisitor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 public class NodeToken implements INode {
 
   public String tokenImage;

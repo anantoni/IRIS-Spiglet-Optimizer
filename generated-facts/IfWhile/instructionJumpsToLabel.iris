@@ -1,0 +1,3 @@
+instructionJumpsToLabel('MAIN',20,'L0').
+instructionJumpsToLabel('MAIN',37,'L3').
+instructionJumpsToLabel('MAIN',65,'L5').

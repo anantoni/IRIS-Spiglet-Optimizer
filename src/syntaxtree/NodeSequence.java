@@ -6,7 +6,8 @@ import visitor.IRetVisitor;
 import visitor.IVoidArguVisitor;
 import visitor.IVoidVisitor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class NodeSequence implements INodeList {
 

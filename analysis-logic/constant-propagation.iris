@@ -2,28 +2,28 @@ constantPropagation(?m, ?i, ?v, ?c) :- instruction(?m, ?i, ?ins1),
                                        instruction(?m, ?j, ?ins2),
                                        constMove(?m, ?j, ?v, ?c),
                                        next(?m, ?j, ?i),
+                                       ?j + 1 = ?i,
+                                       in(?m, ?i, ?v),
                                        !varDef(?m, ?i, ?v),
-                                       ?j + 1 = ?i.
+                                       !hasTwoPred(?m, ?i).
 
 constantPropagation(?m, ?i, ?v, ?c) :- constantPropagation(?m, ?j, ?v, ?c),
                                        next(?m, ?j, ?i),
                                        !varDef(?m, ?i, ?v),
-                                       ?j + 1 = ?i.
-
-constantPropagation(?m, ?i, ?v, ?c) :- constantPropagation(?m, ?j, ?v, ?c),
-                                       jumpInstruction(?m, ?i),
-                                       next(?m, ?j, ?i).
+                                       in(?m, ?j, ?v),
+                                       !hasTwoPred(?m, ?i).
 
 
 constantPropagation(?m, ?i, ?v, ?c) :- next(?m, ?j, ?i),
                                        next(?m, ?k, ?i),
                                        ?j != ?k,
                                        constantPropagation(?m, ?j, ?v, ?c),
-                                       constantPropagation(?m, ?k, ?v, ?c).
+                                       constantPropagation(?m, ?k, ?v, ?c),
+                                       !varDef(?m, ?i, ?v),
+                                       in(?m, ?i, ?v).
 
 constantPropagation(?m, ?i, ?v, ?c) :- varMove(?m, ?i, ?v, ?v1),
-                                       constantPropagation(?m, ?i, ?v1, ?c).
-
-
-
-
+                                       constantPropagation(?m, ?i, ?v1, ?c),
+                                       varDef(?m, ?i, ?v),
+                                       out(?m, ?i, ?v),
+                                       !hasTwoPred(?m, ?i).

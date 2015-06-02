@@ -1,11 +1,5 @@
-copyPropagation(?m, ?i, ?v1, ?v2) :- instruction(?m, ?i, ?ins1),
-                                     instruction(?m, ?j, ?ins2),
-                                     varMove(?m, ?j, ?v1, ?v2),
-                                     next(?m, ?j, ?i),
-                                     ?j + 1 = ?i,
-                                     !varDef(?m, ?i, ?v1),
-                                     in(?m, ?i, ?v1),
-                                     !hasTwoPred(?m, ?i).
+copyPropagation(?m, ?i, ?v1, ?v2) :- varMove(?m, ?i, ?v1, ?v2),
+                                     out(?m, ?i, ?v1).
 
 copyPropagation(?m, ?i, ?v1, ?v2) :- copyPropagation(?m, ?j, ?v1, ?v2),
                                      next(?m, ?j, ?i),
@@ -20,3 +14,6 @@ copyPropagation(?m, ?i, ?v1, ?v2) :- next(?m, ?j, ?i),
                                      copyPropagation(?m, ?k, ?v1, ?v2),
                                      !varDef(?m, ?i, ?v1),
                                      in(?m, ?i, ?v1).
+
+copyAtUse(?m, ?i, ?v1, ?v2) :- varUse(?m, ?i, ?v1),
+                               copyPropagation(?m, ?i, ?v1, ?v2).

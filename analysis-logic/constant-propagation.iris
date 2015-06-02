@@ -1,16 +1,14 @@
-constantPropagation(?m, ?i, ?v, ?c) :- instruction(?m, ?i, ?ins1),
-                                       instruction(?m, ?j, ?ins2),
-                                       constMove(?m, ?j, ?v, ?c),
-                                       next(?m, ?j, ?i),
-                                       ?j + 1 = ?i,
-                                       in(?m, ?i, ?v),
-                                       !varDef(?m, ?i, ?v),
-                                       !hasTwoPred(?m, ?i).
+constantPropagation(?m, ?i, ?v, ?c) :- constMove(?m, ?i, ?v, ?c),
+                                       out(?m, ?i, ?v).
+
+constantPropagation(?m, ?i, ?v, ?c) :- varMove(?m, ?i, ?v, ?v1),
+                                       constantPropagation(?m, ?i, ?v1, ?c),
+                                       out(?m, ?i, ?v).
 
 constantPropagation(?m, ?i, ?v, ?c) :- constantPropagation(?m, ?j, ?v, ?c),
                                        next(?m, ?j, ?i),
                                        !varDef(?m, ?i, ?v),
-                                       in(?m, ?j, ?v),
+                                       in(?m, ?i, ?v),
                                        !hasTwoPred(?m, ?i).
 
 
@@ -22,8 +20,7 @@ constantPropagation(?m, ?i, ?v, ?c) :- next(?m, ?j, ?i),
                                        !varDef(?m, ?i, ?v),
                                        in(?m, ?i, ?v).
 
-constantPropagation(?m, ?i, ?v, ?c) :- varMove(?m, ?i, ?v, ?v1),
-                                       constantPropagation(?m, ?i, ?v1, ?c),
-                                       varDef(?m, ?i, ?v),
-                                       out(?m, ?i, ?v),
-                                       !hasTwoPred(?m, ?i).
+
+
+constantAtUse(?m, ?i, ?v, ?c) :- varUse(?m, ?i, ?v),
+                                 constantPropagation(?m, ?i, ?v, ?c).

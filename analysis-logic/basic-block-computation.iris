@@ -1,22 +1,26 @@
+/**
+ *  next computation
+ */
 next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
                     instruction(?m, ?j, ?instr2),
                     ?i + 1 = ?j,
                     !instructionJumpsToLabel(?m, ?i, ?l).
 
-next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
-                    instruction(?m, ?j, ?instr2),
-                    instructionJumpsToLabel(?m, ?i, ?l),
+next(?m, ?i, ?j) :- instructionJumpsToLabel(?m, ?i, ?l),
                     instructionHasLabel(?m, ?j, ?l).
 
-next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
-                    instruction(?m, ?j, ?instr2),
-                    instructionCJumpsToLabel(?m, ?i, ?l),
+next(?m, ?i, ?j) :- instructionCJumpsToLabel(?m, ?i, ?l),
                     instructionHasLabel(?m, ?j, ?l).
-
+/**
+ *  instruction has i has two predecessors i.e., is a label
+ */
 hasTwoPred(?m, ?i) :- next(?m, ?j, ?i),
                       next(?m, ?k, ?i),
                       ?j != ?k.
 
+/**
+ *  utilities for basic block begin
+ */
 jump(?m, ?i) :- instructionCJumpsToLabel(?m, ?i, ?l).
 
 jump(?m, ?i) :- instructionJumpsToLabel(?m, ?i, ?l).
@@ -30,6 +34,10 @@ beforeLabel(?m, ?i) :- instruction(?m, ?i, ?instr),
                        
 atLabel(?m, ?i) :- instructionHasLabel(?m, ?i, ?l).
 
+
+/**
+ *  compute basic block starts
+ */
 bbBegin(?m, ?i) :- atLabel(?m, ?i).
 
 bbBegin(?m, ?i) :- afterJump(?m, ?i).
@@ -37,6 +45,9 @@ bbBegin(?m, ?i) :- afterJump(?m, ?i).
 bbBegin(?m, ?i) :- instruction(?m, ?i, ?instr),
                    ?i = 1.
 
+/**
+ *  compute basic block ends
+ */
 bbEnd(?m, ?i) :- beforeLabel(?m, ?i).
 
 bbEnd(?m, ?i) :- jump(?m, ?i).
@@ -45,6 +56,9 @@ bbEnd(?m, ?i) :- instruction(?m, ?i, ?instr),
                  !instruction(?m, ?j, ?instr1),
                  ?i + 1 = ?j.
 
+/**
+ *  compute basic block based on bb starts and ends
+ */
 basicBlock(?m, ?i, ?j) :- bbBegin(?m, ?i),
                           bbEnd(?m, ?j),
                           ?i <= ?j,
@@ -58,6 +72,9 @@ hasBBBegin(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
                           ?k <= ?j,
                           bbBegin(?m, ?k).
 
+/**
+ *  alternate computation of basic blocks
+ */
 inSameBasicBlock(?m, ?i, ?i) :- bbBegin(?m, ?i).
 
 
@@ -67,21 +84,3 @@ inSameBasicBlock(?m, ?i, ?k) :- inSameBasicBlock(?m, ?i, ?j),
 
 basicBlock2(?m, ?i, ?j) :- inSameBasicBlock(?m, ?i, ?j),
                            bbEnd(?m, ?j).
-
-inSameBasicBlock2(?m, ?i, ?j) :- bbBegin(?m, ?i),
-                                 next(?m, ?i, ?j),
-                                 ?i + 1 = ?j.
-
-inSameBasicBlock2(?m, ?i, ?k) :- inSameBasicBlock2(?m, ?i, ?j),
-                                 next(?m, ?j, ?k),
-                                 ?j + 1 = ?k,
-                                 !bbEnd(?m, ?j).
-
-basicBlock3(?m, ?i, ?j) :- inSameBasicBlock2(?m, ?i, ?j),
-                           bbEnd(?m, ?j).
-
-                            C(?m,?instr,?var) :- varDef(?m,?instr,?var).
-
-
-
-

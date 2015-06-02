@@ -2,3 +2,5 @@
 *.csv
 *.idea
 *.iml
+generated-facts
+optimized-spiglet

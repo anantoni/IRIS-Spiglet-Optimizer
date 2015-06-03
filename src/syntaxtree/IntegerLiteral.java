@@ -32,4 +32,6 @@ public class IntegerLiteral implements INode {
     vis.visit(this);
   }
 
+  public String toString() { return f0.tokenImage.toString(); };
+
 }

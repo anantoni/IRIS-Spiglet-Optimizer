@@ -23,6 +23,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
     private PrintWriter instructionWriter;
     private PrintWriter instructionJumpsToLabelWriter;
     private PrintWriter instructionCJumpsToLabelWriter;
+    private PrintWriter lessThanWriter;
     private int instructionCounter;
     private IVoidArguVisitor<String> useVarFactGen;
     private IVoidArguVisitor<String> defVarFactGen;
@@ -33,15 +34,16 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
 
         try {
 
-            instructionWriter = new PrintWriter(projectFactsDir + "instruction.iris", "UTF-8");
-            instructionJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionJumpsToLabel.iris", "UTF-8");
-            instructionCJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionCJumpsToLabel.iris", "UTF-8");
-            instructionHasLabelWriter = new PrintWriter(projectFactsDir + "instructionHasLabel.iris", "UTF-8");
-            varDefWriter = new PrintWriter(projectFactsDir + "varDef.iris", "UTF-8");
-            varUseWriter = new PrintWriter(projectFactsDir + "varUse.iris", "UTF-8");
-            varMoveWriter = new PrintWriter(projectFactsDir + "varMove.iris", "UTF-8");
-            varWriter = new PrintWriter(projectFactsDir + "var.iris", "UTF-8");
-            constMoveWriter = new PrintWriter(projectFactsDir + "constMove.iris", "UTF-8");
+            this.instructionWriter = new PrintWriter(projectFactsDir + "instruction.iris", "UTF-8");
+            this.instructionJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionJumpsToLabel.iris", "UTF-8");
+            this.instructionCJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionCJumpsToLabel.iris", "UTF-8");
+            this.instructionHasLabelWriter = new PrintWriter(projectFactsDir + "instructionHasLabel.iris", "UTF-8");
+            this.varDefWriter = new PrintWriter(projectFactsDir + "varDef.iris", "UTF-8");
+            this.varUseWriter = new PrintWriter(projectFactsDir + "varUse.iris", "UTF-8");
+            this.varMoveWriter = new PrintWriter(projectFactsDir + "varMove.iris", "UTF-8");
+            this.varWriter = new PrintWriter(projectFactsDir + "var.iris", "UTF-8");
+            this.lessThanWriter = new PrintWriter(projectFactsDir + "lessThan.iris", "UTF-8");
+            this.constMoveWriter = new PrintWriter(projectFactsDir + "constMove.iris", "UTF-8");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -49,11 +51,11 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
             e.printStackTrace();
         }
 
-        useVarFactGen = new VarUseFactGen(this);
-        defVarFactGen = new VarDefFactGen(this);
-        instructionHasLabelGen = new InstructionHasLabelGen(this);
-        instructionCounter = 1;
-        methodVarsMap = new HashMap<>();
+        this.useVarFactGen = new VarUseFactGen(this);
+        this.defVarFactGen = new VarDefFactGen(this);
+        this.instructionHasLabelGen = new InstructionHasLabelGen(this);
+        this.instructionCounter = 1;
+        this.methodVarsMap = new HashMap<>();
     }
 
     public static boolean isInteger(String s) {
@@ -68,14 +70,15 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
     }
 
     public void closeAllFiles() {
-        instructionWriter.close();
-        instructionJumpsToLabelWriter.close();
-        instructionCJumpsToLabelWriter.close();
-        instructionHasLabelWriter.close();
-        varDefWriter.close();
-        varUseWriter.close();
-        varMoveWriter.close();
-        constMoveWriter.close();
+        this.instructionWriter.close();
+        this.instructionJumpsToLabelWriter.close();
+        this.instructionCJumpsToLabelWriter.close();
+        this.instructionHasLabelWriter.close();
+        this.varDefWriter.close();
+        this.varUseWriter.close();
+        this.varMoveWriter.close();
+        this.constMoveWriter.close();
+        this.lessThanWriter.close();
     }
 
     public PrintWriter getConstMoveWriter() {
@@ -140,6 +143,14 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
 
     public Map<String, Set<String>> getMethodVarsMap() {
         return methodVarsMap;
+    }
+
+    public PrintWriter getLessThanWriter() {
+        return lessThanWriter;
+    }
+
+    public void setLessThanWriter(PrintWriter lessThanWriter) {
+        this.lessThanWriter = lessThanWriter;
     }
 
     public int getInstructionCounter() {
@@ -334,6 +345,7 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
         n.f1.accept(this.defVarFactGen, argu);
 
         String simpleExp = n.f2.accept(this, argu);
+        n.f2.accept(this.useVarFactGen, argu);
         instructionLiteral += " " + simpleExp;
         if (simpleExp.startsWith("TEMP")) {
             n.f2.accept(this.useVarFactGen, argu);

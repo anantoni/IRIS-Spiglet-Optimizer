@@ -1,8 +1,0 @@
-varMove('MAIN',2,'TEMP 1','TEMP 3').
-varMove('MAIN',5,'TEMP 2','TEMP 4').
-varMove('MAIN',18,'TEMP 1','TEMP 7').
-varMove('MAIN',24,'TEMP 2','TEMP 9').
-varMove('MAIN',48,'TEMP 16','TEMP 17').
-varMove('MAIN',54,'TEMP 16','TEMP 19').
-varMove('MAIN',64,'TEMP 1','TEMP 22').
-varMove('MAIN',70,'TEMP 1','TEMP 23').

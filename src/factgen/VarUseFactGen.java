@@ -154,9 +154,18 @@ public class VarUseFactGen extends DepthFirstVoidArguVisitor<String> implements 
     }
 
     public void visit(final BinOp n, final String argu) {
-        n.f0.accept(this, argu);
-        n.f1.accept(this, argu);
-        n.f2.accept(this, argu);
+        String firstOperand = n.f1.f0.tokenImage + " " + n.f1.f1.f0.tokenImage;
+        String secondOperand = n.f2.f0.choice.toString();
+
+        if (n.f0.f0.choice.toString().equals("LT")) {
+            String lessThanEDB;
+            if (secondOperand.contains("TEMP"))
+                lessThanEDB = "lessThan(\'" + argu + "\'," + this.primaryVisitor.getInstructionCounter() + ",\'" + firstOperand + "\'" + ",\'" + secondOperand + "\').";
+            else
+                lessThanEDB = "lessThan(\'" + argu + "\'," + this.primaryVisitor.getInstructionCounter() + ",\'" + firstOperand + "\'" + "," + secondOperand + ").";
+
+            this.primaryVisitor.getLessThanWriter().println(lessThanEDB);
+        }
     }
 
     public void visit(final Operator n, final String argu) {
@@ -168,12 +177,9 @@ public class VarUseFactGen extends DepthFirstVoidArguVisitor<String> implements 
     }
 
     public void visit(final Temp n, final String argu) {
-        n.f0.accept(this, argu);
-        n.f1.accept(this, argu);
-
         String var = n.f0.tokenImage + " " + n.f1.f0.tokenImage;
         String varUseEDB = "varUse(\'" + argu + "\'," + primaryVisitor.getInstructionCounter() + ",\'" + var + "\').";
-        primaryVisitor.getVarUseWriter().println(varUseEDB);
+        this.primaryVisitor.getVarUseWriter().println(varUseEDB);
     }
 
     public void visit(final IntegerLiteral n, final String argu) {

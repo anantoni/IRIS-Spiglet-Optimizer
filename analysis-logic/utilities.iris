@@ -1,0 +1,43 @@
+/**
+ *  next computation
+ */
+next(?m, ?i, ?j) :- instruction(?m, ?i, ?instr1),
+                    instruction(?m, ?j, ?instr2),
+                    ?i + 1 = ?j,
+                    !instructionJumpsToLabel(?m, ?i, ?l).
+
+next(?m, ?i, ?j) :- instructionJumpsToLabel(?m, ?i, ?l),
+                    instructionHasLabel(?m, ?j, ?l).
+
+next(?m, ?i, ?j) :- instructionCJumpsToLabel(?m, ?i, ?l),
+                    instructionHasLabel(?m, ?j, ?l).
+/**
+ *  instruction has i has two predecessors i.e., is a label
+ */
+hasTwoPred(?m, ?i) :- next(?m, ?j, ?i),
+                      next(?m, ?k, ?i),
+                      ?j != ?k.
+
+/**
+ *  utilities for basic block begin
+ */
+jump(?m, ?i) :- instructionCJumpsToLabel(?m, ?i, ?l).
+
+jump(?m, ?i) :- instructionJumpsToLabel(?m, ?i, ?l).
+
+afterJump(?m, ?i ) :- jump(?m, ?j),
+                      ?j + 1 = ?i.
+
+beforeLabel(?m, ?i) :- instruction(?m, ?i, ?instr),
+                       ?i + 1 = ?j,
+                       instructionHasLabel(?m, ?j, ?l).
+
+atLabel(?m, ?i) :- instructionHasLabel(?m, ?i, ?l).
+
+fallThrough(?m, ?i, ?j) :- instructionCJumpsToLabel(?m, ?j, ?l),
+                           next(?m, ?j, ?i),
+                           ?j + 1 = ?i.
+
+branchTaken(?m, ?i, ?j) :- instructionCJumpsToLabel(?m, ?j, ?l),
+                           instructionHasLabel(?m, ?i, ?l),
+                           next(?m, ?j, ?i).

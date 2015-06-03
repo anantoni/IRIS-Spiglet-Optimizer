@@ -40,4 +40,5 @@ public class Temp implements INode {
     vis.visit(this);
   }
 
+  public String toString() {return f0.tokenImage + " " + f1.f0.tokenImage; }
 }

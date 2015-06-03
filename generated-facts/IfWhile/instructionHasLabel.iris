@@ -1,7 +1,0 @@
-instructionHasLabel('MAIN',6,'L0').
-instructionHasLabel('MAIN',21,'L1').
-instructionHasLabel('MAIN',38,'L2').
-instructionHasLabel('MAIN',43,'L3').
-instructionHasLabel('MAIN',55,'L6').
-instructionHasLabel('MAIN',66,'L4').
-instructionHasLabel('MAIN',73,'L5').

@@ -86,7 +86,6 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <mainClass>main.java.Driver</mainClass>
                         </manifest>
-
                     </archive>
                 </configuration>
                 <executions>

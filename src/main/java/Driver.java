@@ -21,7 +21,6 @@ import main.java.parser.SpigletParser;
 import main.java.syntaxtree.Goal;
 import main.java.transformer.Transformer;
 import main.java.utilities.Triple;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -29,6 +28,7 @@ import java.util.*;
 public class Driver {
 
     public static void main(String[] args) throws EvaluationException {
+
         if (args.length != 6) {
             System.err.println("Invalid number of arguments");
             System.exit(-1);
@@ -95,7 +95,7 @@ public class Driver {
              */
             if (factsDirectory.exists() && factsDirectory.isDirectory())
                 for (final File fileEntry : factsDirectory.listFiles()) {
-                    if (fileEntry.isDirectory() || !fileEntry.getName().endsWith(".iris"))
+                    if (fileEntry.isDirectory() || !fileEntry.getName().endsWith(".facts"))
                         System.out.println("Omitting file " + fileEntry.getPath());
 
                     else {
@@ -130,6 +130,7 @@ public class Driver {
                         System.out.println("Omitting file " + fileEntry.getPath());
 
                     else {
+                        System.out.println("Loading analysis-logic file: " + fileEntry.getName());
                         Reader rulesReader;
                         try {
                             rulesReader = new FileReader(fileEntry);
@@ -209,13 +210,13 @@ public class Driver {
                 // Output each tuple in the relation, where the term at position i
                 // corresponds to the variable at position i in the variable
                 // bindings list.
-                if (query.toString().contains("constantPropagation")) {
+                if (query.toString().contains("constantAtUse")) {
                     for (int i = 0; i < relation.size(); i++) {
                         System.out.println(relation.get(i));
                         constantMap.put(new Triple(relation.get(i).get(0).toString().replace("\'", ""), Integer.parseInt(relation.get(i).get(1).toString()), relation.get(i).get(2).toString().replace("\'", "")), Integer.parseInt(relation.get(i).get(3).toString()));
                     }
                 }
-                else if (query.toString().contains("copyPropagation")) {
+                else if (query.toString().contains("copyAtUse")) {
                     for (int i = 0; i < relation.size(); i++) {
                         System.out.println(relation.get(i));
                         copyMap.put(new Triple(relation.get(i).get(0).toString().replace("\'", ""), Integer.parseInt(relation.get(i).get(1).toString()), relation.get(i).get(2).toString().replace("\'", "")), relation.get(i).get(3).toString().replace("\'", ""));
@@ -236,6 +237,10 @@ public class Driver {
                         }
                     }
                 }
+                else {
+                    for (int i = 0; i < relation.size(); i++)
+                        System.out.println(relation.get(i));
+                }
             }
             /**
              * Perform the necessary code transformations to apply the found optimizations to the input spiglet file.
@@ -248,6 +253,7 @@ public class Driver {
                 break;
         }
         while (!currentOptCode.equals(previousOptCode) || currentOptCode.equals(""));
-        spigletTransformer.writeCode();
+        spigletTransformer.writeOptimizedCode();
+        spigletTransformer.close();
     }
 }

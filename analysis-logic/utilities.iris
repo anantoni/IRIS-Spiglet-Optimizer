@@ -19,7 +19,7 @@ hasTwoPred(?m, ?i) :- next(?m, ?j, ?i),
                       ?j != ?k.
 
 /**
- *  utilities for basic block begin
+ *  utilities for basic block begin and end
  */
 jump(?m, ?i) :- instructionCJumpsToLabel(?m, ?i, ?l).
 

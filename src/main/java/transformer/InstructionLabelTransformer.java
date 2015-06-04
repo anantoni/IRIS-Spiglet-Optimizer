@@ -52,8 +52,7 @@ public class InstructionLabelTransformer extends DepthFirstVoidArguVisitor<Strin
         return;
     }
 
-    public void visit(final NodeToken n, @SuppressWarnings("unused") final String argu) {
-        @SuppressWarnings("unused")
+    public void visit(final NodeToken n, final String argu) {
         final String tkIm = n.tokenImage;
         return;
     }
@@ -93,12 +92,10 @@ public class InstructionLabelTransformer extends DepthFirstVoidArguVisitor<Strin
     public void visit(final CJumpStmt n, final String argu) {
         n.f0.accept(this, argu);
         n.f1.accept(this, argu);
-        //n.f2.accept(this, argu);
     }
 
     public void visit(final JumpStmt n, final String argu) {
         n.f0.accept(this, argu);
-        //n.f1.accept(this, argu);
     }
 
     public void visit(final HStoreStmt n, final String argu) {

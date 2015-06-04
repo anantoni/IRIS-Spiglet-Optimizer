@@ -41,8 +41,3 @@ unreachableInstruction(?m, ?i) :- next(?m, ?j, ?i),
                                   ?j != ?k,
                                   unreachableInstruction(?m, ?j),
                                   unreachableInstruction(?m, ?k).
-
-
-
-
-

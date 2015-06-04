@@ -22,11 +22,11 @@ constantPropagation(?m, ?i, ?v, ?c) :- next(?m, ?j, ?i),
 constantAtUse(?m, ?i, ?v, ?c) :- varUse(?m, ?i, ?v),
                                  constantPropagation(?m, ?j, ?v, ?c),
                                  next(?m, ?j, ?i),
-                                 !hastTwoPred(?m, ?i).
+                                 !hasTwoPred(?m, ?i).
 
 constantAtUse(?m, ?i, ?v, ?c) :- varUse(?m, ?i, ?v),
-                                       next(?m, ?j, ?i),
-                                       next(?m, ?k, ?i),
-                                       ?j != ?k,
-                                       constantPropagation(?m, ?j, ?v, ?c),
-                                       constantPropagation(?m, ?k, ?v, ?c).
+                                 next(?m, ?j, ?i),
+                                 next(?m, ?k, ?i),
+                                 ?j != ?k,
+                                 constantPropagation(?m, ?j, ?v, ?c),
+                                 constantPropagation(?m, ?k, ?v, ?c).

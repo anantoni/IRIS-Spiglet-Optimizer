@@ -1,6 +1,0 @@
-('MAIN', 3, 'TEMP 1', 'TEMP 3')
-('MAIN', 19, 'TEMP 1', 'TEMP 7')
-('MAIN', 49, 'TEMP 16', 'TEMP 17')
-('MAIN', 4, 'TEMP 1', 'TEMP 3')
-('MAIN', 20, 'TEMP 1', 'TEMP 7')
-('MAIN', 5, 'TEMP 1', 'TEMP 3')

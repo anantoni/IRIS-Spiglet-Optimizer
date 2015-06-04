@@ -26,6 +26,7 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/iris-0.60.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>iris</groupId>
             <artifactId>iris-parser</artifactId>
@@ -33,6 +34,7 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/iris-parser-0.60.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
@@ -53,6 +55,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -70,12 +73,24 @@
                     </archive>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <mainClass>main.java.Driver</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>lib/</Class-Path>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
                 <executions>
                     <execution>
@@ -86,6 +101,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>

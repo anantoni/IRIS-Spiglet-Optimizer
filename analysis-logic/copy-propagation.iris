@@ -16,13 +16,13 @@ copyPropagation(?m, ?i, ?v1, ?v2) :- next(?m, ?j, ?i),
                                      in(?m, ?i, ?v1).
 
 copyAtUse(?m, ?i, ?v1, ?v2) :- varUse(?m, ?i, ?v1),
-                               copyPropagation(?m, ?i, ?v1, ?v2),
+                               copyPropagation(?m, ?j, ?v1, ?v2),
                                next(?m, ?j, ?i),
                                !hastTwoPred(?m, ?i).
 
 copyAtUse(?m, ?i, ?v1, ?v2) :- varUse(?m, ?i, ?v1),
-                             next(?m, ?j, ?i),
-                             next(?m, ?k, ?i),
-                             ?j != ?k,
-                             copyPropagation(?m, ?j, ?v1, ?v2),
-                             copyPropagation(?m, ?k, ?v1, ?v2).
+                               next(?m, ?j, ?i),
+                               next(?m, ?k, ?i),
+                               ?j != ?k,
+                               copyPropagation(?m, ?j, ?v1, ?v2),
+                               copyPropagation(?m, ?k, ?v1, ?v2).

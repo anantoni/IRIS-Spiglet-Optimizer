@@ -24,26 +24,26 @@ public class FactGenerator extends DepthFirstRetArguVisitor<String, String> impl
     private PrintWriter instructionJumpsToLabelWriter;
     private PrintWriter instructionCJumpsToLabelWriter;
     private PrintWriter lessThanWriter;
-    private int instructionCounter;
     private IVoidArguVisitor<String> useVarFactGen;
     private IVoidArguVisitor<String> defVarFactGen;
     private IVoidArguVisitor<String> instructionHasLabelGen;
     private Map<String, Set<String>> methodVarsMap;
+    private int instructionCounter;
 
     public FactGenerator(String projectFactsDir) {
 
         try {
 
-            this.instructionWriter = new PrintWriter(projectFactsDir + "instruction.iris", "UTF-8");
-            this.instructionJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionJumpsToLabel.iris", "UTF-8");
-            this.instructionCJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionCJumpsToLabel.iris", "UTF-8");
-            this.instructionHasLabelWriter = new PrintWriter(projectFactsDir + "instructionHasLabel.iris", "UTF-8");
-            this.varDefWriter = new PrintWriter(projectFactsDir + "varDef.iris", "UTF-8");
-            this.varUseWriter = new PrintWriter(projectFactsDir + "varUse.iris", "UTF-8");
-            this.varMoveWriter = new PrintWriter(projectFactsDir + "varMove.iris", "UTF-8");
-            this.varWriter = new PrintWriter(projectFactsDir + "var.iris", "UTF-8");
-            this.lessThanWriter = new PrintWriter(projectFactsDir + "lessThan.iris", "UTF-8");
-            this.constMoveWriter = new PrintWriter(projectFactsDir + "constMove.iris", "UTF-8");
+            this.instructionWriter = new PrintWriter(projectFactsDir + "instruction.facts", "UTF-8");
+            this.instructionJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionJumpsToLabel.facts", "UTF-8");
+            this.instructionCJumpsToLabelWriter = new PrintWriter(projectFactsDir + "instructionCJumpsToLabel.facts", "UTF-8");
+            this.instructionHasLabelWriter = new PrintWriter(projectFactsDir + "instructionHasLabel.facts", "UTF-8");
+            this.varDefWriter = new PrintWriter(projectFactsDir + "varDef.facts", "UTF-8");
+            this.varUseWriter = new PrintWriter(projectFactsDir + "varUse.facts", "UTF-8");
+            this.varMoveWriter = new PrintWriter(projectFactsDir + "varMove.facts", "UTF-8");
+            this.varWriter = new PrintWriter(projectFactsDir + "var.facts", "UTF-8");
+            this.lessThanWriter = new PrintWriter(projectFactsDir + "lessThan.facts", "UTF-8");
+            this.constMoveWriter = new PrintWriter(projectFactsDir + "constMove.facts", "UTF-8");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

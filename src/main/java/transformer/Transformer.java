@@ -36,8 +36,10 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
             this.optimizedSpigletWriter = new PrintWriter(projectOptOutDir +  "/" + outFile, "UTF-8");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.exit(-1);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
         this.varUseTransformer = new VarUseTransformer(this);
         this.instructionLabelTransformer = new InstructionLabelTransformer(optimizedSpigletBuffer);
@@ -62,9 +64,12 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
         return optimizedSpigletBuffer.toString();
     }
 
-    public void writeCode() {
-        optimizedSpigletWriter.write(optimizedSpigletBuffer.toString());
-        optimizedSpigletWriter.close();
+    public void writeOptimizedCode() {
+        this.optimizedSpigletWriter.write(optimizedSpigletBuffer.toString());
+    }
+
+    public void close() {
+        this.optimizedSpigletWriter.close();
     }
 
     public int getInstructionCounter() {
@@ -80,7 +85,6 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
     public String visit(final NodeList n, final String argu) {
         String nRes = null;
         for (final Iterator<INode> e = n.elements(); e.hasNext();) {
-            @SuppressWarnings("unused")
             final String sRes = e.next().accept(this, argu);
         }
         return nRes;

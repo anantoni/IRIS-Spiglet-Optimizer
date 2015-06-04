@@ -1,0 +1,32 @@
+MAIN
+MOVE TEMP 1 10
+MOVE TEMP 2 20
+MOVE TEMP 3 TEMP 2
+PRINT TEMP 1
+PRINT TEMP 2
+PRINT TEMP 3
+MOVE TEMP 6 15
+MOVE TEMP 7 TEMP 6
+L0 NOOP
+MOVE TEMP 1 10
+MOVE TEMP 3 TEMP 2
+MOVE TEMP 111 0
+PRINT TEMP 1
+PRINT TEMP 2
+PRINT TEMP 3
+CJUMP TEMP 111 L1
+MOVE TEMP 4 15
+MOVE TEMP 5 TEMP 4
+PRINT TEMP 4
+PRINT TEMP 5
+MOVE TEMP 2 30
+JUMP L0
+L1 NOOP
+PRINT TEMP 1  //Is propagated constant: 10.
+PRINT TEMP 2  //Is not propagated constant!
+PRINT TEMP 3  //Is not propagated constant! Only Copy!
+PRINT TEMP 4  //Is not propagated constant!
+PRINT TEMP 5  //Is not propagated constant!
+PRINT TEMP 6  //It depends on the rules, in most cases not a propagated constant.
+PRINT TEMP 7  //It depends on the rules, in most cases not a propagated constant or copy.
+END

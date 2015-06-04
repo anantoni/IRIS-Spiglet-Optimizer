@@ -175,6 +175,4 @@ public class InstructionLabelTransformer extends DepthFirstVoidArguVisitor<Strin
         n.f0.accept(this, argu);
         optimizedSpigletBuffer.append(n.f0.toString() + " ");
     }
-
 }
-

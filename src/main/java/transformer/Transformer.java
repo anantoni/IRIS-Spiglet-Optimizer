@@ -331,7 +331,7 @@ public class Transformer extends DepthFirstRetArguVisitor<String, String> implem
             else if (operator.equals("TIMES"))
                 return String.valueOf(Integer.parseInt(firstOperand) * Integer.parseInt(secondOperand));
             else
-                return String.valueOf(Integer.parseInt(firstOperand) / Integer.parseInt(secondOperand));
+                return operator + " " + n.f1.f0.tokenImage + " " + n.f1.f1.f0.tokenImage + " " + secondOperand;
         else
             return operator + " " + n.f1.f0.tokenImage + " " + n.f1.f1.f0.tokenImage + " " + secondOperand;
 
